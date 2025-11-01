@@ -28,12 +28,11 @@ export default function AppPage() {
       const completedLessons = moduleLessons.filter(
         (l) => progress[l.id]?.completed
       );
-      const isModuleCompleted = completedLessons.length === moduleLessons.length;
+      const isModuleCompleted = moduleLessons.length > 0 && completedLessons.length === moduleLessons.length;
       
       const isUnlocked = allPreviousModulesCompleted;
       
-      // For the next iteration
-      if (!isModuleCompleted) {
+      if (isModuleCompleted === false) {
         allPreviousModulesCompleted = false;
       }
 
@@ -46,7 +45,6 @@ export default function AppPage() {
   }, [progress]);
 
   if (loading) {
-    // You can add a skeleton loader here if you want
     return <div className="container mx-auto px-4 py-8"><p>Carregando...</p></div>
   }
 
@@ -64,16 +62,16 @@ export default function AppPage() {
       <Carousel
         opts={{
           align: 'start',
-          loop: false, // Loop doesn't make sense with locked modules
+          loop: false,
         }}
         className="w-full"
       >
-        <CarouselContent className="-ml-2">
+        <CarouselContent className="-ml-2 md:-ml-4">
           <TooltipProvider>
             {modulesWithProgress.map((module) => (
               <CarouselItem
                 key={module.id}
-                className="basis-1/2 pl-4 md:basis-1/3 lg:basis-1/4"
+                className="pl-2 basis-3/4 md:basis-1/3 lg:basis-1/4 md:pl-4"
               >
                 <Tooltip>
                   <TooltipTrigger asChild disabled={module.isUnlocked}>

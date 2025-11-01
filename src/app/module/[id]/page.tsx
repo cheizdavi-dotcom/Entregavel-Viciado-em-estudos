@@ -68,7 +68,6 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   const handleCompleted = (lessonId: string) => {
     const lesson = lessons.find(l => l.id === lessonId);
     if (lesson) {
-        // Ensure we don't overwrite watchedSeconds with full duration if user seeks
         const currentProgress = getLessonProgress(lessonId);
         const watchedSeconds = currentProgress?.watchedSeconds ?? lesson.durationSec;
         saveProgress(lessonId, Math.max(watchedSeconds, lesson.durationSec * 0.95), true);
@@ -81,12 +80,13 @@ export default function ModulePage({ params }: { params: { id: string } }) {
         <div className="lg:col-span-2">
           {selectedLesson ? (
              <div>
-                <div className="mb-4">
+                <div className="mb-4 aspect-video bg-black rounded-lg overflow-hidden">
                     <YouTubePlayer 
                         key={selectedLesson.id}
                         youtubeId={selectedLesson.youtubeId}
                         onProgress={handleProgress(selectedLesson.id)}
                         onCompleted={() => handleCompleted(selectedLesson.id)}
+                        startSeconds={progress[selectedLesson.id]?.watchedSeconds || 0}
                     />
                 </div>
                 <h1 className="text-2xl font-bold">{selectedLesson.title}</h1>

@@ -1,45 +1,102 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+declare global {
+  interface Window {
+    onYouTubeIframeAPIReady: () => void;
+    YT: any;
+  }
+}
 
 interface YouTubePlayerProps {
   youtubeId: string;
   onProgress: (seconds: number) => void;
   onCompleted: () => void;
+  startSeconds: number;
 }
 
-export function YouTubePlayer({
-  youtubeId,
-  onProgress,
-  onCompleted,
-}: YouTubePlayerProps) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds }: YouTubePlayerProps) {
+  const playerRef = useRef<any>(null);
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // A lógica de progresso foi simplificada para focar na funcionalidade principal.
-  // Uma implementação completa usaria a API IFrame do YouTube para um rastreamento preciso.
   useEffect(() => {
-    const timer = setInterval(() => {
-      // Simula o progresso para fins de demonstração
-      onProgress(Math.random() * 300); 
-    }, 5000);
+    const setupPlayer = () => {
+      if (window.YT && window.YT.Player) {
+        playerRef.current = new window.YT.Player('youtube-player', {
+          videoId: youtubeId,
+          playerVars: {
+            playsinline: 1,
+            modestbranding: 1,
+            rel: 0,
+            iv_load_policy: 3,
+            fs: 1,
+            disablekb: 0,
+            start: Math.floor(startSeconds || 0),
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange,
+          },
+        });
+      }
+    };
 
-    return () => clearInterval(timer);
-  }, [youtubeId, onProgress]);
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      window.onYouTubeIframeAPIReady = () => {
+        setupPlayer();
+      };
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
+    } else {
+      setupPlayer();
+    }
 
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+      if (playerRef.current) {
+        // Checking if destroy method exists before calling it.
+        if (typeof playerRef.current.destroy === 'function') {
+          playerRef.current.destroy();
+        }
+        playerRef.current = null;
+      }
+    };
+  }, [youtubeId, startSeconds]);
 
-  const src = `https://www.youtube-nocookie.com/embed/${youtubeId}?modestbranding=1&rel=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1`;
+  const onPlayerReady = (event: any) => {
+    // Player is ready
+  };
+
+  const onPlayerStateChange = (event: any) => {
+    if (event.data === window.YT.PlayerState.PLAYING) {
+      progressIntervalRef.current = setInterval(() => {
+        const currentTime = playerRef.current.getCurrentTime();
+        onProgress(currentTime);
+        
+        const duration = playerRef.current.getDuration();
+        if (duration > 0 && currentTime / duration >= 0.95) {
+            onCompleted();
+        }
+
+      }, 1000);
+    } else {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+       if (event.data === window.YT.PlayerState.ENDED) {
+        onCompleted();
+      }
+    }
+  };
 
   return (
     <div className="aspect-video w-full">
-      <iframe
-        ref={iframeRef}
-        src={src}
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        className="w-full h-full"
-      ></iframe>
+      <div id="youtube-player" className="w-full h-full"></div>
     </div>
   );
 }
