@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 const navItems = [
-  { href: '/app', label: 'Principal', icon: Home },
+  { href: '/', label: 'Principal', icon: Home },
   { href: '/continue', label: 'Continuar', icon: PlaySquare },
   { href: '/more', label: 'Mais', icon: LayoutGrid },
 ];

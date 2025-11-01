@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlayCircle, CheckCircle2 } from 'lucide-react';
 import { YouTubePlayer } from '@/components/player/YouTubePlayer';
-import { useProgress } from '@/hooks/useProgress';
+import { useProgress } from '@/hooks/useProgress.tsx';
 import { useState, useMemo, useEffect } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
@@ -33,9 +33,12 @@ export default function ModulePage({ params }: { params: { id: string } }) {
 
   const lastWatchedLesson = useMemo(() => {
     const watchedLessons = moduleLessons
-      .map(l => ({...l, prog: progress[l.id]}))
-      .filter(l => l.prog)
-      .sort((a,b) => b.prog.updatedAt.getTime() - a.prog.updatedAt.getTime());
+      .map(l => {
+          const prog = progress[l.id];
+          return prog ? {...l, prog} : null;
+      })
+      .filter(Boolean)
+      .sort((a,b) => b!.prog.updatedAt.getTime() - a!.prog.updatedAt.getTime());
     return watchedLessons.length > 0 ? watchedLessons[0] : null;
   }, [progress, moduleLessons]);
 

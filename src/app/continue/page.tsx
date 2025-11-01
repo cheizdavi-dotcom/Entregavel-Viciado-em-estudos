@@ -1,6 +1,6 @@
 'use client';
 
-import { useProgress } from '@/hooks/useProgress';
+import { useProgress } from '@/hooks/useProgress.tsx';
 import { lessons } from '@/lib/seed';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,6 +13,7 @@ export default function ContinuePage() {
   const { progress, loading } = useProgress();
 
   const lessonsInProgress = useMemo(() => {
+    if (loading) return [];
     return lessons
       .map(lesson => {
         const lessonProgress = progress[lesson.id];
@@ -27,7 +28,7 @@ export default function ContinuePage() {
       })
       .filter(Boolean)
       .sort((a, b) => b!.progress.updatedAt.getTime() - a!.progress.updatedAt.getTime());
-  }, [progress]);
+  }, [progress, loading]);
 
   if (loading) {
     return <div className="container mx-auto p-4"><p>Carregando seu progresso...</p></div>;
@@ -48,7 +49,7 @@ export default function ContinuePage() {
         <div className="text-center py-16">
           <p className="text-muted-foreground">Você ainda não começou nenhuma aula.</p>
           <Button asChild className="mt-4">
-            <Link href="/app">Ver módulos</Link>
+            <Link href="/">Ver módulos</Link>
           </Button>
         </div>
       ) : (
