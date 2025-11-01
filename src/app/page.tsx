@@ -21,6 +21,8 @@ export default function AppPage() {
   const { progress, loading } = useProgress();
 
   const modulesWithProgress = useMemo(() => {
+    if (loading) return modules.map(m => ({...m, isUnlocked: false, isModuleCompleted: false})).sort((a,b) => a.order - b.order);
+    
     let allPreviousModulesCompleted = true;
 
     return modules.sort((a,b) => a.order - b.order).map((module) => {
@@ -32,6 +34,7 @@ export default function AppPage() {
       
       const isUnlocked = allPreviousModulesCompleted;
       
+      // For the next module in line, this module must be complete.
       if (isModuleCompleted === false) {
         allPreviousModulesCompleted = false;
       }
@@ -42,7 +45,7 @@ export default function AppPage() {
         isModuleCompleted,
       };
     });
-  }, [progress]);
+  }, [progress, loading]);
 
   if (loading) {
     return <div className="container mx-auto px-4 py-8"><p>Carregando...</p></div>
@@ -66,17 +69,20 @@ export default function AppPage() {
         }}
         className="w-full"
       >
-        <CarouselContent className="-ml-2 md:-ml-4">
+        <CarouselContent className="-ml-2 sm:-ml-4">
           <TooltipProvider>
             {modulesWithProgress.map((module) => (
               <CarouselItem
                 key={module.id}
-                className="pl-2 basis-3/4 md:basis-1/3 lg:basis-1/4 md:pl-4"
+                className={cn(
+                  'basis-full pl-2 sm:pl-4',
+                  'sm:basis-1/2 md:basis-1/3 lg:basis-1/4'
+                )}
               >
                 <Tooltip>
                   <TooltipTrigger asChild disabled={module.isUnlocked}>
                     <div className={cn(!module.isUnlocked && "pointer-events-none")}>
-                        <Link href={module.isUnlocked ? `/module/${module.id}` : '#'}>
+                        <Link href={module.isUnlocked ? `/module/${module.id}` : '#'} aria-disabled={!module.isUnlocked}>
                           <div className="p-1">
                             <Card className="overflow-hidden rounded-lg">
                               <CardContent className="relative flex aspect-[1080/1600] items-center justify-center p-0">

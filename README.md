@@ -34,25 +34,6 @@ pnpm dev
 
 Abra [http://localhost:9002](http://localhost:9002) no seu navegador para ver o app.
 
-## 🛠️ Como Atualizar o Conteúdo
-
-### Trocando as Capas dos Módulos
-
-As capas dos módulos são definidas no arquivo `src/lib/seed.ts`. Para trocá-las:
-
-1.  Faça o upload das suas imagens (dimensão recomendada: 1080x1600 pixels) para um serviço de hospedagem de sua preferência.
-2.  Abra o arquivo `src/lib/seed.ts`.
-3.  Encontre o array `modules` e atualize a propriedade `coverUrl` de cada módulo com a URL da sua nova imagem.
-
-### Atualizando os Vídeos das Aulas
-
-Os vídeos das aulas também são definidos em `src/lib/seed.ts`.
-
-1.  Para cada vídeo que deseja adicionar, você precisará do seu **ID do YouTube**. Por exemplo, na URL `https://www.youtube.com/watch?v=Y1_Vsyb_2eQ`, o ID é `Y1_Vsyb_2eQ`.
-2.  Abra o arquivo `src/lib/seed.ts`.
-3.  Encontre o array `lessons` e atualize a propriedade `youtubeId` de cada aula com o ID do vídeo correspondente.
-4.  Ajuste também a `durationSec` para refletir a duração correta do vídeo em segundos. Isso é importante para o cálculo da barra de progresso.
-
 ---
 
 ## 🌐 Deploy: Publicando seu Site com Vercel e GitHub
@@ -70,23 +51,18 @@ Para que o mundo possa ver seu site, você precisa publicá-lo. Usaremos o GitHu
 
 O GitHub mostrará uma página com comandos. Vamos usar a seção **`…or push an existing repository from the command line`**.
 
-### Passo 2: Enviar o Código do seu Computador para o GitHub
+### Passo 2: Enviar o Código para o GitHub (A Conexão Inicial)
 
-Abra o **Terminal** (no Mac) ou **Prompt de Comando / PowerShell** (no Windows) e navegue até a pasta onde o seu projeto está salvo.
+Abra a **aba de comando/terminal** aqui neste ambiente de desenvolvimento.
 
-**Exemplo:** Se a pasta do projeto está em `C:\Users\SeuNome\Documentos\o-fim-da-procrastinacao`, você usará o comando:
-```bash
-cd C:\Users\SeuNome\Documentos\o-fim-da-procrastinacao
-```
-
-Depois de estar na pasta correta, execute os seguintes comandos, um de cada vez:
+Copie e cole os seguintes comandos, um de cada vez, pressionando Enter após cada um.
 
 1.  **Inicia o controle de versão:**
     ```bash
     git init -b main
     ```
 
-2.  **Adiciona todos os arquivos:**
+2.  **Adiciona todos os arquivos do projeto:**
     ```bash
     git add .
     ```
@@ -96,7 +72,7 @@ Depois de estar na pasta correta, execute os seguintes comandos, um de cada vez:
     git commit -m "Versão inicial do projeto"
     ```
 
-4.  **Conecta sua pasta local ao repositório do GitHub.** Copie a linha exata que o GitHub te deu. Será algo assim (**use a sua URL!**):
+4.  **Conecta esta pasta ao seu repositório do GitHub.** Copie a linha exata que o GitHub te deu. Será algo assim (**use a sua URL!**):
     ```bash
     git remote add origin https://github.com/seu-usuario/meu-curso-online.git
     ```
@@ -105,6 +81,8 @@ Depois de estar na pasta correta, execute os seguintes comandos, um de cada vez:
     ```bash
     git push -u origin main
     ```
+
+Se tudo deu certo, seus arquivos agora estão no GitHub!
 
 ### Passo 3: Publicar na Vercel
 
@@ -115,3 +93,20 @@ Depois de estar na pasta correta, execute os seguintes comandos, um de cada vez:
 5.  Clique em **`Deploy`**.
 
 Aguarde alguns minutos e... pronto! A Vercel te dará um link público (ex: `meu-curso-online.vercel.app`) onde seu site estará no ar.
+
+### Como Atualizar o Site Depois
+
+Toda vez que eu fizer uma mudança para você, basta abrir o terminal aqui e rodar os seguintes comandos:
+
+1.  **Adiciona as novas mudanças:**
+    ```bash
+    git add .
+    ```
+2.  **Cria um novo "save point" com uma descrição:**
+    ```bash
+    git commit -m "Atualização do site"
+    ```
+3.  **Envia a atualização para o GitHub (e a Vercel publica automaticamente):**
+    ```bash
+    git push
+    ```
