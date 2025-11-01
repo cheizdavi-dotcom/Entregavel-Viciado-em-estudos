@@ -3,14 +3,13 @@
 import type { User } from 'firebase/auth';
 import { signOut as firebaseSignOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 
-// --- Login Artificial ---
-// Para facilitar o desenvolvimento, estamos simulando um usuário logado.
-// Isso pula a tela de login e vai direto para o app.
-// Para reativar o login real do Firebase, comente o código abaixo
-// e descomente o código original mais abaixo.
 
+// --- Login Artificial (Desativado) ---
+// O código abaixo foi desativado para reativar a autenticação real do Firebase.
+/*
 export function useAuth() {
   const [user] = useState<User | null>({
     uid: 'fake-user-uid',
@@ -31,14 +30,9 @@ export function useAuth() {
 
   return { user, loading, signOut };
 }
+*/
 
-// --- Código de Autenticação Original do Firebase ---
-// Descomente o código abaixo e comente ou remova o `useAuth` artificial
-// para reativar o sistema de login real.
-/*
-import { onAuthStateChanged } from 'firebase/auth';
-import { useEffect } from 'react';
-
+// --- Código de Autenticação Original do Firebase (Ativado) ---
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -62,4 +56,3 @@ export function useAuth() {
 
   return { user, loading, signOut };
 }
-*/
