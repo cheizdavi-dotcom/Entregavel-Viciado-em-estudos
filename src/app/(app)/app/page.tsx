@@ -37,31 +37,29 @@ export default function AppPage() {
               key={module.id}
               className="basis-1/2 md:basis-1/3 lg:basis-4/12 xl:basis-1/5"
             >
-              <Link href={`/module/${module.id}`} legacyBehavior>
-                <a>
-                  <div className="p-1">
-                    <Card className="overflow-hidden">
-                      <CardContent className="flex aspect-[1080/1600] items-center justify-center p-0">
-                        <Image
-                          src={module.coverUrl}
-                          alt={module.title}
-                          width={1080}
-                          height={1600}
-                          className="object-cover w-full h-full"
-                          data-ai-hint="course module"
-                        />
-                      </CardContent>
-                    </Card>
-                    <div className="mt-2 text-center">
-                      <h3 className="font-semibold text-foreground truncate">
-                        {module.title}
-                      </h3>
-                      <p className="text-xs text-muted-foreground">
-                        {module.subtitle}
-                      </p>
-                    </div>
+              <Link href={`/module/${module.id}`}>
+                <div className="p-1">
+                  <Card className="overflow-hidden">
+                    <CardContent className="flex aspect-[1080/1600] items-center justify-center p-0">
+                      <Image
+                        src={module.coverUrl}
+                        alt={module.title}
+                        width={1080}
+                        height={1600}
+                        className="object-cover w-full h-full"
+                        data-ai-hint="course module"
+                      />
+                    </CardContent>
+                  </Card>
+                  <div className="mt-2 text-center">
+                    <h3 className="font-semibold text-foreground truncate">
+                      {module.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      {module.subtitle}
+                    </p>
                   </div>
-                </a>
+                </div>
               </Link>
             </CarouselItem>
           ))}
