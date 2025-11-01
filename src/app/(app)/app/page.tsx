@@ -1,32 +1,15 @@
-import { getModules } from "@/lib/firebase/firestore";
-import { ModuleCarousel } from "@/components/ModuleCarousel";
-import { PersonalizedRecommendations } from "@/components/PersonalizedRecommendations";
 
-export const revalidate = 3600; // Revalidate every hour
-
-export default async function AppPage() {
-  const modules = await getModules();
-
+export default function AppPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
         <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground">
-          Bem-vindo!
+          Bem-vindo ao seu novo projeto!
         </h1>
         <p className="text-muted-foreground mt-2">
-          Comece sua jornada para o fim da procrastinação.
+          Podemos começar a construir seu aplicativo a partir daqui.
         </p>
       </header>
-      
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold font-headline mb-4">Módulos Disponíveis</h2>
-        <ModuleCarousel modules={modules} />
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold font-headline mb-4">Recomendado para Você</h2>
-        <PersonalizedRecommendations allModules={modules} />
-      </section>
     </div>
   );
 }
