@@ -7,11 +7,9 @@ export default function AppLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthGuard>
       <div className="relative flex min-h-screen w-full flex-col">
         <main className="flex-1 pb-20">{children}</main>
         <BottomNav />
       </div>
-    </AuthGuard>
   );
 }

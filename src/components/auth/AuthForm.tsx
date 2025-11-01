@@ -11,7 +11,8 @@ import {
   signInAnonymously,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "@/lib/firebase/config";
+import { auth, db } from "@/lib/firebase/config";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -69,14 +70,24 @@ export function AuthForm() {
             description: "Bem-vindo(a) de volta!",
         });
       } else {
-        await createUserWithEmailAndPassword(auth, data.email, data.password);
+        const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+        const user = userCredential.user;
+
+        // Salva usuário no Firestore
+        await setDoc(doc(db, "users", user.uid), {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+        });
+
         toast({
             title: "Conta criada com sucesso!",
             description: "Seja bem-vindo(a)!",
         });
       }
-      router.push("/home");
-      router.refresh(); // Garante que o estado de autenticação seja atualizado na página de destino
+      router.push("/app");
     } catch (error: any) {
       toast({
         variant: "destructive",
@@ -92,7 +103,7 @@ export function AuthForm() {
     setLoading(true);
     try {
       await signInAnonymously(auth);
-      router.push("/home");
+      router.push("/app");
     } catch (error: any) {
       toast({
         variant: "destructive",
@@ -151,124 +162,119 @@ export function AuthForm() {
           </TabsList>
           
           <Form {...form}>
-            <TabsContent value="login" className="m-0">
-                <form
-                  onSubmit={form.handleSubmit(handleAuthAction)}
-                  className="space-y-4 pt-4"
-                >
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>E-mail</FormLabel>
-                          <FormControl>
+            <form
+              onSubmit={form.handleSubmit(handleAuthAction)}
+              className="space-y-4 pt-4"
+            >
+              <TabsContent value="login" className="m-0 space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>E-mail</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="seu@email.com"
+                            {...field}
+                            disabled={loading}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Senha</FormLabel>
+                        <FormControl>
+                          <div className="relative">
                             <Input
-                              placeholder="seu@email.com"
+                              type={showPassword ? "text" : "password"}
+                              placeholder="••••••••"
                               {...field}
                               disabled={loading}
+                              className="pr-10"
                             />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Senha</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Input
-                                type={showPassword ? "text" : "password"}
-                                placeholder="••••••••"
-                                {...field}
-                                disabled={loading}
-                                className="pr-10"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-0 px-3 flex items-center text-muted-foreground"
-                                disabled={loading}
-                              >
-                                {showPassword ? <EyeOff className="h-4 w-4"/> : <Eye className="h-4 w-4"/>}
-                              </button>
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button variant="link" type="button" onClick={handlePasswordReset} disabled={loading} className="p-0 h-auto text-sm text-primary">
-                      Esqueceu a senha?
-                    </Button>
-                    <Button type="submit" className="w-full" disabled={loading}>
-                      {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Entrar
-                    </Button>
-                </form>
-            </TabsContent>
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute inset-y-0 right-0 px-3 flex items-center text-muted-foreground"
+                              disabled={loading}
+                            >
+                              {showPassword ? <EyeOff className="h-4 w-4"/> : <Eye className="h-4 w-4"/>}
+                            </button>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button variant="link" type="button" onClick={handlePasswordReset} disabled={loading} className="p-0 h-auto text-sm text-primary">
+                    Esqueceu a senha?
+                  </Button>
+                  <Button type="submit" className="w-full" disabled={loading}>
+                    {loading && authAction === 'login' && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Entrar
+                  </Button>
+              </TabsContent>
 
-            <TabsContent value="register" className="m-0">
-                <form
-                  onSubmit={form.handleSubmit(handleAuthAction)}
-                  className="space-y-4 pt-4"
-                >
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>E-mail</FormLabel>
-                          <FormControl>
+              <TabsContent value="register" className="m-0 space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>E-mail</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="seu@email.com"
+                            {...field}
+                            disabled={loading}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Senha</FormLabel>
+                        <FormControl>
+                          <div className="relative">
                             <Input
-                              placeholder="seu@email.com"
+                              type={showPassword ? "text" : "password"}
+                              placeholder="••••••••"
                               {...field}
                               disabled={loading}
+                              className="pr-10"
                             />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Senha</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Input
-                                type={showPassword ? "text" : "password"}
-                                placeholder="••••••••"
-                                {...field}
-                                disabled={loading}
-                                className="pr-10"
-                              />
-                              <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-0 px-3 flex items-center text-muted-foreground"
-                                disabled={loading}
-                              >
-                                {showPassword ? <EyeOff className="h-4 w-4"/> : <Eye className="h-4 w-4"/>}
-                              </button>
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button type="submit" className="w-full" disabled={loading}>
-                      {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Criar Conta
-                    </Button>
-                </form>
-            </TabsContent>
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute inset-y-0 right-0 px-3 flex items-center text-muted-foreground"
+                              disabled={loading}
+                            >
+                              {showPassword ? <EyeOff className="h-4 w-4"/> : <Eye className="h-4 w-4"/>}
+                            </button>
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" className="w-full" disabled={loading}>
+                    {loading && authAction === 'register' && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Criar Conta
+                  </Button>
+              </TabsContent>
+            </form>
           </Form>
         </Tabs>
         <div className="relative my-4">
@@ -287,7 +293,7 @@ export function AuthForm() {
           onClick={handleAnonymousSignIn}
           disabled={loading}
         >
-          {loading && authAction !== "login" && authAction !== "register" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+          {loading && !['login', 'register'].includes(authAction) && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Convidado
         </Button>
       </CardContent>

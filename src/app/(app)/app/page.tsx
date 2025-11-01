@@ -1,24 +1,17 @@
 import { getModules } from "@/lib/firebase/firestore";
 import { ModuleCarousel } from "@/components/ModuleCarousel";
 import { PersonalizedRecommendations } from "@/components/PersonalizedRecommendations";
-import { redirect } from "next/navigation";
 
 export const revalidate = 3600; // Revalidate every hour
 
-export default async function HomePage() {
-  
-  // This page is now part of the /app group, so we redirect to the main /app page
-  // if someone lands here directly. Or we can just delete it.
-  // For now, redirecting is safer.
-  redirect('/app');
-
+export default async function AppPage() {
   const modules = await getModules();
 
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
         <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground">
-          Módulos
+          Bem-vindo!
         </h1>
         <p className="text-muted-foreground mt-2">
           Comece sua jornada para o fim da procrastinação.
@@ -26,6 +19,7 @@ export default async function HomePage() {
       </header>
       
       <section className="mb-12">
+        <h2 className="text-2xl font-bold font-headline mb-4">Módulos Disponíveis</h2>
         <ModuleCarousel modules={modules} />
       </section>
 

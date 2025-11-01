@@ -3,6 +3,7 @@ import './globals.css';
 import { Providers } from '@/components/Providers';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
+import { AuthGuard } from '@/components/auth/AuthGuard';
 
 const APP_NAME = "Procrastination Stopper";
 const APP_DESCRIPTION = "The end of procrastination course app.";
@@ -40,7 +41,9 @@ export default function RootLayout({
       </head>
       <body className={cn("font-body antialiased dark", "bg-background min-h-screen")}>
         <Providers>
-          {children}
+          <AuthGuard>
+            {children}
+          </AuthGuard>
           <Toaster />
         </Providers>
       </body>
