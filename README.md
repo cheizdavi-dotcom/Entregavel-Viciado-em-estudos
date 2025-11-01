@@ -86,7 +86,7 @@ Se tudo deu certo, seus arquivos agora estão no GitHub!
 
 ### Passo 3: Publicar na Vercel
 
-1.  Acesse [**vercel.com**](https://vercel.com) e crie uma conta (você pode usar sua conta do GitHub para facilitar).
+1.  Acesse [**vercel.com**](https://vercel.com) e faça login (use sua conta do GitHub para facilitar).
 2.  No painel da Vercel, clique em **`Add New...`** -> **`Project`**.
 3.  A Vercel vai se conectar ao seu GitHub e mostrar seus repositórios. Encontre o repositório que você acabou de criar (`o-fim-da-procrastinacao`) e clique em **`Import`**.
 4.  A Vercel já sabe que é um projeto Next.js e preenche tudo para você. Você não precisa mudar nada.
