@@ -28,7 +28,7 @@ export const modules = [
     id: '4',
     title: 'Módulo 4: O Hábito',
     subtitle: 'Construindo a Consistência',
-    coverUrl: 'https://i.imgur.com/p8yB3DE.png',
+    coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
   },
