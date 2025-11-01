@@ -40,11 +40,11 @@ Abra [http://localhost:9002](http://localhost:9002) no seu navegador para ver o 
 
 Para que o mundo possa ver seu site, você precisa publicá-lo. Usaremos o GitHub para guardar o código e a Vercel para hospedar o site gratuitamente.
 
-### Passo 1: Criar um Repositório no GitHub
+### Passo 1: Criar um Repositório Vazio no GitHub
 
 1.  Acesse [**github.com**](https://github.com) e faça login.
 2.  No canto superior direito, clique no ícone **`+`** e em **`New repository`**.
-3.  **Nome do repositório:** Escolha um nome, como `meu-curso-online`.
+3.  **Nome do repositório:** Escolha um nome, como `o-fim-da-procrastinacao`.
 4.  **Visibilidade:** Marque como **`Private`** (Privado) para que só você veja o código.
 5.  **Importante:** Não marque nenhuma caixinha (README, .gitignore, license). Crie um repositório vazio.
 6.  Clique em **`Create repository`**.
@@ -57,7 +57,7 @@ Abra a **aba de comando/terminal** aqui neste ambiente de desenvolvimento.
 
 Copie e cole os seguintes comandos, um de cada vez, pressionando Enter após cada um.
 
-1.  **Inicia o controle de versão:**
+1.  **Inicia o controle de versão (caso não tenha sido iniciado):**
     ```bash
     git init -b main
     ```
@@ -74,10 +74,10 @@ Copie e cole os seguintes comandos, um de cada vez, pressionando Enter após cad
 
 4.  **Conecta esta pasta ao seu repositório do GitHub.** Copie a linha exata que o GitHub te deu. Será algo assim (**use a sua URL!**):
     ```bash
-    git remote add origin https://github.com/seu-usuario/meu-curso-online.git
+    git remote add origin https://github.com/seu-usuario/o-fim-da-procrastinacao.git
     ```
 
-5.  **Envia os arquivos para o GitHub:**
+5.  **Envia os arquivos para o GitHub, estabelecendo a conexão:**
     ```bash
     git push -u origin main
     ```
@@ -88,11 +88,11 @@ Se tudo deu certo, seus arquivos agora estão no GitHub!
 
 1.  Acesse [**vercel.com**](https://vercel.com) e crie uma conta (você pode usar sua conta do GitHub para facilitar).
 2.  No painel da Vercel, clique em **`Add New...`** -> **`Project`**.
-3.  A Vercel vai se conectar ao seu GitHub e mostrar seus repositórios. Encontre o repositório que você acabou de criar (`meu-curso-online`) e clique em **`Import`**.
+3.  A Vercel vai se conectar ao seu GitHub e mostrar seus repositórios. Encontre o repositório que você acabou de criar (`o-fim-da-procrastinacao`) e clique em **`Import`**.
 4.  A Vercel já sabe que é um projeto Next.js e preenche tudo para você. Você não precisa mudar nada.
 5.  Clique em **`Deploy`**.
 
-Aguarde alguns minutos e... pronto! A Vercel te dará um link público (ex: `meu-curso-online.vercel.app`) onde seu site estará no ar.
+Aguarde alguns minutos e... pronto! A Vercel te dará um link público (ex: `o-fim-da-procrastinacao.vercel.app`) onde seu site estará no ar.
 
 ### Como Atualizar o Site Depois
 
@@ -104,7 +104,7 @@ Toda vez que eu fizer uma mudança para você, basta abrir o terminal aqui e rod
     ```
 2.  **Cria um novo "save point" com uma descrição:**
     ```bash
-    git commit -m "Atualização do site"
+    git commit -m "Descreva a atualização aqui"
     ```
 3.  **Envia a atualização para o GitHub (e a Vercel publica automaticamente):**
     ```bash
