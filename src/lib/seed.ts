@@ -12,7 +12,7 @@ export const modules = [
     id: '2',
     title: 'Módulo 2: O Gatilho',
     subtitle: 'Identificando Seus Padrões',
-    coverUrl: 'https://i.imgur.com/Jv2a4I3.png',
+    coverUrl: 'https://i.imgur.com/reNazVp.png',
     description: 'Aprenda a identificar os gatilhos que te levam a procrastinar e a criar um ambiente à prova de distrações.',
     order: 2,
   },
