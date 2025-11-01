@@ -22,6 +22,12 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
 
   useEffect(() => {
     const setupPlayer = () => {
+      // If a player instance exists, destroy it before creating a new one.
+      if (playerRef.current && typeof playerRef.current.destroy === 'function') {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+
       if (window.YT && window.YT.Player) {
         playerRef.current = new window.YT.Player('youtube-player', {
           videoId: youtubeId,
@@ -33,8 +39,7 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
             fs: 1,
             disablekb: 0,
             start: Math.floor(startSeconds || 0),
-            // Ensure controls are enabled
-            controls: 1, 
+            controls: 1,
           },
           events: {
             onReady: onPlayerReady,
@@ -51,12 +56,12 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
         setupPlayer();
       };
       const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
-    } else {
-       // If YT API is already loaded, but player exists, destroy it before creating new one
-      if (playerRef.current && typeof playerRef.current.destroy === 'function') {
-        playerRef.current.destroy();
+      if (firstScriptTag && firstScriptTag.parentNode) {
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      } else {
+        document.head.appendChild(tag);
       }
+    } else {
       setupPlayer();
     }
 
@@ -64,23 +69,24 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current);
       }
-      // Don't destroy player on component unmount if it's not the last one
-      // The key prop on the component will handle re-creation
+      // It's safer to also try destroying the player on cleanup
+      if (playerRef.current && typeof playerRef.current.destroy === 'function') {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
     };
   }, [youtubeId, startSeconds]);
 
   const onPlayerReady = (event: any) => {
-    // Player is ready. You could auto-play here if desired.
-    // event.target.playVideo();
+    // Some mobile browsers require a user interaction to play.
+    // We won't autoplay by default to respect that.
   };
 
   const onPlayerStateChange = (event: any) => {
     if (event.data === window.YT.PlayerState.PLAYING) {
-      // Clear any existing interval
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current);
       }
-      // Set new interval
       progressIntervalRef.current = setInterval(() => {
         if (playerRef.current && typeof playerRef.current.getCurrentTime === 'function') {
             const currentTime = playerRef.current.getCurrentTime();
