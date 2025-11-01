@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "module-1",
+      "description": "Cover for Module 1: The Foundation",
+      "imageUrl": "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMGRhcmt8ZW58MHx8fHwxNzYxOTQ4OTAyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract dark"
+    },
+    {
+      "id": "module-2",
+      "description": "Cover for Module 2: Advanced Techniques",
+      "imageUrl": "https://images.unsplash.com/photo-1595411425732-e69c1abe2763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGdlb21ldHJpY3xlbnwwfHx8fDE3NjE4NjQwNzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract geometric"
+    },
+    {
+      "id": "module-3",
+      "description": "Cover for Module 3: Mindset Mastery",
+      "imageUrl": "https://images.unsplash.com/photo-1644690627229-15d952217736?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxtaW5pbWFsaXN0JTIwdGV4dHVyZXxlbnwwfHx8fDE3NjE5MzAxMDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "minimalist texture"
+    },
+    {
+      "id": "module-4",
+      "description": "Cover for Module 4: Productivity Systems",
+      "imageUrl": "https://images.unsplash.com/photo-1584949091598-c31daaaa4aa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0ZWNobm9sb2d5JTIwY29kZXxlbnwwfHx8fDE3NjE4Nzc4NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "technology code"
+    },
+    {
+      "id": "module-5",
+      "description": "Cover for Module 5: Lifelong Habits",
+      "imageUrl": "https://images.unsplash.com/photo-1458014854819-1a40aa70211c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxuYXR1cmUlMjBncm93dGh8ZW58MHx8fHwxNzYxOTc3Nzg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "nature growth"
+    }
+  ]
 }
