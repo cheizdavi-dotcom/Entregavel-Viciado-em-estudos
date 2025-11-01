@@ -14,7 +14,7 @@
     "deploy": "npm run build && firebase deploy --only hosting"
   },
   "engines": {
-    "node": "18"
+    "node": "22.x"
   },
   "dependencies": {
     "@genkit-ai/google-genai": "^1.20.0",
