@@ -52,7 +52,7 @@ export const lessons = [
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'M7lc1UVf-VE', order: 1, durationSec: 310 },
-  { id: '202', moduleId: '2', title: 'Aula 2: Ambiente produtivo', youtubeId: 'M7lc1UVf-VE', order: 2, durationSec: 330 },
+  { id: '202', moduleId: '2', title: ' Aula 2: Ambiente produtivo', youtubeId: 'M7lc1UVf-VE', order: 2, durationSec: 330 },
   { id: '203', moduleId: '2', title: 'Aula 3: Ferramentas e distrações', youtubeId: 'M7lc1UVf-VE', order: 3, durationSec: 290 },
   { id: '204', moduleId: '2', title: 'Aula 4: O poder do "não"', youtubeId: 'M7lc1UVf-VE', order: 4, durationSec: 360 },
   { id: '205', moduleId: '2', title: 'Aula 5: Planejando seu dia', youtubeId: 'M7lc1UVf-VE', order: 5, durationSec: 300 },
