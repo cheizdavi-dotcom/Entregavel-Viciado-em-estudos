@@ -27,7 +27,7 @@ export function YouTubePlayer({
   }, [youtubeId, onProgress]);
 
 
-  const src = `https://www.youtube-nocookie.com/embed/${youtubeId}?controls=0&modestbranding=1&rel=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1`;
+  const src = `https://www.youtube-nocookie.com/embed/${youtubeId}?modestbranding=1&rel=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1`;
 
   return (
     <div className="aspect-video w-full">

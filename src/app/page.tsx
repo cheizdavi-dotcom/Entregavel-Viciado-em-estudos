@@ -31,15 +31,15 @@ export default function AppPage() {
         }}
         className="w-full"
       >
-        <CarouselContent>
+        <CarouselContent className="-ml-2">
           {modules.map((module) => (
             <CarouselItem
               key={module.id}
-              className="basis-1/2 md:basis-1/3 lg:basis-4/12 xl:basis-1/5"
+              className="basis-11/12 pl-2 md:basis-1/3 lg:basis-1/4"
             >
               <Link href={`/module/${module.id}`}>
                 <div className="p-1">
-                  <Card className="overflow-hidden">
+                  <Card className="overflow-hidden rounded-lg">
                     <CardContent className="flex aspect-[1080/1600] items-center justify-center p-0">
                       <Image
                         src={module.coverUrl}
