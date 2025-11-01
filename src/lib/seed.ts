@@ -36,7 +36,7 @@ export const modules = [
     id: '5',
     title: 'Módulo 5: A Maestria',
     subtitle: 'Blindando Sua Mente',
-    coverUrl: 'https://i.imgur.com/lO3b1gH.png',
+    coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
   },
