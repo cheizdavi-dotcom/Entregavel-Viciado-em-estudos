@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signInAnonymously, getAuth } from 'firebase/auth';
+import { signInAnonymously } from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
+import { auth } from '@/lib/firebase';
 
 export function AuthForm() {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,6 @@ export function AuthForm() {
   const handleAnonymousLogin = async () => {
     setLoading(true);
     try {
-      const auth = getAuth();
       await signInAnonymously(auth);
       toast({ title: 'Tudo pronto. Vamos começar!' });
       router.push('/app');

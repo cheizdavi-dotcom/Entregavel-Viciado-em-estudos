@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { AuthProvider } from "@/hooks/useAuth";
+import { AuthProvider } from "@/hooks/useAuth.tsx";
 import { initializeApp, getApps } from "firebase/app";
 import { firebaseConfig } from "@/lib/firebase/config";
 
