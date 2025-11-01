@@ -6,7 +6,6 @@ import Link from "next/link";
 const bonusContent = [
     {id: 1, title: "Planner de Produtividade", description: "Organize sua semana.", type: "PDF", href: "https://files.catbox.moe/a4s10n.pdf"},
     {id: 2, title: "Guia de Ferramentas", description: "Apps para manter o foco.", type: "PDF"},
-    {id: 3, title: "Comunidade Exclusiva", description: "Conecte-se com outros membros.", type: "Link"},
     {id: 4, title: "Checklist Anti-Procrastinação", description: "Passos para começar agora.", type: "PDF"},
 ]
 
