@@ -111,16 +111,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
-              <Link href={item.href} key={item.href} legacyBehavior>
-                <a
-                  className={cn(
-                    'flex flex-col items-center justify-center gap-1 text-xs font-medium',
-                    isActive ? 'text-primary' : 'text-muted-foreground'
-                  )}
-                >
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.label}</span>
-                </a>
+              <Link
+                href={item.href}
+                key={item.href}
+                className={cn(
+                  'flex flex-col items-center justify-center gap-1 text-xs font-medium',
+                  isActive ? 'text-primary' : 'text-muted-foreground'
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                <span>{item.label}</span>
               </Link>
             );
           })}
