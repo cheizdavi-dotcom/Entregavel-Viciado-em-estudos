@@ -1,9 +1,10 @@
+
 export const modules = [
   {
     id: '1',
     title: 'Módulo 1: A Raiz',
     subtitle: 'Entendendo a Procrastinação',
-    coverUrl: 'https://i.imgur.com/xO1Z2lO.png',
+    coverUrl: 'https://i.imgur.com/IR5nhss.png',
     description: 'Neste módulo, vamos desvendar as causas profundas da procrastinação e como ela afeta seu cérebro.',
     order: 1,
   },
