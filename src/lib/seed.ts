@@ -48,7 +48,7 @@ export const lessons = [
   { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: '5kIe6UZQ_1w', order: 2, durationSec: 320 },
   { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: 'rpaxG2t2p_g', order: 3, durationSec: 280 },
   { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'tGdsP9A9I5k', order: 4, durationSec: 350 },
-  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: '2Lz0o_2y9lI', order: 5, durationSec: 290 },
+  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290 },
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'OFd_3h_G6_c', order: 1, durationSec: 310 },
