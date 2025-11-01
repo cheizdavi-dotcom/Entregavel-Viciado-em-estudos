@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInAnonymously,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase/config";
 import { useToast } from "@/hooks/use-toast";
@@ -29,8 +30,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, Rocket } from "lucide-react";
+import { Loader2, Rocket, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { getFirebaseAuthErrorMessage } from "@/lib/firebase/errors";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Por favor, insira um e-mail válido." }),
@@ -44,6 +46,7 @@ type FormValues = z.infer<typeof formSchema>;
 export function AuthForm() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("login");
+  const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -63,17 +66,16 @@ export function AuthForm() {
       } else {
         await createUserWithEmailAndPassword(auth, data.email, data.password);
       }
-      router.push('/home');
+      toast({
+        title: "Sucesso!",
+        description: `Bem-vindo(a)!`,
+      });
+      router.push("/home");
     } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Erro de autenticação",
-        description:
-          error.code === "auth/user-not-found" || error.code === "auth/wrong-password"
-            ? "E-mail ou senha inválidos."
-            : error.code === "auth/email-already-in-use"
-            ? "Este e-mail já está em uso."
-            : "Ocorreu um erro. Tente novamente.",
+        description: getFirebaseAuthErrorMessage(error.code),
       });
     } finally {
       setLoading(false);
@@ -84,12 +86,36 @@ export function AuthForm() {
     setLoading(true);
     try {
       await signInAnonymously(auth);
-      router.push('/home');
-    } catch (error) {
+      router.push("/home");
+    } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Erro",
-        description: "Não foi possível entrar como convidado. Tente novamente.",
+        description: getFirebaseAuthErrorMessage(error.code),
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePasswordReset = async () => {
+    const email = form.getValues("email");
+    if (!email || !z.string().email().safeParse(email).success) {
+      form.setError("email", { type: "manual", message: "Por favor, insira um e-mail válido para resetar a senha." });
+      return;
+    }
+    setLoading(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast({
+        title: "E-mail enviado",
+        description: "Verifique sua caixa de entrada para redefinir sua senha.",
+      });
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Erro",
+        description: getFirebaseAuthErrorMessage(error.code),
       });
     } finally {
       setLoading(false);
@@ -100,7 +126,7 @@ export function AuthForm() {
     <Card className="w-full max-w-md">
       <CardHeader className="text-center">
         <div className="flex justify-center items-center mb-2">
-            <Rocket className="w-10 h-10 text-primary" />
+          <Rocket className="w-10 h-10 text-primary" />
         </div>
         <CardTitle className="text-2xl">O Fim da Procrastinação</CardTitle>
         <CardDescription>
@@ -143,20 +169,34 @@ export function AuthForm() {
                     <FormItem>
                       <FormLabel>Senha</FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
-                          placeholder="••••••••"
-                          {...field}
-                          disabled={loading}
-                        />
+                        <div className="relative">
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            {...field}
+                            disabled={loading}
+                            className="pr-10"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute inset-y-0 right-0 px-3 flex items-center text-muted-foreground"
+                            disabled={loading}
+                          >
+                            {showPassword ? <EyeOff className="h-4 w-4"/> : <Eye className="h-4 w-4"/>}
+                          </button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+                <Button variant="link" type="button" onClick={handlePasswordReset} disabled={loading} className="p-0 h-auto text-sm text-primary">
+                  Esqueceu a senha?
+                </Button>
               </TabsContent>
               <TabsContent value="register" className="m-0 space-y-4">
-                 <FormField
+                <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
@@ -180,12 +220,23 @@ export function AuthForm() {
                     <FormItem>
                       <FormLabel>Senha</FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
-                          placeholder="••••••••"
-                          {...field}
-                          disabled={loading}
-                        />
+                         <div className="relative">
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            {...field}
+                            disabled={loading}
+                            className="pr-10"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute inset-y-0 right-0 px-3 flex items-center text-muted-foreground"
+                            disabled={loading}
+                          >
+                            {showPassword ? <EyeOff className="h-4 w-4"/> : <Eye className="h-4 w-4"/>}
+                          </button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -217,6 +268,7 @@ export function AuthForm() {
           onClick={handleAnonymousSignIn}
           disabled={loading}
         >
+          {loading && activeTab !== "login" && activeTab !== "register" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           Convidado
         </Button>
       </CardContent>
