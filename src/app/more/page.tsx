@@ -1,9 +1,10 @@
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const bonusContent = [
-    {id: 1, title: "Planner de Produtividade", description: "Organize sua semana.", type: "PDF"},
+    {id: 1, title: "Planner de Produtividade", description: "Organize sua semana.", type: "PDF", href: "https://www.notion.so/Planner-Semanal-de-Produtividade-cf66434848624e80a844c2974e8d8114?source=copy_link"},
     {id: 2, title: "Guia de Ferramentas", description: "Apps para manter o foco.", type: "PDF"},
     {id: 3, title: "Comunidade Exclusiva", description: "Conecte-se com outros membros.", type: "Link"},
     {id: 4, title: "Checklist Anti-Procrastinação", description: "Passos para começar agora.", type: "PDF"},
@@ -29,9 +30,16 @@ export default function MorePage() {
                 <CardDescription>{item.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full">
+                <Button asChild className="w-full">
+                  <a 
+                    href={(item as any).href || '#'}
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={!(item as any).href ? 'pointer-events-none opacity-50' : ''}
+                  >
                     <Download className="mr-2 h-4 w-4" />
                     {item.type === 'PDF' ? 'Baixar' : 'Acessar'}
+                  </a>
                 </Button>
               </CardContent>
             </Card>
