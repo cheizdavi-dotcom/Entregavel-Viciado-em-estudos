@@ -22,11 +22,10 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
 
   useEffect(() => {
     const setupPlayer = () => {
-      // If a player instance exists, destroy it before creating a new one.
       if (playerRef.current && typeof playerRef.current.destroy === 'function') {
         playerRef.current.destroy();
-        playerRef.current = null;
       }
+      playerRef.current = null;
 
       if (window.YT && window.YT.Player) {
         playerRef.current = new window.YT.Player('youtube-player', {
@@ -40,6 +39,7 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
             disablekb: 0,
             start: Math.floor(startSeconds || 0),
             controls: 1,
+            autoplay: 1, // Force autoplay
           },
           events: {
             onReady: onPlayerReady,
@@ -69,7 +69,6 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
       if (progressIntervalRef.current) {
         clearInterval(progressIntervalRef.current);
       }
-      // It's safer to also try destroying the player on cleanup
       if (playerRef.current && typeof playerRef.current.destroy === 'function') {
         playerRef.current.destroy();
         playerRef.current = null;
@@ -78,15 +77,16 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
   }, [youtubeId, startSeconds]);
 
   const onPlayerReady = (event: any) => {
-    // Some mobile browsers require a user interaction to play.
-    // We won't autoplay by default to respect that.
+    // Explicitly play the video once it's ready. This fixes issues on mobile and desktop.
+    event.target.playVideo();
   };
 
   const onPlayerStateChange = (event: any) => {
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+    }
+      
     if (event.data === window.YT.PlayerState.PLAYING) {
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
-      }
       progressIntervalRef.current = setInterval(() => {
         if (playerRef.current && typeof playerRef.current.getCurrentTime === 'function') {
             const currentTime = playerRef.current.getCurrentTime();
@@ -101,13 +101,8 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
             }
         }
       }, 1000);
-    } else {
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
-      }
-       if (event.data === window.YT.PlayerState.ENDED) {
+    } else if (event.data === window.YT.PlayerState.ENDED) {
         onCompleted();
-      }
     }
   };
 
