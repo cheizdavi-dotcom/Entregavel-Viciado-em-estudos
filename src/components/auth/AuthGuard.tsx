@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/lib/firebase";
+import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { useEffect } from "react";

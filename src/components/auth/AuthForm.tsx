@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signInAnonymously } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { signInAnonymously, getAuth } from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import {
@@ -23,14 +22,16 @@ export function AuthForm() {
   const handleAnonymousLogin = async () => {
     setLoading(true);
     try {
+      const auth = getAuth();
       await signInAnonymously(auth);
       toast({ title: 'Tudo pronto. Vamos começar!' });
       router.push('/app');
     } catch (e: any) {
+      console.error("Firebase Anonymous Auth Error:", e);
       toast({
         variant: 'destructive',
         title: 'Ops! Algo deu errado.',
-        description: 'Não foi possível iniciar sua sessão. Tente novamente.',
+        description: 'Não foi possível iniciar sua sessão. Verifique sua conexão ou as configurações do Firebase.',
       });
     } finally {
       setLoading(false);

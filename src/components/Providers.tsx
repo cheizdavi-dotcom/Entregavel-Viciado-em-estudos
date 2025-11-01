@@ -1,8 +1,14 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { app } from "@/lib/firebase"; // eslint-disable-line @typescript-eslint/no-unused-vars
-import { AuthProvider } from "@/lib/firebase/auth.tsx";
+import { AuthProvider } from "@/hooks/useAuth";
+import { initializeApp, getApps } from "firebase/app";
+import { firebaseConfig } from "@/lib/firebase/config";
+
+// Inicializa o Firebase de forma segura no lado do cliente
+if (getApps().length === 0) {
+  initializeApp(firebaseConfig);
+}
 
 export function Providers({ children }: { children: ReactNode }) {
   return <AuthProvider>{children}</AuthProvider>;

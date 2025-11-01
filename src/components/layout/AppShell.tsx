@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/lib/firebase';
+import { useAuth } from '@/hooks/useAuth';
 import {
   DropdownMenu,
   DropdownMenuContent,

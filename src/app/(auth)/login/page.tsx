@@ -1,7 +1,7 @@
 'use client';
 
 import { AuthForm } from "@/components/auth/AuthForm";
-import { useAuth } from "@/lib/firebase/auth.tsx";
+import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuth } from '@/lib/firebase';
+import { useAuth } from '@/hooks/useAuth';
 import { db } from '@/lib/firebase';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { useState, useCallback, useEffect } from 'react';
@@ -58,15 +58,19 @@ export function useProgress() {
         return progress[lessonId];
       }
 
-      const docSnap = await getDoc(progressRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data() as any;
-        const lessonProgress = {
-          ...data,
-          updatedAt: data.updatedAt?.toDate(),
-        };
-        setProgress((prev) => ({ ...prev, [lessonId]: lessonProgress }));
-        return lessonProgress;
+      try {
+        const docSnap = await getDoc(progressRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data() as any;
+          const lessonProgress = {
+            ...data,
+            updatedAt: data.updatedAt?.toDate(),
+          };
+          setProgress((prev) => ({ ...prev, [lessonId]: lessonProgress }));
+          return lessonProgress;
+        }
+      } catch (error) {
+        console.error("Failed to get lesson progress:", error);
       }
       return null;
     },
