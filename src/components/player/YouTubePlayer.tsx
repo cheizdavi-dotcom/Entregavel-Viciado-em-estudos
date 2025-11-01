@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 declare global {
   interface Window {
@@ -22,31 +22,27 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
 
   useEffect(() => {
     const setupPlayer = () => {
-      if (playerRef.current && typeof playerRef.current.destroy === 'function') {
+      if (playerRef.current) {
         playerRef.current.destroy();
       }
-      playerRef.current = null;
-
-      if (window.YT && window.YT.Player) {
-        playerRef.current = new window.YT.Player('youtube-player', {
-          videoId: youtubeId,
-          playerVars: {
-            playsinline: 1,
-            modestbranding: 1,
-            rel: 0,
-            iv_load_policy: 3,
-            fs: 1,
-            disablekb: 0,
-            start: Math.floor(startSeconds || 0),
-            controls: 1,
-            autoplay: 1, // Force autoplay
-          },
-          events: {
-            onReady: onPlayerReady,
-            onStateChange: onPlayerStateChange,
-          },
-        });
-      }
+      playerRef.current = new window.YT.Player('youtube-player', {
+        videoId: youtubeId,
+        playerVars: {
+          playsinline: 1,
+          modestbranding: 1,
+          rel: 0,
+          iv_load_policy: 3,
+          fs: 1,
+          disablekb: 0,
+          start: Math.floor(startSeconds || 0),
+          controls: 1,
+          autoplay: 1,
+        },
+        events: {
+          onReady: onPlayerReady,
+          onStateChange: onPlayerStateChange,
+        },
+      });
     };
 
     if (!window.YT) {
@@ -74,10 +70,10 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
         playerRef.current = null;
       }
     };
-  }, [youtubeId, startSeconds]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [youtubeId]); // A dependência AGORA é SÓ o youtubeId.
 
   const onPlayerReady = (event: any) => {
-    // Explicitly play the video once it's ready. This fixes issues on mobile and desktop.
     event.target.playVideo();
   };
 
