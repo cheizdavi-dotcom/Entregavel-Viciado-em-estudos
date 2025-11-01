@@ -1,0 +1,7 @@
+{
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "engines": {
+    "node": "18.x"
+  }
+}
