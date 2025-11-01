@@ -45,7 +45,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export function AuthForm() {
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState("login");
+  const [authAction, setAuthAction] = useState<"login" | "register">("login");
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
@@ -61,7 +61,7 @@ export function AuthForm() {
   const handleAuthAction = async (data: FormValues) => {
     setLoading(true);
     try {
-      if (activeTab === "login") {
+      if (authAction === "login") {
         await signInWithEmailAndPassword(auth, data.email, data.password);
       } else {
         await createUserWithEmailAndPassword(auth, data.email, data.password);
@@ -134,17 +134,21 @@ export function AuthForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs 
+          value={authAction} 
+          onValueChange={(value) => setAuthAction(value as "login" | "register")} 
+          className="w-full"
+        >
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="login">Entrar</TabsTrigger>
             <TabsTrigger value="register">Criar Conta</TabsTrigger>
           </TabsList>
-          <Form {...form}>
-            <form
+          
+          <TabsContent value="login" className="m-0">
+             <form
               onSubmit={form.handleSubmit(handleAuthAction)}
               className="space-y-4 pt-4"
             >
-              <TabsContent value="login" className="m-0 space-y-4">
                 <FormField
                   control={form.control}
                   name="email"
@@ -194,8 +198,18 @@ export function AuthForm() {
                 <Button variant="link" type="button" onClick={handlePasswordReset} disabled={loading} className="p-0 h-auto text-sm text-primary">
                   Esqueceu a senha?
                 </Button>
-              </TabsContent>
-              <TabsContent value="register" className="m-0 space-y-4">
+                 <Button type="submit" className="w-full" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Entrar
+                </Button>
+            </form>
+          </TabsContent>
+
+          <TabsContent value="register" className="m-0">
+            <form
+              onSubmit={form.handleSubmit(handleAuthAction)}
+              className="space-y-4 pt-4"
+            >
                 <FormField
                   control={form.control}
                   name="email"
@@ -242,15 +256,12 @@ export function AuthForm() {
                     </FormItem>
                   )}
                 />
-              </TabsContent>
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : null}
-                {activeTab === "login" ? "Entrar" : "Criar Conta"}
-              </Button>
+                 <Button type="submit" className="w-full" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Criar Conta
+                </Button>
             </form>
-          </Form>
+          </TabsContent>
         </Tabs>
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center">
@@ -268,7 +279,7 @@ export function AuthForm() {
           onClick={handleAnonymousSignIn}
           disabled={loading}
         >
-          {loading && activeTab !== "login" && activeTab !== "register" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+          {loading && authAction !== "login" && authAction !== "register" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
           Convidado
         </Button>
       </CardContent>
