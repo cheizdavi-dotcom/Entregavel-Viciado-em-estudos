@@ -7,7 +7,7 @@ const PROGRESS_STORAGE_KEY = 'lessonProgress';
 export interface LessonProgress {
   watchedSeconds: number;
   completed: boolean;
-  updatedAt: number; // Using timestamp for easier sorting
+  updatedAt: Date; 
 }
 
 interface ProgressContextType {

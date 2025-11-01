@@ -1,7 +1,7 @@
 'use client';
 
-import { AuthGuard } from '@/components/auth/AuthGuard';
 import { AppShell } from '@/components/layout/AppShell';
+import { ProgressProvider } from '@/hooks/useProgress';
 
 export default function AppLayout({
   children,
@@ -9,8 +9,8 @@ export default function AppLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthGuard>
+    <ProgressProvider>
       <AppShell>{children}</AppShell>
-    </AuthGuard>
+    </ProgressProvider>
   );
 }

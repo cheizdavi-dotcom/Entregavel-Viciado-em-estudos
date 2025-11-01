@@ -1,15 +1,8 @@
-"use client";
+'use client';
 
-import type { ReactNode } from "react";
-import { AuthProvider } from "@/hooks/useAuth.tsx";
-import { initializeApp, getApps } from "firebase/app";
-import { firebaseConfig } from "@/lib/firebase/config";
+import type { ReactNode } from 'react';
 
-// Inicializa o Firebase de forma segura no lado do cliente
-if (getApps().length === 0) {
-  initializeApp(firebaseConfig);
-}
-
+// Este arquivo pode ser usado para outros provedores no futuro.
 export function Providers({ children }: { children: ReactNode }) {
-  return <AuthProvider>{children}</AuthProvider>;
+  return <>{children}</>;
 }

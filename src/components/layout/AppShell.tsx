@@ -4,74 +4,16 @@ import {
   Home,
   PlaySquare,
   LayoutGrid,
-  Settings as SettingsIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/useAuth';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 const navItems = [
   { href: '/app', label: 'Principal', icon: Home },
   { href: '/continue', label: 'Continuar', icon: PlaySquare },
   { href: '/more', label: 'Mais', icon: LayoutGrid },
-  { href: '/settings', label: 'Ajustes', icon: SettingsIcon },
 ];
-
-function UserMenu() {
-  const { user, signOut } = useAuth();
-  
-  const getInitials = (name?: string | null) => {
-    if (!name) return '??';
-    const names = name.split(' ');
-    if (names.length > 1) {
-      return `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase();
-    }
-    return name.substring(0, 2).toUpperCase();
-  };
-
-  if (!user) return null;
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src={user.photoURL ?? ''}
-              alt={user.displayName ?? 'Usuário'}
-            />
-            <AvatarFallback>{getInitials(user.isAnonymous ? 'Convidado' : user.displayName)}</AvatarFallback>
-          </Avatar>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">
-              {user.isAnonymous ? 'Convidado' : (user.displayName ?? 'Usuário')}
-            </p>
-            <p className="text-xs leading-none text-muted-foreground">
-              {user.isAnonymous ? 'Sessão anônima' : user.email}
-            </p>
-          </div>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>Sair</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -112,11 +54,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </svg>
           <span className="font-bold text-lg">O Fim da Procrastinação</span>
         </div>
-        <UserMenu />
       </header>
       <main className="flex-1 pb-20">{children}</main>
       <footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/80 backdrop-blur-sm">
-        <nav className="grid grid-cols-4 h-16 items-center">
+        <nav className="grid grid-cols-3 h-16 items-center">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
