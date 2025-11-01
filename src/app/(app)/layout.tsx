@@ -1,3 +1,5 @@
+import { AuthGuard } from '@/components/auth/AuthGuard';
+import { AppShell } from '@/components/layout/AppShell';
 
 export default function AppLayout({
   children,
@@ -5,8 +7,8 @@ export default function AppLayout({
   children: React.ReactNode;
 }) {
   return (
-      <div className="relative flex min-h-screen w-full flex-col">
-        <main className="flex-1">{children}</main>
-      </div>
+    <AuthGuard>
+      <AppShell>{children}</AppShell>
+    </AuthGuard>
   );
 }
