@@ -10,7 +10,7 @@ export default function AppLayout({
 }) {
   return (
     <ProgressProvider>
-        <AppShell>{children}</AppShell>
+      <AppShell>{children}</AppShell>
     </ProgressProvider>
   );
 }
