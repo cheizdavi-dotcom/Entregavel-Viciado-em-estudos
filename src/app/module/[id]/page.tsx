@@ -18,7 +18,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   const { progress, saveProgress, getLessonProgress } = useProgress();
 
   const module = modules.find((m) => m.id === params.id);
-  const moduleLessons = lessons.filter((l) => l.moduleId === params.id);
+  const moduleLessons = lessons.filter((l) => l.moduleId === params.id).sort((a,b) => a.order - b.order);
 
   const selectedLesson = useMemo(() => {
     return lessons.find((l) => l.id === selectedLessonId);
@@ -58,7 +58,9 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   const handleProgress = (lessonId: string) => (seconds: number) => {
     const lesson = lessons.find(l => l.id === lessonId);
     if (lesson) {
-      const isCompleted = (seconds / lesson.durationSec) >= 0.9;
+      const currentProgress = getLessonProgress(lessonId);
+      // Mark as completed if 95% is watched, but only if not already completed
+      const isCompleted = currentProgress?.completed || (seconds / lesson.durationSec) >= 0.95;
       saveProgress(lessonId, seconds, isCompleted);
     }
   };
@@ -66,7 +68,10 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   const handleCompleted = (lessonId: string) => {
     const lesson = lessons.find(l => l.id === lessonId);
     if (lesson) {
-      saveProgress(lessonId, lesson.durationSec, true);
+        // Ensure we don't overwrite watchedSeconds with full duration if user seeks
+        const currentProgress = getLessonProgress(lessonId);
+        const watchedSeconds = currentProgress?.watchedSeconds ?? lesson.durationSec;
+        saveProgress(lessonId, Math.max(watchedSeconds, lesson.durationSec * 0.95), true);
     }
   };
   
@@ -99,7 +104,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
               <CardTitle>{module.title}</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
-                {lastWatchedLesson && (
+                {lastWatchedLesson && !lastWatchedLesson.prog.completed && (
                     <Button onClick={() => setSelectedLessonId(lastWatchedLesson.id)} className='mb-4'>
                         Continuar de onde parei
                     </Button>
@@ -125,7 +130,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                       )}
                       <span className="flex-1">{lesson.title}</span>
                     </button>
-                    {progressPercentage > 0 && !isCompleted && (
+                    {progressPercentage > 0 && progressPercentage < 100 && !isCompleted && (
                         <Progress value={progressPercentage} className="h-1 mt-1 mx-3" />
                     )}
                   </div>

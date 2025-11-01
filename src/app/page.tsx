@@ -9,10 +9,47 @@ import {
 } from '@/components/ui/carousel';
 import { Card, CardContent } from '@/components/ui/card';
 import Image from 'next/image';
-import { modules } from '@/lib/seed';
+import { lessons, modules } from '@/lib/seed';
 import Link from 'next/link';
+import { useProgress } from '@/hooks/useProgress.tsx';
+import { useMemo } from 'react';
+import { Lock } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function AppPage() {
+  const { progress, loading } = useProgress();
+
+  const modulesWithProgress = useMemo(() => {
+    let allPreviousModulesCompleted = true;
+
+    return modules.sort((a,b) => a.order - b.order).map((module) => {
+      const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
+      const completedLessons = moduleLessons.filter(
+        (l) => progress[l.id]?.completed
+      );
+      const isModuleCompleted = completedLessons.length === moduleLessons.length;
+      
+      const isUnlocked = allPreviousModulesCompleted;
+      
+      // For the next iteration
+      if (!isModuleCompleted) {
+        allPreviousModulesCompleted = false;
+      }
+
+      return {
+        ...module,
+        isUnlocked,
+        isModuleCompleted,
+      };
+    });
+  }, [progress]);
+
+  if (loading) {
+    // You can add a skeleton loader here if you want
+    return <div className="container mx-auto px-4 py-8"><p>Carregando...</p></div>
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
@@ -27,42 +64,60 @@ export default function AppPage() {
       <Carousel
         opts={{
           align: 'start',
-          loop: true,
+          loop: false, // Loop doesn't make sense with locked modules
         }}
         className="w-full"
       >
         <CarouselContent className="-ml-2">
-          {modules.map((module) => (
-            <CarouselItem
-              key={module.id}
-              className="basis-11/12 pl-2 md:basis-1/3 lg:basis-1/4"
-            >
-              <Link href={`/module/${module.id}`}>
-                <div className="p-1">
-                  <Card className="overflow-hidden rounded-lg">
-                    <CardContent className="flex aspect-[1080/1600] items-center justify-center p-0">
-                      <Image
-                        src={module.coverUrl}
-                        alt={module.title}
-                        width={1080}
-                        height={1600}
-                        className="object-cover w-full h-full"
-                        data-ai-hint="course module"
-                      />
-                    </CardContent>
-                  </Card>
-                  <div className="mt-2 text-center">
-                    <h3 className="font-semibold text-foreground truncate">
-                      {module.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground">
-                      {module.subtitle}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            </CarouselItem>
-          ))}
+          <TooltipProvider>
+            {modulesWithProgress.map((module) => (
+              <CarouselItem
+                key={module.id}
+                className="basis-1/2 pl-4 md:basis-1/3 lg:basis-1/4"
+              >
+                <Tooltip>
+                  <TooltipTrigger asChild disabled={module.isUnlocked}>
+                    <div className={cn(!module.isUnlocked && "pointer-events-none")}>
+                        <Link href={module.isUnlocked ? `/module/${module.id}` : '#'}>
+                          <div className="p-1">
+                            <Card className="overflow-hidden rounded-lg">
+                              <CardContent className="relative flex aspect-[1080/1600] items-center justify-center p-0">
+                                <Image
+                                  src={module.coverUrl}
+                                  alt={module.title}
+                                  width={1080}
+                                  height={1600}
+                                  className={cn("object-cover w-full h-full", !module.isUnlocked && "grayscale")}
+                                  data-ai-hint="course module"
+                                />
+                                {!module.isUnlocked && (
+                                    <div className='absolute inset-0 bg-black/60 flex items-center justify-center'>
+                                        <Lock className='w-16 h-16 text-white/80'/>
+                                    </div>
+                                )}
+                              </CardContent>
+                            </Card>
+                            <div className="mt-2 text-center">
+                              <h3 className="font-semibold text-foreground truncate">
+                                {module.title}
+                              </h3>
+                              <p className="text-xs text-muted-foreground">
+                                {module.subtitle}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                    </div>
+                  </TooltipTrigger>
+                  {!module.isUnlocked && (
+                    <TooltipContent>
+                      <p>Complete o módulo anterior para desbloquear</p>
+                    </TooltipContent>
+                  )}
+                </Tooltip>
+              </CarouselItem>
+            ))}
+          </TooltipProvider>
         </CarouselContent>
         <CarouselPrevious className="hidden sm:flex" />
         <CarouselNext className="hidden sm:flex" />
