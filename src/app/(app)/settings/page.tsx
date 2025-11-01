@@ -42,12 +42,12 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
                 <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Nome</span>
-                    <span>{user?.displayName ?? 'Convidado'}</span>
+                    <span className="text-muted-foreground">Usuário</span>
+                    <span>{user?.isAnonymous ? 'Convidado' : (user?.displayName ?? 'Usuário')}</span>
                 </div>
                  <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Email</span>
-                    <span>{user?.isAnonymous ? 'Não aplicável' : user?.email}</span>
+                    <span className="text-muted-foreground">Sessão</span>
+                    <span>{user?.isAnonymous ? 'Anônima' : 'Registrada'}</span>
                 </div>
                 <Button variant="outline" onClick={handleSignOut} className="w-full">
                     Sair da Conta

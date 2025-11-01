@@ -1,12 +1,9 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { app } from "@/lib/firebase";
+import { app } from "@/lib/firebase"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import { AuthProvider } from "@/lib/firebase/auth.tsx";
 
-// This component now ensures that Firebase is initialized before any part of the
-// app that might need it is rendered.
 export function Providers({ children }: { children: ReactNode }) {
-  // By initializing the app here at the root, we ensure it's ready.
-  // The 'app' import triggers the initialization in firebase/index.ts
-  return <>{children}</>;
+  return <AuthProvider>{children}</AuthProvider>;
 }

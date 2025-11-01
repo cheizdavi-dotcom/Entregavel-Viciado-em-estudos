@@ -21,4 +21,4 @@ const db = getFirestore(app);
 export { app, auth, db };
 
 // Also exporting the auth hook from here
-export { useAuth } from './auth';
+export { useAuth } from './auth.tsx';

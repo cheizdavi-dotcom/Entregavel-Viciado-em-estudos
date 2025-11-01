@@ -1,3 +1,5 @@
+'use client';
+
 import { AuthGuard } from '@/components/auth/AuthGuard';
 import { AppShell } from '@/components/layout/AppShell';
 
