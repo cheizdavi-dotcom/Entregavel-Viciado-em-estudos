@@ -3,11 +3,14 @@
  * 
  * IMPORTANTE:
  * 1. Edite a lista `bonusCodes` para definir seus próprios códigos secretos.
+ *    - CADA BÔNUS TEM SEU PRÓPRIO CÓDIGO.
+ *    - Você enviará o código específico para o cliente que comprou o bônus correspondente.
  * 2. Edite a lista `bonusContent` para definir seus materiais.
  * 3. Use o `requiredCode` em um item de `bonusContent` para vinculá-lo a um código.
  */
 
-// 1. Defina aqui os nomes e os códigos de cada order bump/bônus
+// 1. Defina aqui os nomes e os CÓDIGOS SECRETOS de cada bônus.
+// Estes são os códigos que você vai enviar para os seus clientes.
 export const bonusCodes = [
     { name: "Memória de Ouro", code: "MEMORIA-OURO" },
     { name: "Rotina de Estudos", code: "ROTINA-ESTUDOS" },
@@ -22,15 +25,15 @@ export const bonusContent = [
         description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
         type: "PDF", 
         href: "https://files.catbox.moe/a4s10n.pdf", // <-- TROCAR O LINK REAL AQUI
-        requiredCode: "MEMORIA-OURO" // Este bônus precisa do código para ser desbloqueado
+        requiredCode: "MEMORIA-OURO" // Este bônus precisa do código "MEMORIA-OURO" para ser desbloqueado.
     },
     {
         id: 2, 
-        title: "Como Manter uma Rotina de Estudos", 
+        title: "Rotina de Estudos", 
         description: "Um guia prático para construir e manter a disciplina nos estudos.", 
         type: "PDF", 
         href: "https://files.catbox.moe/b1c2d3.pdf", // <-- TROCAR O LINK REAL AQUI
-        requiredCode: "ROTINA-ESTUDOS" // E este precisa do outro código
+        requiredCode: "ROTINA-ESTUDOS" // E este precisa do código "ROTINA-ESTUDOS".
     },
     {
         id: 3, 
@@ -38,7 +41,7 @@ export const bonusContent = [
         description: "O passo a passo estratégico para garantir sua vaga.", 
         type: "PDF", 
         href: "https://files.catbox.moe/e4f5g6.pdf", // <-- TROCAR O LINK REAL AQUI
-        requiredCode: "APROVACAO-2024"
+        requiredCode: "APROVACAO-2024" // E este, do código "APROVACAO-2024".
     },
     {
         id: 4,
