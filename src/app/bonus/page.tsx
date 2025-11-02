@@ -30,10 +30,13 @@ export default function BonusPage() {
   }, []);
 
   const handleUnlock = () => {
-    const code = inputValue.trim().toUpperCase();
+    // Remove spaces, dots, and normalize to uppercase to make the check more robust.
+    const cleanInput = (str: string) => str.replace(/[\s.-]/g, '').toUpperCase();
+    
+    const code = cleanInput(inputValue);
     if (!code) return;
 
-    const validCode = bonusCodes.find(c => c.code.toUpperCase() === code);
+    const validCode = bonusCodes.find(c => cleanInput(c.code) === code);
 
     if (validCode) {
       if (unlockedCodes.includes(validCode.code)) {
