@@ -50,5 +50,13 @@ export const bonusContent = [
         type: "Link",
         href: "/module/1", // Exemplo: link para uma página interna
         // Sem `requiredCode`, então este item estará sempre desbloqueado/visível para todos.
+    },
+    {
+        id: 5,
+        title: "Planner Semanal",
+        description: "Organize suas tarefas e horários de estudo com este planner exclusivo.",
+        type: "PDF",
+        href: "https://files.catbox.moe/p1a2n3.pdf", // <-- TROCAR O LINK REAL AQUI
+        // Sem `requiredCode`, conteúdo gratuito.
     }
 ]
