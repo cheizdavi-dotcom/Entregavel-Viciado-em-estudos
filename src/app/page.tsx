@@ -13,20 +13,57 @@ import { lessons, modules } from '@/lib/seed';
 import Link from 'next/link';
 import { useProgress } from '@/hooks/useProgress.tsx';
 import { useMemo } from 'react';
-import { Lock } from 'lucide-react';
+import { Lock, PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { Progress } from '@/components/ui/progress';
+import { Button } from '@/components/ui/button';
 
 export default function AppPage() {
   const { progress, loading } = useProgress();
 
+  const totalLessons = lessons.length;
+  const completedLessons = useMemo(() => {
+    if (loading) return 0;
+    return Object.values(progress).filter((p) => p.completed).length;
+  }, [progress, loading]);
+
+  const overallProgress = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
+  
+  const lastWatchedLessonModuleId = useMemo(() => {
+    if (loading || Object.keys(progress).length === 0) return null;
+    
+    const allProgress = Object.entries(progress)
+      .map(([lessonId, prog]) => ({ lessonId, ...prog }))
+      .sort((a,b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+
+    if (allProgress.length > 0) {
+      const lastLessonId = allProgress[0].lessonId;
+      const lastLesson = lessons.find(l => l.id === lastLessonId);
+      return lastLesson?.moduleId;
+    }
+    return null;
+  }, [progress, loading]);
+
+
   const modulesWithProgress = useMemo(() => {
     if (loading) {
-      return modules.map(m => ({ ...m, isUnlocked: m.order === 1, isModuleCompleted: false })).sort((a, b) => a.order - b.order);
+      return modules
+        .map((m) => ({
+          ...m,
+          isUnlocked: m.order === 1,
+          isModuleCompleted: false,
+        }))
+        .sort((a, b) => a.order - b.order);
     }
-  
+
     const moduleCompletionStatus: Record<string, boolean> = {};
-    modules.forEach(module => {
+    modules.forEach((module) => {
       const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
       if (moduleLessons.length === 0) {
         moduleCompletionStatus[module.id] = true;
@@ -35,41 +72,74 @@ export default function AppPage() {
       const completedLessons = moduleLessons.filter(
         (l) => progress[l.id]?.completed
       );
-      moduleCompletionStatus[module.id] = completedLessons.length === moduleLessons.length;
+      moduleCompletionStatus[module.id] =
+        completedLessons.length === moduleLessons.length;
     });
 
-    return modules.sort((a,b) => a.order - b.order).map((module) => {
-      let isUnlocked = false;
-      if (module.order === 1) {
-        isUnlocked = true;
-      } else {
-        const previousModules = modules.filter(m => m.order < module.order);
-        isUnlocked = previousModules.every(pm => moduleCompletionStatus[pm.id]);
-      }
-      
-      return {
-        ...module,
-        isUnlocked,
-        isModuleCompleted: moduleCompletionStatus[module.id],
-      };
-    });
+    return modules
+      .sort((a, b) => a.order - b.order)
+      .map((module) => {
+        let isUnlocked = false;
+        if (module.order === 1) {
+          isUnlocked = true;
+        } else {
+          const previousModule = modules.find(m => m.order === module.order - 1);
+          isUnlocked = previousModule ? moduleCompletionStatus[previousModule.id] : false;
+        }
+
+        return {
+          ...module,
+          isUnlocked,
+          isModuleCompleted: moduleCompletionStatus[module.id],
+        };
+      });
   }, [progress, loading]);
 
-
   if (loading) {
-    return <div className="container mx-auto px-4 py-8"><p>Carregando...</p></div>
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <p>Carregando...</p>
+      </div>
+    );
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
         <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground">
-          Principal
+          Boas-vindas à sua jornada!
         </h1>
         <p className="text-muted-foreground mt-2">
-          Comece sua jornada para o fim da procrastinação.
+          Seu caminho para o fim da procrastinação começa agora.
         </p>
       </header>
+
+      <Card className="mb-8">
+        <CardContent className="p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex-1">
+                <p className="text-sm text-muted-foreground mb-1">Progresso Total</p>
+                <div className="flex items-center gap-4">
+                    <Progress value={overallProgress} className="h-2 w-full flex-1" />
+                    <span className="text-sm font-bold text-foreground">{Math.round(overallProgress)}%</span>
+                </div>
+            </div>
+            {lastWatchedLessonModuleId && (
+                <Button asChild className="w-full sm:w-auto">
+                    <Link href={`/module/${lastWatchedLessonModuleId}`}>
+                        <PlayCircle />
+                        Continuar de onde parou
+                    </Link>
+                </Button>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+
+      <h2 className="text-2xl font-bold font-headline tracking-tight text-foreground mb-4">
+        Módulos do Curso
+      </h2>
 
       <Carousel
         opts={{
@@ -90,36 +160,42 @@ export default function AppPage() {
               >
                 <Tooltip>
                   <TooltipTrigger asChild disabled={module.isUnlocked}>
-                    <div className={cn(!module.isUnlocked && "pointer-events-none")}>
-                        <Link href={module.isUnlocked ? `/module/${module.id}` : '#'} aria-disabled={!module.isUnlocked}>
-                          <div className="p-1">
-                            <Card className="overflow-hidden rounded-lg">
-                              <CardContent className="relative flex aspect-[1080/1600] items-center justify-center p-0">
-                                <Image
-                                  src={module.coverUrl}
-                                  alt={module.title}
-                                  width={1080}
-                                  height={1600}
-                                  className={cn("object-cover w-full h-full", !module.isUnlocked && "grayscale")}
-                                  data-ai-hint="course module"
-                                />
-                                {!module.isUnlocked && (
-                                    <div className='absolute inset-0 bg-black/60 flex items-center justify-center'>
-                                        <Lock className='w-16 h-16 text-white/80'/>
-                                    </div>
+                    <div className={cn(!module.isUnlocked && 'pointer-events-none')}>
+                      <Link
+                        href={module.isUnlocked ? `/module/${module.id}` : '#'}
+                        aria-disabled={!module.isUnlocked}
+                      >
+                        <div className="p-1">
+                          <Card className="overflow-hidden rounded-lg">
+                            <CardContent className="relative flex aspect-[1080/1600] items-center justify-center p-0">
+                              <Image
+                                src={module.coverUrl}
+                                alt={module.title}
+                                width={1080}
+                                height={1600}
+                                className={cn(
+                                  'object-cover w-full h-full',
+                                  !module.isUnlocked && 'grayscale'
                                 )}
-                              </CardContent>
-                            </Card>
-                            <div className="mt-2 text-center">
-                              <h3 className="font-semibold text-foreground truncate">
-                                {module.title}
-                              </h3>
-                              <p className="text-xs text-muted-foreground">
-                                {module.subtitle}
-                              </p>
-                            </div>
+                                data-ai-hint="course module"
+                              />
+                              {!module.isUnlocked && (
+                                <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                                  <Lock className="w-16 h-16 text-white/80" />
+                                </div>
+                              )}
+                            </CardContent>
+                          </Card>
+                          <div className="mt-2 text-center">
+                            <h3 className="font-semibold text-foreground truncate">
+                              {module.title}
+                            </h3>
+                            <p className="text-xs text-muted-foreground">
+                              {module.subtitle}
+                            </p>
                           </div>
-                        </Link>
+                        </div>
+                      </Link>
                     </div>
                   </TooltipTrigger>
                   {!module.isUnlocked && (
