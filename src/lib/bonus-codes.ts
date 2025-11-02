@@ -50,5 +50,21 @@ export const bonusContent = [
         type: "PDF",
         href: "https://files.catbox.moe/p1a2n3.pdf", // <-- TROCAR O LINK REAL AQUI
         // Sem `requiredCode`, conteúdo gratuito.
+    },
+    {
+        id: 6,
+        title: "Mapa Mental de Estudos",
+        description: "Um modelo de mapa mental para organizar ideias e acelerar o aprendizado.",
+        type: "PDF",
+        href: "https://files.catbox.moe/m4p1m3.pdf", // <-- TROCAR O LINK REAL AQUI
+        // Sem `requiredCode`, conteúdo gratuito.
+    },
+    {
+        id: 7,
+        title: "Checklist de Foco",
+        description: "Prepare seu ambiente antes de estudar e elimine as distrações.",
+        type: "PDF",
+        href: "https://files.catbox.moe/f0c4s5.pdf", // <-- TROCAR O LINK REAL AQUI
+        // Sem `requiredCode`, conteúdo gratuito.
     }
 ]
