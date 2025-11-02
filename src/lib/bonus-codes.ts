@@ -9,36 +9,36 @@
 
 // 1. Defina aqui os nomes e os códigos de cada order bump/bônus
 export const bonusCodes = [
-    { name: "Planner de Produtividade", code: "PRODUTIVIDADE-2024" },
-    { name: "Guia de Ferramentas", code: "FOCO-TOTAL" },
-    { name: "Checklist Anti-Procrastinação", code: "COMECE-AGORA" },
+    { name: "Memória de Ouro", code: "MEMORIA-OURO" },
+    { name: "Rotina de Estudos", code: "ROTINA-ESTUDOS" },
+    { name: "Caminho para Aprovação", code: "APROVACAO-2024" },
 ];
 
 // 2. Defina aqui os materiais bônus.
 export const bonusContent = [
     {
         id: 1, 
-        title: "Planner de Produtividade", 
-        description: "Organize sua semana.", 
+        title: "Memória de Ouro", 
+        description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
         type: "PDF", 
-        href: "https://files.catbox.moe/a4s10n.pdf",
-        requiredCode: "PRODUTIVIDADE-2024" // Este bônus precisa do código para ser desbloqueado
+        href: "https://files.catbox.moe/a4s10n.pdf", // <-- TROCAR O LINK REAL AQUI
+        requiredCode: "MEMORIA-OURO" // Este bônus precisa do código para ser desbloqueado
     },
     {
         id: 2, 
-        title: "Guia de Ferramentas", 
-        description: "Apps para manter o foco.", 
+        title: "Como Manter uma Rotina de Estudos", 
+        description: "Um guia prático para construir e manter a disciplina nos estudos.", 
         type: "PDF", 
         href: "https://files.catbox.moe/b1c2d3.pdf", // <-- TROCAR O LINK REAL AQUI
-        requiredCode: "FOCO-TOTAL" // E este precisa do outro código
+        requiredCode: "ROTINA-ESTUDOS" // E este precisa do outro código
     },
     {
         id: 3, 
-        title: "Checklist Anti-Procrastinação", 
-        description: "Passos para começar agora.", 
+        title: "Caminho para Aprovação", 
+        description: "O passo a passo estratégico para garantir sua vaga.", 
         type: "PDF", 
         href: "https://files.catbox.moe/e4f5g6.pdf", // <-- TROCAR O LINK REAL AQUI
-        requiredCode: "COMECE-AGORA"
+        requiredCode: "APROVACAO-2024"
     },
     {
         id: 4,
