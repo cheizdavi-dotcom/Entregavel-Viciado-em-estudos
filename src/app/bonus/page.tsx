@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
 import { bonusContent, bonusCodes } from "@/lib/bonus-codes";
+import { cn } from "@/lib/utils";
 
 const UNLOCKED_CODES_KEY = 'unlockedBonusCodes';
 
@@ -113,28 +114,36 @@ export default function BonusPage() {
 
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {unlockableContent.map(item => {
-            const isUnlocked = isBonusUnlocked(item.id);
+            const isUnlocked = isClient && isBonusUnlocked(item.id);
             return (
-              <Card key={item.id} className={!isUnlocked ? 'bg-muted/50' : ''}>
-                <CardHeader>
-                  <CardTitle className="text-lg flex items-center justify-between">
-                    <span>{item.title}</span>
-                    {!isUnlocked && isClient && <Lock className="h-4 w-4 text-muted-foreground"/>}
-                  </CardTitle>
-                  <CardDescription>{item.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button asChild className="w-full" disabled={!isUnlocked}>
-                    <a 
-                      href={isUnlocked ? item.href : '#'}
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                    >
-                      <Download className="mr-2 h-4 w-4" />
-                      {item.type === 'PDF' ? 'Baixar' : 'Acessar'}
-                    </a>
-                  </Button>
-                </CardContent>
+              <Card key={item.id} className="relative overflow-hidden">
+                <div className={cn(!isUnlocked && 'blur-[2px] pointer-events-none')}>
+                  <CardHeader>
+                    <CardTitle className="text-lg">
+                      {item.title}
+                    </CardTitle>
+                    <CardDescription>{item.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button asChild className="w-full" disabled={!isUnlocked}>
+                      <a 
+                        href={isUnlocked ? item.href : '#'}
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                      >
+                        <Download className="mr-2 h-4 w-4" />
+                        {item.type === 'PDF' ? 'Baixar' : 'Acessar'}
+                      </a>
+                    </Button>
+                  </CardContent>
+                </div>
+                 {!isUnlocked && isClient && (
+                  <div className="absolute inset-0 bg-background/80 flex flex-col items-center justify-center text-center p-4">
+                    <Lock className="h-8 w-8 text-foreground" />
+                    <p className="mt-2 font-semibold text-foreground">Bloqueado</p>
+                    <p className="text-xs text-muted-foreground">Insira o código para liberar</p>
+                  </div>
+                )}
               </Card>
             )
           })}
