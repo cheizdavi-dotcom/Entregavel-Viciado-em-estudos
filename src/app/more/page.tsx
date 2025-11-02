@@ -3,11 +3,10 @@
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Download, LifeBuoy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { bonusContent } from "@/lib/bonus-codes";
+import { moreContent } from "@/lib/bonus-codes";
 import Link from "next/link";
 
 export default function MorePage() {
-  const freeContent = bonusContent.filter(item => !item.requiredCode);
   const supportEmail = "metodoviciadonosestudos@gmail.com";
 
   return (
@@ -42,11 +41,11 @@ export default function MorePage() {
             </Card>
         </section>
 
-        {freeContent.length > 0 && (
+        {moreContent.length > 0 && (
           <section>
              <h2 className="text-2xl font-bold font-headline tracking-tight text-foreground mb-4">Materiais Gratuitos</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {freeContent.map(item => {
+                {moreContent.map(item => {
                     const isInternalLink = item.href.startsWith('/');
                     return (
                     <Card key={item.id}>

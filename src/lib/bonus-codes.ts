@@ -6,6 +6,8 @@
  *    - CADA BÔNUS TEM SEU PRÓPRIO CÓDIGO.
  *    - Você enviará o código específico para o cliente que comprou o bônus correspondente.
  * 2. Edite a lista `bonusContent` para definir seus materiais.
+ *    - Atualize a `coverUrl` com a imagem de capa de cada bônus.
+ *    - Atualize a `youtubeId` com o ID do vídeo do YouTube para cada bônus.
  * 3. Use o `requiredCode` em um item de `bonusContent` para vinculá-lo a um código.
  */
 
@@ -17,39 +19,79 @@ export const bonusCodes = [
     { name: "Caminho para Aprovação", code: "APROVACAO-2024" },
 ];
 
+export interface BonusItem {
+    id: string;
+    title: string;
+    description: string;
+    coverUrl: string; // Capa do bônus
+    youtubeId: string; // ID do vídeo do YouTube
+    requiredCode?: string;
+}
+
+
 // 2. Defina aqui os materiais bônus.
-export const bonusContent = [
+export const bonusContent: BonusItem[] = [
     {
-        id: 1, 
+        id: "memoria-de-ouro", 
         title: "Memória de Ouro", 
         description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
-        type: "PDF", 
-        href: "https://files.catbox.moe/a4s10n.pdf", // <-- TROCAR O LINK REAL AQUI
-        requiredCode: "MEMORIA-OURO" // Este bônus precisa do código "MEMORIA-OURO" para ser desbloqueado.
+        coverUrl: "https://i.imgur.com/kSso2tA.png", // <- TROCAR IMAGEM REAL
+        youtubeId: "BpYYVSFZYfs", // <- TROCAR ID DO VÍDEO REAL
+        requiredCode: "MEMORIA-OURO" 
     },
     {
-        id: 2, 
+        id: "rotina-de-estudos", 
         title: "Rotina de Estudos", 
         description: "Um guia prático para construir e manter a disciplina nos estudos.", 
-        type: "PDF", 
-        href: "https://files.catbox.moe/b1c2d3.pdf", // <-- TROCAR O LINK REAL AQUI
-        requiredCode: "ROTINA-ESTUDOS" // E este precisa do código "ROTINA-ESTUDOS".
+        coverUrl: "https://i.imgur.com/W2zI1st.png", // <- TROCAR IMAGEM REAL
+        youtubeId: "ImZ2abenGkw", // <- TROCAR ID DO VÍDEO REAL
+        requiredCode: "ROTINA-ESTUDOS"
     },
     {
-        id: 3, 
+        id: "caminho-para-aprovacao", 
         title: "Caminho para Aprovação", 
         description: "O passo a passo estratégico para garantir sua vaga.", 
-        type: "PDF", 
-        href: "https://files.catbox.moe/e4f5g6.pdf", // <-- TROCAR O LINK REAL AQUI
-        requiredCode: "APROVACAO-2024" // E este, do código "APROVACAO-2024".
+        coverUrl: "https://i.imgur.com/8RrvCgR.png", // <- TROCAR IMAGEM REAL
+        youtubeId: "3EwH4EghGqw", // <- TROCAR ID DO VÍDEO REAL
+        requiredCode: "APROVACAO-2024"
+    },
+    // Itens gratuitos (sem requiredCode) aparecerão na página "Mais"
+    {
+        id: "planner-semanal",
+        title: "Planner Semanal",
+        description: "Organize suas tarefas e horários de estudo com este planner exclusivo.",
+        coverUrl: "https://i.imgur.com/InRd8Er.png", // Este campo não será usado na pág "Mais"
+        youtubeId: "p1a2n3", // Este campo não será usado na pág "Mais"
+        // Sem `requiredCode`, conteúdo gratuito.
     },
     {
+        id: "mapa-mental",
+        title: "Mapa Mental de Estudos",
+        description: "Um modelo de mapa mental para organizar ideias e acelerar o aprendizado.",
+        coverUrl: "https://i.imgur.com/ILDypkd.png", // Este campo não será usado na pág "Mais"
+        youtubeId: "m4p1m3", // Este campo não será usado na pág "Mais"
+        // Sem `requiredCode`, conteúdo gratuito.
+    },
+    {
+        id: "checklist-foco",
+        title: "Checklist de Foco",
+        description: "Prepare seu ambiente antes de estudar e elimine as distrações.",
+        coverUrl: "https://i.imgur.com/reNazVp.png", // Este campo não será usado na pág "Mais"
+        youtubeId: "f0c4s5", // Este campo não será usado na pág "Mais"
+        // Sem `requiredCode`, conteúdo gratuito.
+    }
+];
+
+// Re-exportando `bonusContent` como `moreContent` para a página 'Mais',
+// mas com a estrutura antiga para não quebrar a página.
+// Isso é um passo intermediário.
+export const moreContent = [
+     {
         id: 5,
         title: "Planner Semanal",
         description: "Organize suas tarefas e horários de estudo com este planner exclusivo.",
         type: "PDF",
         href: "https://files.catbox.moe/p1a2n3.pdf", // <-- TROCAR O LINK REAL AQUI
-        // Sem `requiredCode`, conteúdo gratuito.
     },
     {
         id: 6,
@@ -57,7 +99,6 @@ export const bonusContent = [
         description: "Um modelo de mapa mental para organizar ideias e acelerar o aprendizado.",
         type: "PDF",
         href: "https://files.catbox.moe/m4p1m3.pdf", // <-- TROCAR O LINK REAL AQUI
-        // Sem `requiredCode`, conteúdo gratuito.
     },
     {
         id: 7,
@@ -65,6 +106,5 @@ export const bonusContent = [
         description: "Prepare seu ambiente antes de estudar e elimine as distrações.",
         type: "PDF",
         href: "https://files.catbox.moe/f0c4s5.pdf", // <-- TROCAR O LINK REAL AQUI
-        // Sem `requiredCode`, conteúdo gratuito.
     }
 ]

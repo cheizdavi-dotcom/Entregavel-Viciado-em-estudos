@@ -1,13 +1,15 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import { Download, Lock, Unlock } from "lucide-react";
+import { Lock, Unlock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
 import { bonusContent, bonusCodes } from "@/lib/bonus-codes";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import Image from "next/image";
 
 const UNLOCKED_CODES_KEY = 'unlockedBonusCodes';
 
@@ -30,7 +32,6 @@ export default function BonusPage() {
   }, []);
 
   const handleUnlock = () => {
-    // Remove spaces, dots, and normalize to uppercase to make the check more robust.
     const cleanInput = (str: string) => str.replace(/[\s.-]/g, '').toUpperCase();
     
     const code = cleanInput(inputValue);
@@ -74,7 +75,7 @@ export default function BonusPage() {
     }
   };
   
-  const isBonusUnlocked = (bonusId: string | number): boolean => {
+  const isBonusUnlocked = (bonusId: string): boolean => {
     if (!isClient) return false;
     const bonus = bonusContent.find(b => b.id === bonusId);
     if (!bonus?.requiredCode) return false;
@@ -115,39 +116,38 @@ export default function BonusPage() {
         </CardContent>
       </Card>
 
-       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {unlockableContent.map(item => {
             const isUnlocked = isClient && isBonusUnlocked(item.id);
             return (
-              <Card key={item.id} className="relative overflow-hidden">
-                <div className={cn(!isUnlocked && 'blur-[2px] pointer-events-none')}>
-                  <CardHeader>
-                    <CardTitle className="text-lg">
-                      {item.title}
-                    </CardTitle>
-                    <CardDescription>{item.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button asChild className="w-full" disabled={!isUnlocked}>
-                      <a 
-                        href={isUnlocked ? item.href : '#'}
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                      >
-                        <Download className="mr-2 h-4 w-4" />
-                        {item.type === 'PDF' ? 'Baixar' : 'Acessar'}
-                      </a>
-                    </Button>
-                  </CardContent>
+              <Link key={item.id} href={isUnlocked ? `/bonus/${item.id}` : '#'} aria-disabled={!isUnlocked} className={cn(!isUnlocked && 'pointer-events-none')}>
+                <Card className="relative overflow-hidden transition-transform hover:scale-105">
+                    <CardContent className="relative flex aspect-[1080/1350] items-center justify-center p-0">
+                    <Image
+                        src={item.coverUrl}
+                        alt={item.title}
+                        width={1080}
+                        height={1350}
+                        className={cn(
+                        'object-cover w-full h-full',
+                        !isUnlocked && 'grayscale'
+                        )}
+                        data-ai-hint="course bonus"
+                    />
+                     {!isUnlocked && isClient && (
+                        <div className="absolute inset-0 bg-background/80 flex flex-col items-center justify-center text-center p-4">
+                            <Lock className="h-8 w-8 text-foreground" />
+                            <p className="mt-2 font-semibold text-foreground">Bloqueado</p>
+                            <p className="text-xs text-muted-foreground">Insira o código para liberar</p>
+                        </div>
+                    )}
+                    </CardContent>
+                </Card>
+                <div className="mt-2 text-center">
+                    <h3 className="font-semibold text-foreground truncate">{item.title}</h3>
+                    <p className="text-xs text-muted-foreground">{item.description}</p>
                 </div>
-                 {!isUnlocked && isClient && (
-                  <div className="absolute inset-0 bg-background/80 flex flex-col items-center justify-center text-center p-4">
-                    <Lock className="h-8 w-8 text-foreground" />
-                    <p className="mt-2 font-semibold text-foreground">Bloqueado</p>
-                    <p className="text-xs text-muted-foreground">Insira o código para liberar</p>
-                  </div>
-                )}
-              </Card>
+              </Link>
             )
           })}
         </div>
