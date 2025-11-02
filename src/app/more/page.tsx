@@ -1,15 +1,79 @@
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import { Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+'use client';
 
-const bonusContent = [
-    {id: 1, title: "Planner de Produtividade", description: "Organize sua semana.", type: "PDF", href: "https://files.catbox.moe/a4s10n.pdf"},
-    {id: 2, title: "Guia de Ferramentas", description: "Apps para manter o foco.", type: "PDF"},
-    {id: 4, title: "Checklist Anti-Procrastinação", description: "Passos para começar agora.", type: "PDF"},
-]
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
+import { Download, Lock, Unlock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+import { useState, useEffect } from "react";
+import { bonusContent, bonusCodes } from "@/lib/bonus-codes";
+
+const UNLOCKED_CODES_KEY = 'unlockedBonusCodes';
 
 export default function MorePage() {
+  const { toast } = useToast();
+  const [inputValue, setInputValue] = useState('');
+  const [unlockedCodes, setUnlockedCodes] = useState<string[]>([]);
+
+  useEffect(() => {
+    try {
+      const storedCodes = localStorage.getItem(UNLOCKED_CODES_KEY);
+      if (storedCodes) {
+        setUnlockedCodes(JSON.parse(storedCodes));
+      }
+    } catch (error) {
+      console.error("Failed to load unlocked codes from localStorage", error);
+    }
+  }, []);
+
+  const handleUnlock = () => {
+    const code = inputValue.trim().toUpperCase();
+    if (!code) return;
+
+    const validCode = bonusCodes.find(c => c.code.toUpperCase() === code);
+
+    if (validCode) {
+      if (unlockedCodes.includes(validCode.code)) {
+        toast({
+          title: "Código já utilizado",
+          description: "Este conteúdo bônus já foi desbloqueado.",
+        });
+      } else {
+        const newUnlockedCodes = [...unlockedCodes, validCode.code];
+        setUnlockedCodes(newUnlockedCodes);
+        try {
+          localStorage.setItem(UNLOCKED_CODES_KEY, JSON.stringify(newUnlockedCodes));
+          toast({
+            title: "Conteúdo Desbloqueado!",
+            description: `Você liberou: ${validCode.name}.`,
+            variant: 'default',
+            className: 'bg-primary text-primary-foreground',
+          });
+        } catch (error) {
+           console.error("Failed to save unlocked codes to localStorage", error);
+           toast({
+             title: "Erro ao salvar",
+             description: "Não foi possível salvar seu progresso. Tente novamente.",
+             variant: "destructive",
+           });
+        }
+      }
+      setInputValue('');
+    } else {
+      toast({
+        title: "Código Inválido",
+        description: "Por favor, verifique o código e tente novamente.",
+        variant: "destructive",
+      });
+    }
+  };
+  
+  const isBonusUnlocked = (bonusId: string | number): boolean => {
+    const bonus = bonusContent.find(b => b.id === bonusId);
+    if (!bonus?.requiredCode) return true; // Always unlocked if no code is required
+    return unlockedCodes.includes(bonus.requiredCode);
+  }
+
   return (
     <div className="container mx-auto p-4">
       <header className="mb-8">
@@ -21,28 +85,54 @@ export default function MorePage() {
         </p>
       </header>
 
+      <Card className="mb-8">
+        <CardHeader>
+          <CardTitle>Desbloquear Bônus</CardTitle>
+          <CardDescription>Comprou um produto extra? Insira o código que você recebeu por e-mail para liberá-lo.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Input 
+              placeholder="Digite seu código de acesso"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyUp={(e) => e.key === 'Enter' && handleUnlock()}
+            />
+            <Button onClick={handleUnlock} className="sm:w-auto w-full">
+              <Unlock className="mr-2 h-4 w-4" />
+              Desbloquear
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {bonusContent.map(item => (
-            <Card key={item.id}>
-              <CardHeader>
-                <CardTitle className="text-lg">{item.title}</CardTitle>
-                <CardDescription>{item.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button asChild className="w-full">
-                  <a 
-                    href={(item as any).href || '#'}
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className={!(item as any).href ? 'pointer-events-none opacity-50' : ''}
-                  >
-                    <Download className="mr-2 h-4 w-4" />
-                    {item.type === 'PDF' ? 'Baixar' : 'Acessar'}
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+          {bonusContent.map(item => {
+            const isUnlocked = isBonusUnlocked(item.id);
+            return (
+              <Card key={item.id} className={!isUnlocked ? 'bg-muted/50' : ''}>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center justify-between">
+                    <span>{item.title}</span>
+                    {!isUnlocked && <Lock className="h-4 w-4 text-muted-foreground"/>}
+                  </CardTitle>
+                  <CardDescription>{item.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button asChild className="w-full" disabled={!isUnlocked}>
+                    <a 
+                      href={isUnlocked ? item.href : '#'}
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                    >
+                      <Download className="mr-2 h-4 w-4" />
+                      {item.type === 'PDF' ? 'Baixar' : 'Acessar'}
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            )
+          })}
         </div>
     </div>
   );
