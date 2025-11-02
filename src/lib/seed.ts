@@ -46,7 +46,7 @@ export const lessons = [
   // Módulo 1
   { id: '101', moduleId: '1', title: 'Aula 1: O que é procrastinação?', youtubeId: 'BpYYVSFZYfs', order: 1, durationSec: 300 },
   { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320 },
-  { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: 'f5oLmLc0bOs', order: 3, durationSec: 280 },
+  { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280 },
   { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: '6P2j3i0y6pY', order: 4, durationSec: 350 },
   { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'Y1sHc2_Wpso', order: 5, durationSec: 290 },
 
