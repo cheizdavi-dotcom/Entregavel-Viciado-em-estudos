@@ -64,22 +64,6 @@ export default function MorePage() {
             })}
         </div>
       )}
-
-      <Card className="mt-8 bg-accent/20 border-accent">
-          <CardHeader>
-              <CardTitle>Tem um código de bônus?</CardTitle>
-              <CardDescription>Clique no botão abaixo para acessar a área de bônus e desbloquear seus conteúdos exclusivos.</CardDescription>
-          </CardHeader>
-          <CardContent>
-              <Button asChild>
-                  <Link href="/bonus">
-                      <Unlock className="mr-2 h-4 w-4" />
-                      Ir para a área de bônus
-                  </Link>
-              </Button>
-          </CardContent>
-      </Card>
-
     </div>
   );
 }

@@ -44,14 +44,6 @@ export const bonusContent = [
         requiredCode: "APROVACAO-2024" // E este, do código "APROVACAO-2024".
     },
     {
-        id: 4,
-        title: "Aula Extra: Lidando com a Ansiedade",
-        description: "Uma aula exclusiva sobre como a ansiedade afeta a produtividade.",
-        type: "Link",
-        href: "/module/1", // Exemplo: link para uma página interna
-        // Sem `requiredCode`, então este item estará sempre desbloqueado/visível para todos.
-    },
-    {
         id: 5,
         title: "Planner Semanal",
         description: "Organize suas tarefas e horários de estudo com este planner exclusivo.",
