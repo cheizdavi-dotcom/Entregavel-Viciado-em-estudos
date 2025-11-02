@@ -21,31 +21,40 @@ export default function AppPage() {
   const { progress, loading } = useProgress();
 
   const modulesWithProgress = useMemo(() => {
-    if (loading) return modules.map(m => ({...m, isUnlocked: false, isModuleCompleted: false})).sort((a,b) => a.order - b.order);
-    
-    let allPreviousModulesCompleted = true;
-
-    return modules.sort((a,b) => a.order - b.order).map((module) => {
+    if (loading) {
+      return modules.map(m => ({ ...m, isUnlocked: m.order === 1, isModuleCompleted: false })).sort((a, b) => a.order - b.order);
+    }
+  
+    const moduleCompletionStatus: Record<string, boolean> = {};
+    modules.forEach(module => {
       const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
+      if (moduleLessons.length === 0) {
+        moduleCompletionStatus[module.id] = true;
+        return;
+      }
       const completedLessons = moduleLessons.filter(
         (l) => progress[l.id]?.completed
       );
-      const isModuleCompleted = moduleLessons.length > 0 && completedLessons.length === moduleLessons.length;
-      
-      const isUnlocked = allPreviousModulesCompleted;
-      
-      // For the next module in line, this module must be complete.
-      if (isModuleCompleted === false) {
-        allPreviousModulesCompleted = false;
-      }
+      moduleCompletionStatus[module.id] = completedLessons.length === moduleLessons.length;
+    });
 
+    return modules.sort((a,b) => a.order - b.order).map((module) => {
+      let isUnlocked = false;
+      if (module.order === 1) {
+        isUnlocked = true;
+      } else {
+        const previousModules = modules.filter(m => m.order < module.order);
+        isUnlocked = previousModules.every(pm => moduleCompletionStatus[pm.id]);
+      }
+      
       return {
         ...module,
         isUnlocked,
-        isModuleCompleted,
+        isModuleCompleted: moduleCompletionStatus[module.id],
       };
     });
   }, [progress, loading]);
+
 
   if (loading) {
     return <div className="container mx-auto px-4 py-8"><p>Carregando...</p></div>
@@ -115,7 +124,7 @@ export default function AppPage() {
                   </TooltipTrigger>
                   {!module.isUnlocked && (
                     <TooltipContent>
-                      <p>Complete o módulo anterior para desbloquear</p>
+                      <p>Complete os módulos anteriores para desbloquear</p>
                     </TooltipContent>
                   )}
                 </Tooltip>
