@@ -90,13 +90,14 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
             
             const duration = playerRef.current.getDuration();
             if (duration > 0 && (currentTime / duration) >= 0.95) {
-                onCompleted();
+                // onCompleted will be called, so we can clear the interval here
                 if (progressIntervalRef.current) {
                     clearInterval(progressIntervalRef.current);
                 }
+                onCompleted();
             }
         }
-      }, 1000);
+      }, 250); // Increased frequency for smoother progress updates
     } else if (event.data === window.YT.PlayerState.ENDED) {
         onCompleted();
     }
