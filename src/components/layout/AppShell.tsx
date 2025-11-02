@@ -4,10 +4,12 @@ import {
   Home,
   PlaySquare,
   LayoutGrid,
+  Info,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const navItems = [
   { href: '/', label: 'Principal', icon: Home },
@@ -55,7 +57,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <span className="font-bold text-lg">O Fim da Procrastinação</span>
         </div>
       </header>
-      <main className="flex-1 pb-20">{children}</main>
+      <main className="flex-1 pb-20">
+        <div className="p-4">
+          <Alert>
+            <Info className="h-4 w-4" />
+            <AlertTitle>Aviso</AlertTitle>
+            <AlertDescription>
+              Estamos em constante atualização para melhorar sua experiência. Novidades em breve!
+            </AlertDescription>
+          </Alert>
+        </div>
+        {children}
+      </main>
       <footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/80 backdrop-blur-sm">
         <nav className="grid grid-cols-3 h-16 items-center">
           {navItems.map((item) => {
