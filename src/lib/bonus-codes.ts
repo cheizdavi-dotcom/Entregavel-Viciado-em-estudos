@@ -15,6 +15,7 @@ export const bonusCodes = [
     { name: "Memória de Ouro", code: "MEMORIA-OURO" },
     { name: "Rotina de Estudos", code: "ROTINA-ESTUDOS" },
     { name: "Caminho para Aprovação", code: "APROVACAO-2024" },
+    { name: "Comunidade de Estudos", code: "COMUNIDADE-ATIVA" },
 ];
 
 // 2. Defina aqui os materiais bônus.
@@ -42,6 +43,14 @@ export const bonusContent = [
         type: "PDF", 
         href: "https://files.catbox.moe/e4f5g6.pdf", // <-- TROCAR O LINK REAL AQUI
         requiredCode: "APROVACAO-2024" // E este, do código "APROVACAO-2024".
+    },
+    {
+        id: 4,
+        title: "Comunidade de Estudos",
+        description: "Acesso ao nosso grupo exclusivo para tirar dúvidas e interagir.",
+        type: "Link",
+        href: "https://chat.whatsapp.com/seugrupoaqui", // <-- TROCAR O LINK REAL AQUI
+        requiredCode: "COMUNIDADE-ATIVA"
     },
     {
         id: 5,
