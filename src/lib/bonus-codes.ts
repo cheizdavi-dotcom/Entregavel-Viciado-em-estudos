@@ -51,7 +51,7 @@ export const bonusContent: BonusItem[] = [
         id: "caminho-para-aprovacao", 
         title: "Caminho para Aprovação", 
         description: "O passo a passo estratégico para garantir sua vaga.", 
-        coverUrl: "https://picsum.photos/seed/bonus-3/1080/1350",
+        coverUrl: "https://i.imgur.com/vPHn8Xu.png",
         youtubeId: "3EwH4EghGqw", // <- TROCAR ID DO VÍDEO REAL
         requiredCode: "APROVACAO-2024"
     },
