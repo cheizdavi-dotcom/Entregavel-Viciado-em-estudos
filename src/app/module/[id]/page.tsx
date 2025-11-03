@@ -22,31 +22,20 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   const selectedLesson = useMemo(() => {
     return lessons.find((l) => l.id === selectedLessonId);
   }, [selectedLessonId]);
-
-  const currentModule = useMemo(() => {
-      if (selectedLesson) {
-          return modules.find(m => m.id === selectedLesson.moduleId);
-      }
-      return initialModule;
-  }, [selectedLesson, initialModule]);
   
+  const currentModule = useMemo(() => {
+    if (selectedLesson) {
+      return modules.find((m) => m.id === selectedLesson.moduleId);
+    }
+    return initialModule;
+  }, [selectedLesson, initialModule]);
+
   // Effect to preload progress for lessons in this module
   useEffect(() => {
     moduleLessons.forEach(lesson => {
       getLessonProgress(lesson.id);
     });
   }, [moduleLessons, getLessonProgress]);
-
-  const lastWatchedLesson = useMemo(() => {
-    const watchedLessons = moduleLessons
-      .map(l => {
-          const prog = progress[l.id];
-          return prog ? {...l, prog} : null;
-      })
-      .filter((l): l is NonNullable<typeof l> => l !== null)
-      .sort((a,b) => b.prog.updatedAt.getTime() - a.prog.updatedAt.getTime());
-    return watchedLessons.length > 0 ? watchedLessons[0] : null;
-  }, [progress, moduleLessons]);
 
   useEffect(() => {
     if (!selectedLessonId && moduleLessons.length > 0) {
