@@ -43,7 +43,7 @@ export const bonusContent: BonusItem[] = [
         id: "rotina-de-estudos", 
         title: "Rotina de Estudos", 
         description: "Um guia prático para construir e manter a disciplina nos estudos.", 
-        coverUrl: "https://picsum.photos/seed/bonus-2/1080/1350",
+        coverUrl: "https://i.imgur.com/z6nLauv.png",
         youtubeId: "ImZ2abenGkw", // <- TROCAR ID DO VÍDEO REAL
         requiredCode: "ROTINA-ESTUDOS"
     },
