@@ -83,7 +83,3 @@ export const lessons = [
   { id: '504', moduleId: '5', title: 'Aula 4: O poder do tédio', youtubeId: 'TWTB4a6A-wY', order: 4, durationSec: 290 },
   { id: '505', moduleId: '5', title: 'Aula 5: Próximos passos', youtubeId: 'Lp9M4soP-Y', order: 5, durationSec: 330 },
 ];
-
-    
-
-    
