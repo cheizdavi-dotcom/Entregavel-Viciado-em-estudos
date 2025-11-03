@@ -1,3 +1,4 @@
+
 'use client';
 
 import { lessons, modules } from '@/lib/seed';
@@ -97,23 +98,32 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                         startSeconds={progress[selectedLesson.id]?.watchedSeconds || 0}
                     />
                 </div>
-                <div>
-                  <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
-                  {currentModule && (
-                    <p className="text-sm sm:text-base text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
-                  )}
-                </div>
-                
-                 {currentModule?.summaryPdfUrl && (
-                    <div>
+                <div className="space-y-2">
+                  <div>
+                    <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
+                    {currentModule && (
+                      <p className="text-sm sm:text-base text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedLesson.lessonPdfUrl && (
+                      <Button asChild variant="outline" size="sm">
+                        <a href={selectedLesson.lessonPdfUrl} target="_blank" rel="noopener noreferrer">
+                          <Download className="mr-2 h-4 w-4" />
+                          Baixar PDF da Aula
+                        </a>
+                      </Button>
+                    )}
+                    {currentModule?.summaryPdfUrl && (
                       <Button asChild variant="outline" size="sm">
                         <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
                           <Download className="mr-2 h-4 w-4" />
-                          Baixar Resumo do Módulo
+                          Resumo do Módulo
                         </a>
                       </Button>
-                    </div>
-                  )}
+                    )}
+                  </div>
+                </div>
             </div>
           ) : (
              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
@@ -165,3 +175,5 @@ export default function ModulePage({ params }: { params: { id: string } }) {
     </div>
   );
 }
+
+    
