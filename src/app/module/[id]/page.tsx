@@ -79,7 +79,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 sm:p-6 lg:p-8">
       <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-8">
         
         {/* Main Content: Video Player and Info */}
@@ -102,18 +102,10 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                   <div>
                     <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
                     {currentModule && (
-                      <p className="text-sm sm:text-base text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
+                      <p className="text-sm text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
                     )}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {selectedLesson.lessonPdfUrl && (
-                      <Button asChild variant="outline" size="sm">
-                        <a href={selectedLesson.lessonPdfUrl} target="_blank" rel="noopener noreferrer">
-                          <Download className="mr-2 h-4 w-4" />
-                          Baixar PDF da Aula
-                        </a>
-                      </Button>
-                    )}
                     {currentModule?.summaryPdfUrl && (
                       <Button asChild variant="outline" size="sm">
                         <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
