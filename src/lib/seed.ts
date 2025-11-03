@@ -11,7 +11,7 @@ export const modules = [
   {
     id: '2',
     title: 'Módulo 2: O Gatilho',
-    subtitle: 'Identificando Seus Padrões',
+    subtitle: 'Em breve: lançamento em 15/07',
     coverUrl: 'https://i.imgur.com/reNazVp.png',
     description: 'Aprenda a identificar os gatilhos que te levam a procrastinar e a criar um ambiente à prova de distrações.',
     order: 2,
@@ -19,7 +19,7 @@ export const modules = [
   {
     id: '3',
     title: 'Módulo 3: A Ação',
-    subtitle: 'Técnicas de Produtividade',
+    subtitle: 'Em breve: lançamento em 22/07',
     coverUrl: 'https://i.imgur.com/8RrvCgR.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
@@ -27,7 +27,7 @@ export const modules = [
   {
     id: '4',
     title: 'Módulo 4: O Controle',
-    subtitle: 'Dominando Seu Tempo',
+    subtitle: 'Em breve: lançamento em 29/07',
     coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
@@ -35,7 +35,7 @@ export const modules = [
   {
     id: '5',
     title: 'Módulo 5: A Constância',
-    subtitle: 'Mantendo o Ritmo',
+    subtitle: 'Em breve: lançamento em 05/08',
     coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
