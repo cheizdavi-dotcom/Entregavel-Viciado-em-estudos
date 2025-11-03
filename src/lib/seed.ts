@@ -58,7 +58,7 @@ export const lessons = [
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310, summaryPdfUrl: 'https://files.catbox.moe/w857w8.pdf' },
   { id: '202', moduleId: '2', title: ' Aula 2: Ambiente produtivo', youtubeId: 'TGyS50xIbw4', order: 2, durationSec: 330, summaryPdfUrl: 'https://files.catbox.moe/rfnviw.pdf' },
-  { id: '203', moduleId: '2', title: 'Aula 3: Ferramentas e distrações', youtubeId: 'CxBoGEZzir4', order: 3, durationSec: 290, summaryPdfUrl: null },
+  { id: '203', moduleId: '2', title: 'Aula 3: Ferramentas e distrações', youtubeId: 'CxBoGEZzir4', order: 3, durationSec: 290, summaryPdfUrl: 'https://files.catbox.moe/rx9hnq.pdf' },
   { id: '204', moduleId: '2', title: 'Aula 4: O poder do "não"', youtubeId: 'pPJ5WX2VPRc', order: 4, durationSec: 360, summaryPdfUrl: null },
   { id: '205', moduleId: '2', title: 'Aula 5: Planejando seu dia', youtubeId: 'QAU_8iRzcI4', order: 5, durationSec: 300, summaryPdfUrl: null },
 
