@@ -91,7 +91,7 @@ export const moreContent = [
         title: "Planner Semanal",
         description: "Organize suas tarefas e horários de estudo com este planner exclusivo.",
         type: "PDF",
-        href: "https://files.catbox.moe/p1a2n3.pdf", // <-- TROCAR O LINK REAL AQUI
+        href: "https://files.catbox.moe/a4s10n.pdf", // <-- TROCAR O LINK REAL AQUI
     },
     {
         id: 6,
