@@ -1,5 +1,6 @@
 
 
+
 export const modules = [
   {
     id: '1',
@@ -8,7 +9,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/IR5nhss.png',
     description: 'Neste módulo, vamos desvendar as causas profundas da procrastinação e como ela afeta seu cérebro.',
     order: 1,
-    summaryPdfUrl: '',
+    summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf',
   },
   {
     id: '2',
@@ -17,7 +18,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/reNazVp.png',
     description: 'Aprenda a identificar os gatilhos que te levam a procrastinar e a criar um ambiente à prova de distrações.',
     order: 2,
-    summaryPdfUrl: 'https://files.catbox.moe/yvvxzf.pdf',
+    summaryPdfUrl: '',
   },
   {
     id: '3',
@@ -26,7 +27,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/8RrvCgR.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
-    summaryPdfUrl: 'https://files.catbox.moe/33phmw.pdf',
+    summaryPdfUrl: '',
   },
   {
     id: '4',
@@ -35,7 +36,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
-    summaryPdfUrl: 'https://files.catbox.moe/yx86tu.pdf',
+    summaryPdfUrl: '',
   },
   {
     id: '5',
@@ -44,17 +45,17 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
-    summaryPdfUrl: 'https://files.catbox.moe/bl3tk6.pdf',
+    summaryPdfUrl: '',
   },
 ];
 
 export const lessons = [
   // Módulo 1
-  { id: '101', moduleId: '1', title: 'Aula 1: O que é procrastinação?', youtubeId: 'BpYYVSFZYfs', order: 1, durationSec: 300, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
-  { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
-  { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
-  { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'zJJBkLtEVZM', order: 4, durationSec: 350, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
-  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
+  { id: '101', moduleId: '1', title: 'Aula 1: O que é procrastinação?', youtubeId: 'BpYYVSFZYfs', order: 1, durationSec: 300 },
+  { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320 },
+  { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280 },
+  { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'zJJbbsidj8XQ', order: 4, durationSec: 350 },
+  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290 },
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310 },
