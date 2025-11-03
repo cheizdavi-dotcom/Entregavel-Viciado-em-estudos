@@ -7,12 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { PlayCircle, CheckCircle2, Download, FileText } from 'lucide-react';
 import { YouTubePlayer } from '@/components/player/YouTubePlayer';
 import { useProgress } from '@/hooks/useProgress.tsx';
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect, useCallback, use } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
-export default function ModulePage({ params }: { params: { id: string } }) {
+export default function ModulePage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
+  const params = use(paramsPromise);
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
 
   const { progress, saveProgress, getLessonProgress } = useProgress();
@@ -117,7 +118,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                 <Button asChild className="mb-2">
                   <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
                     <FileText className="mr-2"/>
-                    Resumo do Módulo (PDF)
+                    Resumo do Módulo
                   </a>
                 </Button>
               )}
