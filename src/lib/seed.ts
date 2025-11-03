@@ -7,7 +7,6 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/IR5nhss.png',
     description: 'Neste módulo, vamos desvendar as causas profundas da procrastinação e como ela afeta seu cérebro.',
     order: 1,
-    summaryPdfUrl: 'https://files.catbox.moe/6t169j.pdf',
   },
   {
     id: '2',
@@ -16,7 +15,6 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/reNazVp.png',
     description: 'Aprenda a identificar os gatilhos que te levam a procrastinar e a criar um ambiente à prova de distrações.',
     order: 2,
-    summaryPdfUrl: 'https://files.catbox.moe/fntpix.pdf',
   },
   {
     id: '3',
@@ -25,7 +23,6 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/8RrvCgR.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
-    summaryPdfUrl: 'https://files.catbox.moe/zsasaj.pdf',
   },
   {
     id: '4',
@@ -34,7 +31,6 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
-    summaryPdfUrl: 'https://files.catbox.moe/t46n34.pdf',
   },
   {
     id: '5',
@@ -43,7 +39,6 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
-    summaryPdfUrl: 'https://files.catbox.moe/0szf73.pdf',
   },
 ];
 
