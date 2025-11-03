@@ -43,7 +43,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
-    summaryPdfUrl: 'https://files.catbox.moe/p1a2n3.pdf', // <-- TROCAR O LINK REAL AQUI
+    summaryPdfUrl: 'https://files.catbox.moe/bl3tk6.pdf', // Link atualizado
   },
 ];
 
