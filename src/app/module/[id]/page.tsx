@@ -10,6 +10,7 @@ import { useProgress } from '@/hooks/useProgress.tsx';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 export default function ModulePage({ params }: { params: { id: string } }) {
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
@@ -81,8 +82,8 @@ export default function ModulePage({ params }: { params: { id: string } }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           {selectedLesson ? (
-             <div>
-                <div className="mb-4 aspect-video bg-black rounded-lg overflow-hidden">
+             <div className="flex flex-col gap-4">
+                <div className="aspect-video bg-black rounded-lg overflow-hidden">
                     <YouTubePlayer 
                         key={selectedLesson.id}
                         youtubeId={selectedLesson.youtubeId}
@@ -94,7 +95,23 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                         startSeconds={progress[selectedLesson.id]?.watchedSeconds || 0}
                     />
                 </div>
-                <h1 className="text-2xl font-bold">{selectedLesson.title}</h1>
+                <div>
+                  <h1 className="text-2xl font-bold">{selectedLesson.title}</h1>
+                  {currentModule && (
+                    <p className="text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
+                  )}
+                </div>
+                
+                 {currentModule?.summaryPdfUrl && (
+                    <div>
+                      <Button asChild>
+                        <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
+                          <Download className="mr-2 h-4 w-4" />
+                          Baixar Resumo do Módulo
+                        </a>
+                      </Button>
+                    </div>
+                  )}
             </div>
           ) : (
              <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
@@ -104,27 +121,10 @@ export default function ModulePage({ params }: { params: { id: string } }) {
         </div>
 
         <div className="lg:col-span-1 flex flex-col gap-4">
-          {currentModule && (
-            <Card>
-              <CardHeader>
-                <CardTitle>{currentModule.title}</CardTitle>
-                <CardDescription>{currentModule.subtitle}</CardDescription>
-              </CardHeader>
-              {currentModule.summaryPdfUrl && (
-                <CardContent>
-                  <Button asChild className="w-full">
-                    <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
-                      <Download className="mr-2 h-4 w-4" />
-                      Baixar Resumo do Módulo
-                    </a>
-                  </Button>
-                </CardContent>
-              )}
-            </Card>
-          )}
           <Card>
             <CardHeader>
-              <CardTitle>Aulas</CardTitle>
+              <CardTitle>Aulas do Módulo</CardTitle>
+              <CardDescription>Selecione uma aula para assistir</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
               {moduleLessons.map((lesson) => {
