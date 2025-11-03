@@ -5,31 +5,13 @@ import { lessons, modules } from '@/lib/seed';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { PlayCircle, CheckCircle2, Download, Paperclip } from 'lucide-react';
+import { PlayCircle, CheckCircle2, Download } from 'lucide-react';
 import { YouTubePlayer } from '@/components/player/YouTubePlayer';
 import { useProgress } from '@/hooks/useProgress.tsx';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-
-// Mapeamento de links de recursos. Podemos preencher isso depois.
-const resourceLinks: Record<string, { summaryPdfUrl?: string }> = {
-  '1': { summaryPdfUrl: 'https://files.catbox.moe/6t169j.pdf' },
-  '2': { summaryPdfUrl: 'https://files.catbox.moe/fntpix.pdf' },
-  '3': { summaryPdfUrl: 'https://files.catbox.moe/zsasaj.pdf' },
-  '4': { summaryPdfUrl: '' }, // Será preenchido
-  '5': { summaryPdfUrl: '' }, // Será preenchido
-};
-
 
 export default function ModulePage({ params }: { params: { id: string } }) {
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
@@ -49,11 +31,6 @@ export default function ModulePage({ params }: { params: { id: string } }) {
     }
     return initialModule;
   }, [selectedLesson, initialModule]);
-
-  const moduleResources = useMemo(() => {
-    if (!currentModule) return null;
-    return resourceLinks[currentModule.id];
-  }, [currentModule]);
 
   // Effect to preload progress for lessons in this module
   useEffect(() => {
@@ -129,34 +106,19 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                     )}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                         <Button variant="outline" size="sm">
-                          <Paperclip className="mr-2 h-4 w-4" />
-                          Recursos da Aula
+                    {currentModule?.summaryPdfUrl ? (
+                      <Button asChild variant="outline" size="sm">
+                        <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
+                          <Download className="mr-2 h-4 w-4" />
+                          Resumo do Módulo (PDF)
+                        </a>
+                      </Button>
+                    ) : (
+                       <Button variant="outline" size="sm" disabled>
+                          <Download className="mr-2 h-4 w-4" />
+                          Resumo do Módulo (PDF)
                         </Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Recursos do Módulo: {currentModule?.title}</DialogTitle>
-                          <DialogDescription>
-                            Aqui estão os materiais de apoio para este módulo.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <div className="flex flex-col gap-4 py-4">
-                            {moduleResources?.summaryPdfUrl ? (
-                                <Button asChild>
-                                    <a href={moduleResources.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
-                                      <Download className="mr-2 h-4 w-4" />
-                                      Resumo do Módulo (PDF)
-                                    </a>
-                                </Button>
-                            ) : (
-                                <p className="text-sm text-muted-foreground text-center">Nenhum recurso disponível para este módulo ainda.</p>
-                            )}
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                    )}
                   </div>
                 </div>
             </div>
