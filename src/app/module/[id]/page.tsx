@@ -20,8 +20,6 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   const currentModule = useMemo(() => modules.find((m) => m.id === params.id), [params.id]);
   const moduleLessons = useMemo(() => lessons.filter((l) => l.moduleId === params.id).sort((a,b) => a.order - b.order), [params.id]);
   
-  const summaryPdfUrl = useMemo(() => currentModule?.summaryPdfUrl || null, [currentModule]);
-
   // DERIVED STATE:
   const selectedLesson = useMemo(() => {
     return lessons.find((l) => l.id === selectedLessonId);
@@ -115,14 +113,6 @@ export default function ModulePage({ params }: { params: { id: string } }) {
               <CardDescription className="text-sm">Selecione uma aula para assistir</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-1 p-2 sm:p-4">
-              {summaryPdfUrl && (
-                  <Button asChild variant="outline" size="sm" className="mb-2">
-                    <a href={summaryPdfUrl} target="_blank" rel="noopener noreferrer">
-                      <Download className="mr-2 h-4 w-4" />
-                      Resumo do Módulo (PDF)
-                    </a>
-                  </Button>
-              )}
               {moduleLessons.map((lesson) => {
                 const lessonProgress = progress[lesson.id];
                 const isCompleted = lessonProgress?.completed;
@@ -130,20 +120,27 @@ export default function ModulePage({ params }: { params: { id: string } }) {
 
                 return (
                   <div key={lesson.id}>
-                    <button
-                      onClick={() => setSelectedLessonId(lesson.id)}
-                      className={cn(
-                        'w-full text-left p-3 rounded-lg flex items-center gap-3 transition-colors text-sm',
-                        selectedLessonId === lesson.id ? 'bg-accent' : 'hover:bg-accent/50'
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => setSelectedLessonId(lesson.id)}
+                        className={cn(
+                          'w-full text-left p-3 rounded-lg flex items-center gap-3 transition-colors text-sm flex-grow',
+                          selectedLessonId === lesson.id ? 'bg-accent' : 'hover:bg-accent/50'
+                        )}
+                      >
+                        {isCompleted ? (
+                          <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+                        ) : (
+                          <PlayCircle className="h-5 w-5 text-muted-foreground shrink-0" />
+                        )}
+                        <span className="flex-1">{lesson.title}</span>
+                      </button>
+                      {lesson.summaryPdfUrl && (
+                        <a href={lesson.summaryPdfUrl} target="_blank" rel="noopener noreferrer" title="Baixar resumo da aula" className="p-2 text-muted-foreground hover:text-primary transition-colors shrink-0">
+                          <Download className="h-5 w-5" />
+                        </a>
                       )}
-                    >
-                      {isCompleted ? (
-                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-                      ) : (
-                        <PlayCircle className="h-5 w-5 text-muted-foreground shrink-0" />
-                      )}
-                      <span className="flex-1">{lesson.title}</span>
-                    </button>
+                    </div>
                     {progressPercentage > 0 && progressPercentage < 100 && !isCompleted && (
                         <Progress value={progressPercentage} className="h-1 mt-1 mx-3" />
                     )}

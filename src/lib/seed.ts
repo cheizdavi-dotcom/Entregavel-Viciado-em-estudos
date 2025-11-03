@@ -8,7 +8,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/IR5nhss.png',
     description: 'Neste módulo, vamos desvendar as causas profundas da procrastinação e como ela afeta seu cérebro.',
     order: 1,
-    summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf',
+    summaryPdfUrl: '',
   },
   {
     id: '2',
@@ -50,11 +50,11 @@ export const modules = [
 
 export const lessons = [
   // Módulo 1
-  { id: '101', moduleId: '1', title: 'Aula 1: O que é procrastinação?', youtubeId: 'BpYYVSFZYfs', order: 1, durationSec: 300 },
-  { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320 },
-  { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280 },
-  { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'zJJBkLtEVZM', order: 4, durationSec: 350 },
-  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290 },
+  { id: '101', moduleId: '1', title: 'Aula 1: O que é procrastinação?', youtubeId: 'BpYYVSFZYfs', order: 1, durationSec: 300, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
+  { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
+  { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
+  { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'zJJBkLtEVZM', order: 4, durationSec: 350, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
+  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290, summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf' },
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310 },
