@@ -18,21 +18,13 @@ export default function ModulePage({ params }: { params: { id: string } }) {
 
   const { progress, saveProgress, getLessonProgress } = useProgress();
 
-  const initialModule = useMemo(() => modules.find((m) => m.id === params.id), [params.id]);
+  const currentModule = useMemo(() => modules.find((m) => m.id === params.id), [params.id]);
   const moduleLessons = useMemo(() => lessons.filter((l) => l.moduleId === params.id).sort((a,b) => a.order - b.order), [params.id]);
 
   // DERIVED STATE:
   const selectedLesson = useMemo(() => {
     return lessons.find((l) => l.id === selectedLessonId);
   }, [selectedLessonId]);
-  
-  // This is the main fix. The currentModule was not being updated correctly.
-  // It now derives from the selectedLesson if available, otherwise it falls back to the initialModule.
-  const currentModule = useMemo(() => {
-    const moduleFromLesson = modules.find((m) => m.id === selectedLesson?.moduleId);
-    return moduleFromLesson || initialModule;
-  }, [selectedLesson, initialModule]);
-
 
   // Effect to preload progress for lessons in this module
   useEffect(() => {
@@ -53,7 +45,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   }, [moduleLessons, progress, selectedLessonId]);
 
 
-  if (!initialModule) {
+  if (!currentModule) {
     notFound();
   }
 
@@ -103,12 +95,10 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                 <div className="space-y-2">
                   <div>
                     <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
-                    {currentModule && (
-                      <p className="text-sm text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
-                    )}
+                    <p className="text-sm text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {currentModule?.summaryPdfUrl ? (
+                    {currentModule.summaryPdfUrl ? (
                       <Button asChild variant="outline" size="sm">
                         <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
                           <Download className="mr-2 h-4 w-4" />
