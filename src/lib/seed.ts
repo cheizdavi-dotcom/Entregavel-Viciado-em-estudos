@@ -11,7 +11,7 @@ export const modules = [
   {
     id: '2',
     title: 'Módulo 2: O Gatilho',
-    subtitle: 'Em breve: lançamento em 15/07',
+    subtitle: 'Em breve: lançamento em 04/07',
     coverUrl: 'https://i.imgur.com/reNazVp.png',
     description: 'Aprenda a identificar os gatilhos que te levam a procrastinar e a criar um ambiente à prova de distrações.',
     order: 2,
@@ -19,7 +19,7 @@ export const modules = [
   {
     id: '3',
     title: 'Módulo 3: A Ação',
-    subtitle: 'Em breve: lançamento em 22/07',
+    subtitle: 'Em breve: lançamento em 11/07',
     coverUrl: 'https://i.imgur.com/8RrvCgR.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
@@ -27,7 +27,7 @@ export const modules = [
   {
     id: '4',
     title: 'Módulo 4: O Controle',
-    subtitle: 'Em breve: lançamento em 29/07',
+    subtitle: 'Em breve: lançamento em 18/07',
     coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
@@ -35,7 +35,7 @@ export const modules = [
   {
     id: '5',
     title: 'Módulo 5: A Constância',
-    subtitle: 'Em breve: lançamento em 05/08',
+    subtitle: 'Em breve: lançamento em 25/07',
     coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
@@ -59,7 +59,7 @@ export const lessons = [
 
   // Módulo 3
   { id: '301', moduleId: '3', title: 'Aula 1: A regra dos 2 minutos', youtubeId: 'a_qR-oH1gV8', order: 1, durationSec: 280 },
-  { id: '302', moduleId: '3', title: 'Aula 2: Técnica Pomodoro na prática', youtubeId: 'r214dwM3b58', order: 2, durationSec: 340 },
+  { id: '302', moduleId: '3', title: 'Aula 2: Técnica Pomodoro na prática', youtubeId: 'r2145b58', order: 2, durationSec: 340 },
   { id: '303', moduleId: '3', title: 'Aula 3: "Coma o sapo"', youtubeId: 'Tnwk-22Ab3E', order: 3, durationSec: 300 },
   { id: '304', moduleId: '3', title: 'Aula 4: Dividir para conquistar', youtubeId: 'w2n2bfpYnI4', order: 4, durationSec: 320 },
   { id: '305', moduleId: '3', title: 'Aula 5: Recompensas inteligentes', youtubeId: '9v5tJo2eL0A', order: 5, durationSec: 310 },
