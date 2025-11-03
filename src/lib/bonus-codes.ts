@@ -35,7 +35,7 @@ export const bonusContent: BonusItem[] = [
         id: "memoria-de-ouro", 
         title: "Memória de Ouro", 
         description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
-        coverUrl: "https://i.imgur.com/kSso2tA.png", // <- TROCAR IMAGEM REAL
+        coverUrl: "https://picsum.photos/seed/memoria/1080/1350",
         youtubeId: "BpYYVSFZYfs", // <- TROCAR ID DO VÍDEO REAL
         requiredCode: "MEMORIA-OURO" 
     },
@@ -43,7 +43,7 @@ export const bonusContent: BonusItem[] = [
         id: "rotina-de-estudos", 
         title: "Rotina de Estudos", 
         description: "Um guia prático para construir e manter a disciplina nos estudos.", 
-        coverUrl: "https://i.imgur.com/W2zI1st.png", // <- TROCAR IMAGEM REAL
+        coverUrl: "https://picsum.photos/seed/rotina/1080/1350",
         youtubeId: "ImZ2abenGkw", // <- TROCAR ID DO VÍDEO REAL
         requiredCode: "ROTINA-ESTUDOS"
     },
@@ -51,7 +51,7 @@ export const bonusContent: BonusItem[] = [
         id: "caminho-para-aprovacao", 
         title: "Caminho para Aprovação", 
         description: "O passo a passo estratégico para garantir sua vaga.", 
-        coverUrl: "https://i.imgur.com/8RrvCgR.png", // <- TROCAR IMAGEM REAL
+        coverUrl: "https://picsum.photos/seed/aprovacao/1080/1350",
         youtubeId: "3EwH4EghGqw", // <- TROCAR ID DO VÍDEO REAL
         requiredCode: "APROVACAO-2024"
     },
