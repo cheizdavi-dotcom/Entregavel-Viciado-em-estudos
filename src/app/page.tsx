@@ -69,19 +69,18 @@ export default function AppPage() {
         moduleCompletionStatus[module.id] = true;
         return;
       }
-      const completedLessons = moduleLessons.filter(
+      const completedLessonsInModule = moduleLessons.filter(
         (l) => progress[l.id]?.completed
       );
       moduleCompletionStatus[module.id] =
-        completedLessons.length === moduleLessons.length;
+        completedLessonsInModule.length === moduleLessons.length;
     });
 
     return modules
       .sort((a, b) => a.order - b.order)
       .map((module) => {
         let isUnlocked = false;
-        // Temporarily unlock module 2 for development
-        if (module.order === 1 || module.order === 2) {
+        if (module.order === 1) {
           isUnlocked = true;
         } else {
           const previousModule = modules.find(m => m.order === module.order - 1);
