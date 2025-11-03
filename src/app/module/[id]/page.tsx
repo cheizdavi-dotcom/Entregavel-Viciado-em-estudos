@@ -16,12 +16,19 @@ export default function ModulePage({ params }: { params: { id: string } }) {
 
   const { progress, saveProgress, getLessonProgress } = useProgress();
 
-  const module = modules.find((m) => m.id === params.id);
+  const initialModule = useMemo(() => modules.find((m) => m.id === params.id), [params.id]);
   const moduleLessons = useMemo(() => lessons.filter((l) => l.moduleId === params.id).sort((a,b) => a.order - b.order), [params.id]);
 
   const selectedLesson = useMemo(() => {
     return lessons.find((l) => l.id === selectedLessonId);
   }, [selectedLessonId]);
+
+  const currentModule = useMemo(() => {
+      if (selectedLesson) {
+          return modules.find(m => m.id === selectedLesson.moduleId);
+      }
+      return initialModule;
+  }, [selectedLesson, initialModule]);
   
   // Effect to preload progress for lessons in this module
   useEffect(() => {
@@ -53,7 +60,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   }, [moduleLessons, selectedLessonId, progress]);
 
 
-  if (!module) {
+  if (!initialModule) {
     notFound();
   }
 
@@ -108,22 +115,24 @@ export default function ModulePage({ params }: { params: { id: string } }) {
         </div>
 
         <div className="lg:col-span-1 flex flex-col gap-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>{module.title}</CardTitle>
-              <CardDescription>{module.subtitle}</CardDescription>
-            </CardHeader>
-            {module.summaryPdfUrl && (
-              <CardContent>
-                <Button asChild className="w-full">
-                  <a href={module.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
-                    <Download className="mr-2 h-4 w-4" />
-                    Baixar Resumo do Módulo
-                  </a>
-                </Button>
-              </CardContent>
-            )}
-          </Card>
+          {currentModule && (
+            <Card>
+              <CardHeader>
+                <CardTitle>{currentModule.title}</CardTitle>
+                <CardDescription>{currentModule.subtitle}</CardDescription>
+              </CardHeader>
+              {currentModule.summaryPdfUrl && (
+                <CardContent>
+                  <Button asChild className="w-full">
+                    <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
+                      <Download className="mr-2 h-4 w-4" />
+                      Baixar Resumo do Módulo
+                    </a>
+                  </Button>
+                </CardContent>
+              )}
+            </Card>
+          )}
           <Card>
             <CardHeader>
               <CardTitle>Aulas</CardTitle>
