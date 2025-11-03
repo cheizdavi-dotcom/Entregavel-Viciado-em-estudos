@@ -74,8 +74,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         )}
         {children}
       </main>
-      <footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/80 backdrop-blur-sm md:hidden">
-        <nav className="grid grid-cols-4 h-16 items-center">
+      <footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/80 backdrop-blur-sm">
+        <nav className="grid h-16 items-center grid-cols-4 max-w-md mx-auto">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
             return (
