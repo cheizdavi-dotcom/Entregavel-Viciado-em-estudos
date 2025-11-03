@@ -106,14 +106,6 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                     )}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {selectedLesson.summaryPdfUrl && (
-                        <Button asChild variant="outline" size="sm">
-                            <a href={selectedLesson.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
-                                <Download className="mr-2 h-4 w-4" />
-                                Material de Apoio (PDF)
-                            </a>
-                        </Button>
-                    )}
                     {currentModule?.summaryPdfUrl && (
                       <Button asChild variant="outline" size="sm">
                         <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">

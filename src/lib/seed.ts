@@ -16,7 +16,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/reNazVp.png',
     description: 'Aprenda a identificar os gatilhos que te levam a procrastinar e a criar um ambiente à prova de distrações.',
     order: 2,
-    summaryPdfUrl: null,
+    summaryPdfUrl: 'https://files.catbox.moe/xd9ttc.pdf',
   },
   {
     id: '3',
@@ -56,10 +56,10 @@ export const lessons = [
   { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290, summaryPdfUrl: null },
 
   // Módulo 2
-  { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310, summaryPdfUrl: 'https://files.catbox.moe/w857w8.pdf' },
-  { id: '202', moduleId: '2', title: ' Aula 2: Ambiente produtivo', youtubeId: 'TGyS50xIbw4', order: 2, durationSec: 330, summaryPdfUrl: 'https://files.catbox.moe/rfnviw.pdf' },
-  { id: '203', moduleId: '2', title: 'Aula 3: Ferramentas e distrações', youtubeId: 'CxBoGEZzir4', order: 3, durationSec: 290, summaryPdfUrl: 'https://files.catbox.moe/rx9hnq.pdf' },
-  { id: '204', moduleId: '2', title: 'Aula 4: O poder do "não"', youtubeId: 'pPJ5WX2VPRc', order: 4, durationSec: 360, summaryPdfUrl: 'https://files.catbox.moe/xd9ttc.pdf' },
+  { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310, summaryPdfUrl: null },
+  { id: '202', moduleId: '2', title: ' Aula 2: Ambiente produtivo', youtubeId: 'TGyS50xIbw4', order: 2, durationSec: 330, summaryPdfUrl: null },
+  { id: '203', moduleId: '2', title: 'Aula 3: Ferramentas e distrações', youtubeId: 'CxBoGEZzir4', order: 3, durationSec: 290, summaryPdfUrl: null },
+  { id: '204', moduleId: '2', title: 'Aula 4: O poder do "não"', youtubeId: 'pPJ5WX2VPRc', order: 4, durationSec: 360, summaryPdfUrl: null },
   { id: '205', moduleId: '2', title: 'Aula 5: Planejando seu dia', youtubeId: 'QAU_8iRzcI4', order: 5, durationSec: 300, summaryPdfUrl: null },
 
   // Módulo 3
@@ -81,10 +81,9 @@ export const lessons = [
   { id: '502', moduleId: '5', title: 'Aula 2: Autocompaixão produtiva', youtubeId: 'E1I0hAx2wSo', order: 2, durationSec: 350, summaryPdfUrl: null },
   { id: '503', moduleId: '5', title: 'Aula 3: Visualização e futuro', youtubeId: '6vuetK362wE', order: 3, durationSec: 310, summaryPdfUrl: null },
   { id: '504', moduleId: '5', title: 'Aula 4: O poder do tédio', youtubeId: 'TWTB4a6A-wY', order: 4, durationSec: 290, summaryPdfUrl: null },
-  { id: '505', moduleId: '5', title: 'Aula 5: Próximos passos', youtubeId: 'Lp9M4so5P-Y', order: 5, durationSec: 330, summaryPdfUrl: null },
+  { id: '505', moduleId: '5', title: 'Aula 5: Próximos passos', youtubeId: 'Lp9M4soP-Y', order: 5, durationSec: 330, summaryPdfUrl: null },
 ];
 
     
 
     
-
