@@ -14,10 +14,11 @@ import { cn } from '@/lib/utils';
 // Mapa centralizado para os links dos resumos.
 // Adicione novos resumos aqui.
 const moduleSummaries: Record<string, string> = {
-  '1': 'https://files.catbox.moe/6t169j.pdf', // Link da Aula 1.
-  // '2': 'link-do-pdf-do-modulo-2.pdf',
-  // '3': 'link-do-pdf-do-modulo-3.pdf',
-  // etc.
+  '1': 'https://files.catbox.moe/a9jyy2.pdf',
+  '2': 'https://files.catbox.moe/yvvxzf.pdf',
+  '3': 'https://files.catbox.moe/33phmw.pdf',
+  '4': 'https://files.catbox.moe/yx86tu.pdf',
+  '5': 'https://files.catbox.moe/bl3tk6.pdf',
 };
 
 export default function ModulePage({ params }: { params: { id: string } }) {
