@@ -2,10 +2,9 @@
 
 import { lessons, modules } from '@/lib/seed';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PlayCircle, CheckCircle2 } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { PlayCircle, CheckCircle2, Download } from 'lucide-react';
 import { YouTubePlayer } from '@/components/player/YouTubePlayer';
 import { useProgress } from '@/hooks/useProgress.tsx';
 import { useState, useMemo, useEffect, useCallback } from 'react';
@@ -108,10 +107,26 @@ export default function ModulePage({ params }: { params: { id: string } }) {
           )}
         </div>
 
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 flex flex-col gap-4">
           <Card>
             <CardHeader>
               <CardTitle>{module.title}</CardTitle>
+              <CardDescription>{module.subtitle}</CardDescription>
+            </CardHeader>
+            {module.summaryPdfUrl && (
+              <CardContent>
+                <Button asChild className="w-full">
+                  <a href={module.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
+                    <Download className="mr-2 h-4 w-4" />
+                    Baixar Resumo do Módulo
+                  </a>
+                </Button>
+              </CardContent>
+            )}
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Aulas</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
               {moduleLessons.map((lesson) => {
