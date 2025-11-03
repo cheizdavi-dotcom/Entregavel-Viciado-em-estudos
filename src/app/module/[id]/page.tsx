@@ -11,6 +11,15 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
 
+// Mapa centralizado para os links dos resumos.
+// Adicione novos resumos aqui.
+const moduleSummaries: Record<string, string> = {
+  '1': 'https://files.catbox.moe/6t169j.pdf', // Link da Aula 1 que você forneceu.
+  // '2': 'link-do-pdf-do-modulo-2.pdf',
+  // '3': 'link-do-pdf-do-modulo-3.pdf',
+  // etc.
+};
+
 export default function ModulePage({ params }: { params: { id: string } }) {
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
 
@@ -18,6 +27,9 @@ export default function ModulePage({ params }: { params: { id: string } }) {
 
   const currentModule = useMemo(() => modules.find((m) => m.id === params.id), [params.id]);
   const moduleLessons = useMemo(() => lessons.filter((l) => l.moduleId === params.id).sort((a,b) => a.order - b.order), [params.id]);
+  
+  // Lógica simplificada para obter o link do resumo.
+  const summaryPdfUrl = useMemo(() => moduleSummaries[params.id] || null, [params.id]);
 
   // DERIVED STATE:
   const selectedLesson = useMemo(() => {
@@ -96,9 +108,9 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                     <p className="text-sm text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {currentModule.summaryPdfUrl ? (
+                    {summaryPdfUrl ? (
                       <Button asChild variant="outline" size="sm">
-                        <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
+                        <a href={summaryPdfUrl} target="_blank" rel="noopener noreferrer">
                           <Download className="mr-2 h-4 w-4" />
                           Resumo do Módulo (PDF)
                         </a>
