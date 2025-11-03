@@ -105,6 +105,6 @@ export const moreContent = [
         title: "Checklist de Foco",
         description: "Prepare seu ambiente antes de estudar e elimine as distrações.",
         type: "PDF",
-        href: "https://files.catbox.moe/f0c4s5.pdf", // <-- TROCAR O LINK REAL AQUI
+        href: "https://files.catbox.moe/imsckt.pdf", 
     }
 ]
