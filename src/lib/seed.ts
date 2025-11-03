@@ -7,7 +7,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/IR5nhss.png',
     description: 'Neste módulo, vamos desvendar as causas profundas da procrastinação e como ela afeta seu cérebro.',
     order: 1,
-    summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf',
+    summaryPdfUrl: 'https://files.catbox.moe/6t169j.pdf',
   },
   {
     id: '2',
