@@ -91,14 +91,14 @@ export const moreContent = [
         title: "Planner Semanal",
         description: "Organize suas tarefas e horários de estudo com este planner exclusivo.",
         type: "PDF",
-        href: "https://files.catbox.moe/a4s10n.pdf", // <-- TROCAR O LINK REAL AQUI
+        href: "https://files.catbox.moe/a4s10n.pdf", 
     },
     {
         id: 6,
         title: "Mapa Mental de Estudos",
         description: "Um modelo de mapa mental para organizar ideias e acelerar o aprendizado.",
         type: "PDF",
-        href: "https://files.catbox.moe/m4p1m3.pdf", // <-- TROCAR O LINK REAL AQUI
+        href: "https://files.catbox.moe/cina3t.pdf", 
     },
     {
         id: 7,
