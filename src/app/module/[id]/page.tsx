@@ -106,7 +106,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                     )}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {currentModule?.summaryPdfUrl ? (
+                    {selectedLesson && currentModule?.summaryPdfUrl ? (
                       <Button asChild variant="outline" size="sm">
                         <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
                           <Download className="mr-2 h-4 w-4" />
