@@ -3,6 +3,7 @@
 
 
 
+
 export const modules = [
   {
     id: '1',
@@ -20,7 +21,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/reNazVp.png',
     description: 'Aprenda a identificar os gatilhos que te levam a procrastinar e a criar um ambiente à prova de distrações.',
     order: 2,
-    summaryPdfUrl: 'https://drive.google.com/drive/folders/1ig1O6wDOQ75vk32jnlL8joRxboFwC0Ib?usp=drive_link',
+    summaryPdfUrl: 'https://drive.google.com/drive/folders/1Ry44GXyrgi2ZqlVf8d7rLHSAql1VBfUu?usp=sharing',
   },
   {
     id: '3',
