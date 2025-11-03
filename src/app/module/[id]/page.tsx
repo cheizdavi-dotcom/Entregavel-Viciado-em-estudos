@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
 // Mapa centralizado para os links dos resumos.
 // Adicione novos resumos aqui.
 const moduleSummaries: Record<string, string> = {
-  '1': 'https://files.catbox.moe/6t169j.pdf', // Link da Aula 1 que você forneceu.
+  '1': 'https://files.catbox.moe/6t169j.pdf', // Link da Aula 1.
   // '2': 'link-do-pdf-do-modulo-2.pdf',
   // '3': 'link-do-pdf-do-modulo-3.pdf',
   // etc.
