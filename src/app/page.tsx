@@ -80,7 +80,8 @@ export default function AppPage() {
       .sort((a, b) => a.order - b.order)
       .map((module) => {
         let isUnlocked = false;
-        if (module.order === 1) {
+        // Temporarily unlock module 2 for development
+        if (module.order === 1 || module.order === 2) {
           isUnlocked = true;
         } else {
           const previousModule = modules.find(m => m.order === module.order - 1);
@@ -125,7 +126,7 @@ export default function AppPage() {
                 </div>
             </div>
             {lastWatchedLessonModuleId && (
-                <Button asChild className="w-full sm:w-auto">
+                <Button asChild className="w-full sm:w-auto" size="sm">
                     <Link href={`/module/${lastWatchedLessonModuleId}`}>
                         <PlayCircle />
                         Continuar de onde parou
@@ -154,7 +155,7 @@ export default function AppPage() {
               <CarouselItem
                 key={module.id}
                 className={cn(
-                  'basis-full pl-2 md:pl-4',
+                  'basis-1/2 pl-2 md:pl-4',
                   'sm:basis-1/2 md:basis-1/3 lg:basis-1/4'
                 )}
               >
@@ -166,7 +167,7 @@ export default function AppPage() {
                         aria-disabled={!module.isUnlocked}
                       >
                         <div className="p-1">
-                          <Card className="overflow-hidden rounded-lg">
+                          <Card className="overflow-hidden rounded-lg transition-transform hover:scale-105">
                             <CardContent className="relative flex aspect-[1080/1600] items-center justify-center p-0">
                               <Image
                                 src={module.coverUrl}
