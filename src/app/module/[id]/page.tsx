@@ -1,4 +1,3 @@
-
 'use client';
 
 import { lessons, modules } from '@/lib/seed';
@@ -11,7 +10,6 @@ import { useProgress } from '@/hooks/useProgress.tsx';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 
 export default function ModulePage({ params }: { params: { id: string } }) {
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
