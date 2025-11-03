@@ -86,8 +86,8 @@ export default function BonusPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground">
+      <header className="mb-6 md:mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold font-headline tracking-tight text-foreground">
           Conteúdos Bônus
         </h1>
         <p className="text-muted-foreground mt-2">
@@ -95,9 +95,9 @@ export default function BonusPage() {
         </p>
       </header>
 
-      <Card className="mb-8">
+      <Card className="mb-6 md:mb-8">
         <CardHeader>
-          <CardTitle>Desbloquear Bônus</CardTitle>
+          <CardTitle className="text-xl sm:text-2xl">Desbloquear Bônus</CardTitle>
           <CardDescription>Comprou um produto extra? Insira o código que você recebeu por e-mail para liberá-lo.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -116,7 +116,7 @@ export default function BonusPage() {
         </CardContent>
       </Card>
 
-       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {unlockableContent.map(item => {
             const isUnlocked = isClient && isBonusUnlocked(item.id);
             return (

@@ -11,8 +11,8 @@ export default function MorePage() {
 
   return (
     <div className="container mx-auto p-4">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground">
+      <header className="mb-6 md:mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold font-headline tracking-tight text-foreground">
           Mais Conteúdos
         </h1>
         <p className="text-muted-foreground mt-2">
@@ -31,7 +31,7 @@ export default function MorePage() {
                 <CardDescription>Precisa de ajuda ou tem alguma dúvida? Fale com nossa equipe.</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button asChild className="w-full">
+                <Button asChild className="w-full sm:w-auto">
                   <a href={`mailto:${supportEmail}`}>
                     <LifeBuoy className="mr-2 h-4 w-4" />
                     Entrar em Contato
@@ -44,7 +44,7 @@ export default function MorePage() {
         {moreContent.length > 0 && (
           <section>
              <h2 className="text-2xl font-bold font-headline tracking-tight text-foreground mb-4">Materiais Gratuitos</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {moreContent.map(item => {
                     const isInternalLink = item.href.startsWith('/');
                     return (

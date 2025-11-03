@@ -97,16 +97,16 @@ export default function AppPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto p-4 md:px-6 md:py-8">
         <p>Carregando...</p>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground">
+    <div className="container mx-auto p-4 md:px-6 md:py-8">
+      <header className="mb-6 md:mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold font-headline tracking-tight text-foreground">
           Boas-vindas à sua jornada!
         </h1>
         <p className="text-muted-foreground mt-2">
@@ -114,8 +114,8 @@ export default function AppPage() {
         </p>
       </header>
 
-      <Card className="mb-8">
-        <CardContent className="p-6">
+      <Card className="mb-6 md:mb-8">
+        <CardContent className="p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex-1">
                 <p className="text-sm text-muted-foreground mb-1">Progresso Total</p>
@@ -148,13 +148,13 @@ export default function AppPage() {
         }}
         className="w-full"
       >
-        <CarouselContent className="-ml-2 sm:-ml-4">
+        <CarouselContent className="-ml-2 md:-ml-4">
           <TooltipProvider>
             {modulesWithProgress.map((module) => (
               <CarouselItem
                 key={module.id}
                 className={cn(
-                  'basis-full pl-2 sm:pl-4',
+                  'basis-full pl-2 md:pl-4',
                   'sm:basis-1/2 md:basis-1/3 lg:basis-1/4'
                 )}
               >

@@ -79,8 +79,10 @@ export default function ModulePage({ params }: { params: { id: string } }) {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+      <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-8">
+        
+        {/* Main Content: Video Player and Info */}
+        <div className="lg:col-span-2 w-full">
           {selectedLesson ? (
              <div className="flex flex-col gap-4">
                 <div className="aspect-video bg-black rounded-lg overflow-hidden">
@@ -96,15 +98,15 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                     />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold">{selectedLesson.title}</h1>
+                  <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
                   {currentModule && (
-                    <p className="text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
+                    <p className="text-sm sm:text-base text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
                   )}
                 </div>
                 
                  {currentModule?.summaryPdfUrl && (
                     <div>
-                      <Button asChild>
+                      <Button asChild variant="outline" size="sm">
                         <a href={currentModule.summaryPdfUrl} target="_blank" rel="noopener noreferrer">
                           <Download className="mr-2 h-4 w-4" />
                           Baixar Resumo do Módulo
@@ -120,13 +122,14 @@ export default function ModulePage({ params }: { params: { id: string } }) {
           )}
         </div>
 
-        <div className="lg:col-span-1 flex flex-col gap-4">
+        {/* Sidebar: Lesson List */}
+        <div className="lg:col-span-1 flex flex-col gap-4 mt-8 lg:mt-0">
           <Card>
-            <CardHeader>
-              <CardTitle>Aulas do Módulo</CardTitle>
-              <CardDescription>Selecione uma aula para assistir</CardDescription>
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-lg">Aulas do Módulo</CardTitle>
+              <CardDescription className="text-sm">Selecione uma aula para assistir</CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col gap-2">
+            <CardContent className="flex flex-col gap-1 p-2 sm:p-4">
               {moduleLessons.map((lesson) => {
                 const lessonProgress = progress[lesson.id];
                 const isCompleted = lessonProgress?.completed;
@@ -137,14 +140,14 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                     <button
                       onClick={() => setSelectedLessonId(lesson.id)}
                       className={cn(
-                        'w-full text-left p-3 rounded-lg flex items-center gap-4 transition-colors',
+                        'w-full text-left p-3 rounded-lg flex items-center gap-3 transition-colors text-sm',
                         selectedLessonId === lesson.id ? 'bg-accent' : 'hover:bg-accent/50'
                       )}
                     >
                       {isCompleted ? (
-                        <CheckCircle2 className="h-5 w-5 text-primary" />
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
                       ) : (
-                        <PlayCircle className="h-5 w-5 text-muted-foreground" />
+                        <PlayCircle className="h-5 w-5 text-muted-foreground shrink-0" />
                       )}
                       <span className="flex-1">{lesson.title}</span>
                     </button>
@@ -157,6 +160,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
             </CardContent>
           </Card>
         </div>
+
       </div>
     </div>
   );

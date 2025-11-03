@@ -36,8 +36,8 @@ export default function ContinuePage() {
 
   return (
     <div className="container mx-auto p-4">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold font-headline tracking-tight text-foreground">
+      <header className="mb-6 md:mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold font-headline tracking-tight text-foreground">
           Continuar Assistindo
         </h1>
         <p className="text-muted-foreground mt-2">
@@ -46,14 +46,14 @@ export default function ContinuePage() {
       </header>
 
       {lessonsInProgress.length === 0 ? (
-        <div className="text-center py-16">
+        <div className="text-center py-10 sm:py-16">
           <p className="text-muted-foreground">Você ainda não começou nenhuma aula.</p>
           <Button asChild className="mt-4">
             <Link href="/">Ver módulos</Link>
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {lessonsInProgress.map(lesson => lesson && (
             <Card key={lesson.id}>
               <CardHeader>
