@@ -16,7 +16,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/reNazVp.png',
     description: 'Aprenda a identificar os gatilhos que te levam a procrastinar e a criar um ambiente à prova de distrações.',
     order: 2,
-    summaryPdfUrl: 'https://files.catbox.moe/p1a2n3.pdf', // <-- TROCAR O LINK REAL AQUI
+    summaryPdfUrl: 'https://files.catbox.moe/a9jyy2.pdf', // Link atualizado
   },
   {
     id: '3',
