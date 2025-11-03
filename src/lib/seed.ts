@@ -19,7 +19,7 @@ export const modules = [
   {
     id: '3',
     title: 'Módulo 3: A Ação',
-    subtitle: 'Em breve: lançamento em 11/07',
+    subtitle: 'Em breve: lançamento em 06/07',
     coverUrl: 'https://i.imgur.com/8RrvCgR.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
@@ -27,7 +27,7 @@ export const modules = [
   {
     id: '4',
     title: 'Módulo 4: O Controle',
-    subtitle: 'Em breve: lançamento em 18/07',
+    subtitle: 'Em breve: lançamento em 08/07',
     coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
@@ -35,7 +35,7 @@ export const modules = [
   {
     id: '5',
     title: 'Módulo 5: A Constância',
-    subtitle: 'Em breve: lançamento em 25/07',
+    subtitle: 'Em breve: lançamento em 10/07',
     coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
