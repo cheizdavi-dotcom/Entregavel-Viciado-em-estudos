@@ -21,16 +21,18 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   const initialModule = useMemo(() => modules.find((m) => m.id === params.id), [params.id]);
   const moduleLessons = useMemo(() => lessons.filter((l) => l.moduleId === params.id).sort((a,b) => a.order - b.order), [params.id]);
 
+  // DERIVED STATE:
   const selectedLesson = useMemo(() => {
     return lessons.find((l) => l.id === selectedLessonId);
   }, [selectedLessonId]);
   
+  // This is the main fix. The currentModule was not being updated correctly.
+  // It now derives from the selectedLesson if available, otherwise it falls back to the initialModule.
   const currentModule = useMemo(() => {
-    if (selectedLesson) {
-      return modules.find((m) => m.id === selectedLesson.moduleId);
-    }
-    return initialModule;
+    const moduleFromLesson = modules.find((m) => m.id === selectedLesson?.moduleId);
+    return moduleFromLesson || initialModule;
   }, [selectedLesson, initialModule]);
+
 
   // Effect to preload progress for lessons in this module
   useEffect(() => {
@@ -40,15 +42,15 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   }, [moduleLessons, getLessonProgress]);
 
   useEffect(() => {
-    if (!selectedLessonId && moduleLessons.length > 0) {
-      const firstUncompletedLesson = moduleLessons.find(l => !progress[l.id]?.completed);
-      if (firstUncompletedLesson) {
-        setSelectedLessonId(firstUncompletedLesson.id);
-      } else {
-         setSelectedLessonId(moduleLessons[0].id);
-      }
+    if (moduleLessons.length > 0 && !selectedLessonId) {
+        const firstUncompletedLesson = moduleLessons.find(l => !progress[l.id]?.completed);
+        if (firstUncompletedLesson) {
+            setSelectedLessonId(firstUncompletedLesson.id);
+        } else {
+            setSelectedLessonId(moduleLessons[0].id);
+        }
     }
-  }, [moduleLessons, selectedLessonId, progress]);
+  }, [moduleLessons, progress, selectedLessonId]);
 
 
   if (!initialModule) {
