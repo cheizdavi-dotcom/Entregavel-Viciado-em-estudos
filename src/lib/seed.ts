@@ -60,7 +60,7 @@ export const lessons = [
   { id: '202', moduleId: '2', title: ' Aula 2: Ambiente produtivo', youtubeId: 'TGyS50xIbw4', order: 2, durationSec: 330 },
   { id: '203', moduleId: '2', title: 'Aula 3: Ferramentas e distrações', youtubeId: 'CxBoGEZzir4', order: 3, durationSec: 290 },
   { id: '204', moduleId: '2', title: 'Aula 4: O poder do "não"', youtubeId: 'pPJ5WX2VPRc', order: 4, durationSec: 360 },
-  { id: '205', moduleId: '2', title: 'Aula 5: Planejando seu dia', youtubeId: 'xO5KglXl-6Q', order: 5, durationSec: 300 },
+  { id: '205', moduleId: '2', title: 'Aula 5: Planejando seu dia', youtubeId: 'QAU_8iRzcI4', order: 5, durationSec: 300 },
 
   // Módulo 3
   { id: '301', moduleId: '3', title: 'Aula 1: A regra dos 2 minutos', youtubeId: 'a_qR-oH1gV8', order: 1, durationSec: 280 },
@@ -71,7 +71,7 @@ export const lessons = [
 
   // Módulo 4
   { id: '401', moduleId: '4', title: 'Aula 1: Como hábitos funcionam', youtubeId: 'dtrYk5IuVvI', order: 1, durationSec: 330 },
-  { id: '402', moduleId: '4', title: 'Aula 2: Empilhamento de hábitos', youtubeId: 'fzeHAfhp39Y', order: 2, durationSec: 290 },
+  { id_2: '402', moduleId: '4', title: 'Aula 2: Empilhamento de hábitos', youtubeId: 'fzeHAfhp39Y', order: 2, durationSec: 290 },
   { id: '403', moduleId: '4', title: 'Aula 3: O diário de progresso', youtubeId: 'KzZy35_k_wI', order: 3, durationSec: 310 },
   { id: '404', moduleId: '4', title: 'Aula 4: Lidando com falhas', youtubeId: 'X7gh_A3locY', order: 4, durationSec: 340 },
   { id: '405', moduleId: '4', title: 'Aula 5: A identidade de quem faz', youtubeId: 'PZ7lDrwYdZc', order: 5, durationSec: 300 },
