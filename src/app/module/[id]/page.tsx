@@ -10,16 +10,7 @@ import { useProgress } from '@/hooks/useProgress.tsx';
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
-
-// Mapa centralizado para os links dos resumos.
-// Adicione novos resumos aqui.
-const moduleSummaries: Record<string, string> = {
-  '1': 'https://files.catbox.moe/a9jyy2.pdf',
-  '2': 'https://files.catbox.moe/yvvxzf.pdf',
-  '3': 'https://files.catbox.moe/33phmw.pdf',
-  '4': 'https://files.catbox.moe/yx86tu.pdf',
-  '5': 'https://files.catbox.moe/bl3tk6.pdf',
-};
+import Link from 'next/link';
 
 export default function ModulePage({ params }: { params: { id: string } }) {
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
@@ -29,8 +20,7 @@ export default function ModulePage({ params }: { params: { id: string } }) {
   const currentModule = useMemo(() => modules.find((m) => m.id === params.id), [params.id]);
   const moduleLessons = useMemo(() => lessons.filter((l) => l.moduleId === params.id).sort((a,b) => a.order - b.order), [params.id]);
   
-  // Lógica simplificada para obter o link do resumo.
-  const summaryPdfUrl = useMemo(() => moduleSummaries[params.id] || null, [params.id]);
+  const summaryPdfUrl = useMemo(() => currentModule?.summaryPdfUrl || null, [currentModule]);
 
   // DERIVED STATE:
   const selectedLesson = useMemo(() => {
@@ -108,21 +98,6 @@ export default function ModulePage({ params }: { params: { id: string } }) {
                     <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
                     <p className="text-sm text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {summaryPdfUrl ? (
-                      <Button asChild variant="outline" size="sm">
-                        <a href={summaryPdfUrl} target="_blank" rel="noopener noreferrer">
-                          <Download className="mr-2 h-4 w-4" />
-                          Resumo do Módulo (PDF)
-                        </a>
-                      </Button>
-                    ) : (
-                       <Button variant="outline" size="sm" disabled>
-                          <Download className="mr-2 h-4 w-4" />
-                          Resumo do Módulo (PDF)
-                        </Button>
-                    )}
-                  </div>
                 </div>
             </div>
           ) : (
@@ -140,6 +115,14 @@ export default function ModulePage({ params }: { params: { id: string } }) {
               <CardDescription className="text-sm">Selecione uma aula para assistir</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-1 p-2 sm:p-4">
+              {summaryPdfUrl && (
+                  <Button asChild variant="outline" size="sm" className="mb-2">
+                    <a href={summaryPdfUrl} target="_blank" rel="noopener noreferrer">
+                      <Download className="mr-2 h-4 w-4" />
+                      Resumo do Módulo (PDF)
+                    </a>
+                  </Button>
+              )}
               {moduleLessons.map((lesson) => {
                 const lessonProgress = progress[lesson.id];
                 const isCompleted = lessonProgress?.completed;
