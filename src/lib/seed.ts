@@ -63,8 +63,8 @@ export const lessons = [
   { id: '101', moduleId: '1', title: 'Aula 1: O que é procrastinação?', youtubeId: 'BpYYVSFZYfs', order: 1, durationSec: 300, summaryPdfUrl: '' },
   { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320, summaryPdfUrl: '' },
   { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280, summaryPdfUrl: '' },
-  { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'zJJbbsidj8XQ', order: 4, durationSec: 350, summaryPdfUrl: '' },
-  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290, summaryPdfUrl: '' },
+  { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'zJJbsidj8XQ', order: 4, durationSec: 350, summaryPdfUrl: '' },
+  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uYbBsidj8XQ', order: 5, durationSec: 290, summaryPdfUrl: '' },
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310, summaryPdfUrl: '' },
@@ -98,6 +98,6 @@ export const lessons = [
   { id: 'bonus-101', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 1: A Fundação da Memória de Ouro', youtubeId: '8wVNtEvoDWg', order: 1, durationSec: 300, summaryPdfUrl: '' },
   { id: 'bonus-102', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 2: O Palácio Mental (Técnica de Loci)', youtubeId: '6vxiOOmgyAw', order: 2, durationSec: 320, summaryPdfUrl: '' },
   { id: 'bonus-103', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 3: Repetição Espaçada Inteligente', youtubeId: 'fi5QvSlZvrI', order: 3, durationSec: 280, summaryPdfUrl: '' },
-  { id: 'bonus-104', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 4: Associações Criativas e Mnemônicos', youtubeId: 'zJJbbsidj8XQ', order: 4, durationSec: 350, summaryPdfUrl: '' },
-  { id: 'bonus-105', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 5: Integrando Tudo na Sua Rotina', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290, summaryPdfUrl: '' },
+  { id: 'bonus-104', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 4: Associações Criativas e Mnemônicos', youtubeId: 'X6s-xYg_p_A', order: 4, durationSec: 350, summaryPdfUrl: '' },
+  { id: 'bonus-105', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 5: Integrando Tudo na Sua Rotina', youtubeId: 'u5EXshQSo_s', order: 5, durationSec: 290, summaryPdfUrl: '' },
 ];
