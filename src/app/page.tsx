@@ -60,55 +60,38 @@ export default function AppPage() {
 
 
   const modulesWithProgress = useMemo(() => {
-    const regularModules = modules.filter(m => !m.isBonus);
-    
+    const regularModules = modules.filter(m => !m.isBonus).sort((a, b) => a.order - b.order);
+
     if (loading) {
-      return regularModules
-        .map((m) => ({
-          ...m,
-          isUnlocked: m.order === 1,
-          isModuleCompleted: false,
-        }))
-        .sort((a, b) => a.order - b.order);
+      return regularModules.map((m) => ({
+        ...m,
+        isUnlocked: m.order === 1,
+      }));
     }
 
     const moduleCompletionStatus: Record<string, boolean> = {};
     regularModules.forEach((module) => {
       const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
-      // Módulo só pode ser completo se tiver aulas
+      // Módulos sem aulas não podem ser concluídos.
       if (moduleLessons.length === 0) {
         moduleCompletionStatus[module.id] = false;
         return;
       }
-      const completedLessonsInModule = moduleLessons.filter(
-        (l) => progress[l.id]?.completed
-      );
-      moduleCompletionStatus[module.id] =
-        completedLessonsInModule.length === moduleLessons.length;
+      const completedCount = moduleLessons.filter((l) => progress[l.id]?.completed).length;
+      moduleCompletionStatus[module.id] = completedCount === moduleLessons.length;
     });
 
-    return regularModules
-      .sort((a, b) => a.order - b.order)
-      .map((module) => {
-        let isUnlocked = false;
-        
-        // O primeiro módulo é sempre desbloqueado
-        if (module.order === 1) {
-          isUnlocked = true;
-        } else {
-          // Os módulos seguintes são desbloqueados se o módulo anterior estiver completo
-          const previousModule = regularModules.find(m => m.order === module.order - 1);
-          if (previousModule) {
-            isUnlocked = moduleCompletionStatus[previousModule.id];
-          }
-        }
-        
+    let previousModuleCompleted = true; // Permite que o primeiro módulo seja sempre desbloqueado
+    return regularModules.map((module) => {
+        const isUnlocked = previousModuleCompleted;
+        // Prepara a verificação para o próximo módulo da iteração
+        previousModuleCompleted = isUnlocked && moduleCompletionStatus[module.id];
         return {
           ...module,
           isUnlocked,
-          isModuleCompleted: moduleCompletionStatus[module.id],
         };
       });
+      
   }, [progress, loading]);
 
   if (loading) {
