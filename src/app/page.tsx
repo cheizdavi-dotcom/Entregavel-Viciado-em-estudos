@@ -92,8 +92,6 @@ export default function AppPage() {
         let isUnlocked = false;
         if (module.order === 1) {
           isUnlocked = true;
-        } else if (module.id === '3') { // TEMP: Force unlock for Module 3 editing
-          isUnlocked = true;
         } else {
           const previousModule = regularModules.find(m => m.order === module.order - 1);
           isUnlocked = previousModule ? moduleCompletionStatus[previousModule.id] : false;
