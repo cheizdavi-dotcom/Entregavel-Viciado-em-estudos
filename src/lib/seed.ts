@@ -78,7 +78,7 @@ export const lessons = [
   { id: '302', moduleId: '3', title: 'Aula 2: Técnica Pomodoro na prática', youtubeId: 'WKnaT07qaJ0', order: 2, durationSec: 340, summaryPdfUrl: '' },
   { id: '303', moduleId: '3', title: 'Aula 3: "Coma o sapo"', youtubeId: 'dtP8OQ1993k', order: 3, durationSec: 300, summaryPdfUrl: '' },
   { id: '304', moduleId: '3', title: 'Aula 4: Dividir para conquistar', youtubeId: '_FQOvA1t1Mw', order: 4, durationSec: 320, summaryPdfUrl: '' },
-  { id: '305', moduleId: '3', title: 'Aula 5: Recompensas inteligentes', youtubeId: '9v5tJo2eL0A', order: 5, durationSec: 310, summaryPdfUrl: '' },
+  { id: '305', moduleId: '3', title: 'Aula 5: Recompensas inteligentes', youtubeId: 'K-1I4sVUInY', order: 5, durationSec: 310, summaryPdfUrl: '' },
 
   // Módulo 4
   { id: '401', moduleId: '4', title: 'Aula 1: Como hábitos funcionam', youtubeId: 'dtrYk5IuVvI', order: 1, durationSec: 330, summaryPdfUrl: '' },
