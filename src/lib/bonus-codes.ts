@@ -8,6 +8,7 @@
  * 2. Edite a lista `bonusContent` para definir seus materiais.
  *    - Atualize a `coverUrl` com a imagem de capa de cada bônus.
  *    - Atualize a `youtubeId` com o ID do vídeo do YouTube para cada bônus.
+ *    - Adicione uma `releaseDate` no formato 'YYYY-MM-DD' para bônus futuros.
  * 3. Use o `requiredCode` em um item de `bonusContent` para vinculá-lo a um código.
  */
 
@@ -26,6 +27,7 @@ export interface BonusItem {
     coverUrl: string; // Capa do bônus
     youtubeId: string; // ID do vídeo do YouTube
     requiredCode?: string;
+    releaseDate?: string; // Data de lançamento no formato 'YYYY-MM-DD'
 }
 
 
@@ -53,7 +55,8 @@ export const bonusContent: BonusItem[] = [
         description: "O passo a passo estratégico para garantir sua vaga.", 
         coverUrl: "https://i.imgur.com/vPHn8Xu.png",
         youtubeId: "3EwH4EghGqw", // <- TROCAR ID DO VÍDEO REAL
-        requiredCode: "APROVACAO-2024"
+        requiredCode: "APROVACAO-2024",
+        releaseDate: "2024-07-20" // Exemplo: Lançamento em 20 de Julho de 2024
     },
     // Itens gratuitos (sem requiredCode) aparecerão na página "Mais"
     {

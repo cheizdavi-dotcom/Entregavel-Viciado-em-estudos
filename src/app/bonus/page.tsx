@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import { Lock, Unlock } from "lucide-react";
+import { Lock, Unlock, CalendarClock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -10,6 +10,8 @@ import { bonusContent, bonusCodes } from "@/lib/bonus-codes";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 const UNLOCKED_CODES_KEY = 'unlockedBonusCodes';
 
@@ -75,11 +77,26 @@ export default function BonusPage() {
     }
   };
   
-  const isBonusUnlocked = (bonusId: string): boolean => {
-    if (!isClient) return false;
+  const getBonusStatus = (bonusId: string): { isUnlocked: boolean; isReleased: boolean; releaseDateFormatted: string | null } => {
+    if (!isClient) return { isUnlocked: false, isReleased: false, releaseDateFormatted: null };
+    
     const bonus = bonusContent.find(b => b.id === bonusId);
-    if (!bonus?.requiredCode) return false;
-    return unlockedCodes.includes(bonus.requiredCode);
+    if (!bonus) return { isUnlocked: false, isReleased: false, releaseDateFormatted: null };
+
+    const isUnlocked = bonus.requiredCode ? unlockedCodes.includes(bonus.requiredCode) : false;
+    
+    let isReleased = true;
+    let releaseDateFormatted = null;
+
+    if (bonus.releaseDate) {
+      // releaseDate is 'YYYY-MM-DD', needs to be compared at midnight UTC
+      const releaseDateTime = new Date(`${bonus.releaseDate}T00:00:00Z`);
+      const now = new Date();
+      isReleased = now >= releaseDateTime;
+      releaseDateFormatted = format(releaseDateTime, "dd 'de' MMMM", { locale: ptBR });
+    }
+
+    return { isUnlocked, isReleased, releaseDateFormatted };
   }
 
   const unlockableContent = bonusContent.filter(item => item.requiredCode);
@@ -118,9 +135,25 @@ export default function BonusPage() {
 
        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {unlockableContent.map(item => {
-            const isUnlocked = isClient && isBonusUnlocked(item.id);
+            if (!isClient) {
+              return (
+                <div key={item.id}>
+                  <Card className="relative overflow-hidden">
+                    <CardContent className="relative flex aspect-[1080/1350] items-center justify-center p-0">
+                      <div className="w-full h-full bg-muted animate-pulse" />
+                    </CardContent>
+                  </Card>
+                   <div className="mt-2 h-5 w-3/4 mx-auto bg-muted animate-pulse rounded-md" />
+                   <div className="mt-1 h-4 w-1/2 mx-auto bg-muted animate-pulse rounded-md" />
+                </div>
+              );
+            }
+            
+            const { isUnlocked, isReleased, releaseDateFormatted } = getBonusStatus(item.id);
+            const isAccessible = isUnlocked && isReleased;
+
             return (
-              <Link key={item.id} href={isUnlocked ? `/bonus/${item.id}` : '#'} aria-disabled={!isUnlocked} className={cn(!isUnlocked && 'pointer-events-none')}>
+              <Link key={item.id} href={isAccessible ? `/bonus/${item.id}` : '#'} aria-disabled={!isAccessible} className={cn(!isAccessible && 'pointer-events-none')}>
                 <Card className="relative overflow-hidden transition-transform hover:scale-105">
                     <CardContent className="relative flex aspect-[1080/1350] items-center justify-center p-0">
                     <Image
@@ -134,11 +167,18 @@ export default function BonusPage() {
                         )}
                         data-ai-hint="course bonus"
                     />
-                     {!isUnlocked && isClient && (
+                     {isClient && !isUnlocked && (
                         <div className="absolute inset-0 bg-background/80 flex flex-col items-center justify-center text-center p-4">
                             <Lock className="h-8 w-8 text-foreground" />
                             <p className="mt-2 font-semibold text-foreground">Bloqueado</p>
                             <p className="text-xs text-muted-foreground">Insira o código para liberar</p>
+                        </div>
+                    )}
+                    {isClient && isUnlocked && !isReleased && (
+                       <div className="absolute inset-0 bg-background/80 flex flex-col items-center justify-center text-center p-4">
+                            <CalendarClock className="h-8 w-8 text-foreground" />
+                            <p className="mt-2 font-semibold text-foreground">Em breve</p>
+                            {releaseDateFormatted && <p className="text-xs text-muted-foreground">Lançamento em {releaseDateFormatted}</p>}
                         </div>
                     )}
                     </CardContent>
