@@ -74,7 +74,7 @@ export const lessons = [
   { id: '205', moduleId: '2', title: 'Aula 5: Planejando seu dia', youtubeId: 'QAU_8iRzcI4', order: 5, durationSec: 300, summaryPdfUrl: '' },
 
   // Módulo 3
-  { id: '301', moduleId: '3', title: 'Aula 1: A regra dos 2 minutos', youtubeId: 'a_qR-oH1gV8', order: 1, durationSec: 280, summaryPdfUrl: '' },
+  { id: '301', moduleId: '3', title: 'Aula 1: A regra dos 2 minutos', youtubeId: 'JnJv42N4DWo', order: 1, durationSec: 280, summaryPdfUrl: '' },
   { id: '302', moduleId: '3', title: 'Aula 2: Técnica Pomodoro na prática', youtubeId: 'r2145b58', order: 2, durationSec: 340, summaryPdfUrl: '' },
   { id: '303', moduleId: '3', title: 'Aula 3: "Coma o sapo"', youtubeId: 'Tnwk-22Ab3E', order: 3, durationSec: 300, summaryPdfUrl: '' },
   { id: '304', moduleId: '3', title: 'Aula 4: Dividir para conquistar', youtubeId: 'w2n2bfpYnI4', order: 4, durationSec: 320, summaryPdfUrl: '' },
