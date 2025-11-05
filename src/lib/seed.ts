@@ -63,8 +63,8 @@ export const lessons = [
   { id: '101', moduleId: '1', title: 'Aula 1: O que é procrastinação?', youtubeId: 'BpYYVSFZYfs', order: 1, durationSec: 300, summaryPdfUrl: '' },
   { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320, summaryPdfUrl: '' },
   { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280, summaryPdfUrl: '' },
-  { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'zJJbsidj8XQ', order: 4, durationSec: 350, summaryPdfUrl: '' },
-  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'uYbBsidj8XQ', order: 5, durationSec: 290, summaryPdfUrl: '' },
+  { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'dQw4w9WgXcQ', order: 4, durationSec: 350, summaryPdfUrl: '' },
+  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'o-YBDTqX_ZU', order: 5, durationSec: 290, summaryPdfUrl: '' },
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310, summaryPdfUrl: '' },
@@ -75,7 +75,7 @@ export const lessons = [
 
   // Módulo 3
   { id: '301', moduleId: '3', title: 'Aula 1: A regra dos 2 minutos', youtubeId: 'JnJv42N4DWo', order: 1, durationSec: 280, summaryPdfUrl: '' },
-  { id: '302', moduleId: '3', title: 'Aula 2: Técnica Pomodoro na prática', youtubeId: 'r2145b58', order: 2, durationSec: 340, summaryPdfUrl: '' },
+  { id: '302', moduleId: '3', title: 'Aula 2: Técnica Pomodoro na prática', youtubeId: '6vxiOOmgyAw', order: 2, durationSec: 340, summaryPdfUrl: '' },
   { id: '303', moduleId: '3', title: 'Aula 3: "Coma o sapo"', youtubeId: 'Tnwk-22Ab3E', order: 3, durationSec: 300, summaryPdfUrl: '' },
   { id: '304', moduleId: '3', title: 'Aula 4: Dividir para conquistar', youtubeId: 'w2n2bfpYnI4', order: 4, durationSec: 320, summaryPdfUrl: '' },
   { id: '305', moduleId: '3', title: 'Aula 5: Recompensas inteligentes', youtubeId: '9v5tJo2eL0A', order: 5, durationSec: 310, summaryPdfUrl: '' },
