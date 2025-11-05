@@ -63,30 +63,30 @@ export default function AppPage() {
     const regularModules = modules.filter(m => !m.isBonus).sort((a, b) => a.order - b.order);
 
     if (loading) {
-      return regularModules.map((m) => ({
-        ...m,
-        isUnlocked: m.order === 1,
-      }));
+        return regularModules.map(m => ({ ...m, isUnlocked: m.order === 1 }));
     }
 
     const moduleCompletionStatus: { [key: string]: boolean } = {};
     for (const module of regularModules) {
-        const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
+        const moduleLessons = lessons.filter(l => l.moduleId === module.id);
         if (moduleLessons.length === 0) {
             moduleCompletionStatus[module.id] = false; // Módulos sem aulas não podem ser "completos" para desbloquear outros.
             continue;
         }
-        const completedLessonsCount = moduleLessons.filter((l) => progress[l.id]?.completed).length;
+        const completedLessonsCount = moduleLessons.filter(l => progress[l.id]?.completed).length;
         moduleCompletionStatus[module.id] = completedLessonsCount === moduleLessons.length;
     }
-
-    let previousModuleCompleted = true; // O primeiro módulo (order: 1) sempre começa desbloqueado
+    
     return regularModules.map((module, index) => {
-        if (index > 0) {
-            const prevModule = regularModules[index - 1];
-            previousModuleCompleted = moduleCompletionStatus[prevModule.id];
+        let isUnlocked = false;
+        if (module.order === 1) {
+            isUnlocked = true;
+        } else {
+            const prevModule = regularModules.find(m => m.order === module.order - 1);
+            if (prevModule) {
+                isUnlocked = moduleCompletionStatus[prevModule.id];
+            }
         }
-        const isUnlocked = index === 0 || previousModuleCompleted;
         return {
             ...module,
             isUnlocked,
@@ -174,7 +174,7 @@ export default function AppPage() {
                                 width={1080}
                                 height={1600}
                                 className={cn(
-                                  'object-cover object-top w-full h-full',
+                                  'object-cover w-full h-full',
                                   !module.isUnlocked && 'grayscale'
                                 )}
                                 data-ai-hint="course module"
