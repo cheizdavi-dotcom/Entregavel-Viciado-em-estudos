@@ -37,6 +37,7 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
           start: Math.floor(startSeconds || 0),
           controls: 1,
           autoplay: 1,
+          origin: window.location.origin,
         },
         events: {
           onReady: onPlayerReady,
