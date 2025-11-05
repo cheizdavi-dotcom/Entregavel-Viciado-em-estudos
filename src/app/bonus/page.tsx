@@ -132,7 +132,7 @@ export default function BonusPage() {
             </Button>
           </div>
            <p className="text-xs text-muted-foreground mt-3 text-center sm:text-left">
-            Comprou e não recebeu o código? {" "}
+            Comprou e não recebeu o código?{" "}
             <a href={`mailto:${supportEmail}`} className="underline hover:text-foreground">
                 Envie um e-mail para nós.
             </a>
