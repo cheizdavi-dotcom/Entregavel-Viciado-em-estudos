@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import { Lock, Unlock, CalendarClock } from "lucide-react";
+import { Lock, Unlock, CalendarClock, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -108,14 +108,14 @@ export default function BonusPage() {
           Conteúdos Bônus
         </h1>
         <p className="text-muted-foreground mt-2">
-          Desbloqueie aqui os materiais exclusivos que você adquiriu.
+          Desbloqueie aqui os materiais exclusivos que você adquiriu ou compre novos.
         </p>
       </header>
 
       <Card className="mb-6 md:mb-8">
         <CardHeader>
           <CardTitle className="text-xl sm:text-2xl">Desbloquear Bônus</CardTitle>
-          <CardDescription>Comprou um produto extra? Insira o código que você recebeu por e-mail para liberá-lo.</CardDescription>
+          <CardDescription>Já comprou um produto extra? Insira o código que você recebeu por e-mail para liberá-lo.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-2">
@@ -152,9 +152,8 @@ export default function BonusPage() {
             const { isUnlocked, isReleased, releaseDateFormatted } = getBonusStatus(item.id);
             const isAccessible = isUnlocked && isReleased;
 
-            return (
-              <Link key={item.id} href={isAccessible ? `/bonus/${item.id}` : '#'} aria-disabled={!isAccessible} className={cn(!isAccessible && 'pointer-events-none')}>
-                <Card className="relative overflow-hidden transition-transform hover:scale-105">
+            const cardContent = (
+                <Card className="relative overflow-hidden transition-transform hover:scale-105 group">
                     <CardContent className="relative flex aspect-[1080/1350] items-center justify-center p-0">
                     <Image
                         src={item.coverUrl}
@@ -171,7 +170,16 @@ export default function BonusPage() {
                         <div className="absolute inset-0 bg-background/80 flex flex-col items-center justify-center text-center p-4">
                             <Lock className="h-8 w-8 text-foreground" />
                             <p className="mt-2 font-semibold text-foreground">Bloqueado</p>
-                            <p className="text-xs text-muted-foreground">Insira o código para liberar</p>
+                            {item.checkoutUrl ? (
+                              <Button asChild size="sm" className="mt-4">
+                                <a href={item.checkoutUrl} target="_blank" rel="noopener noreferrer">
+                                  <ShoppingCart className="mr-2"/>
+                                  Comprar Agora
+                                </a>
+                              </Button>
+                            ) : (
+                              <p className="text-xs text-muted-foreground mt-2">Insira o código para liberar</p>
+                            )}
                         </div>
                     )}
                     {isClient && isUnlocked && !isReleased && (
@@ -183,11 +191,23 @@ export default function BonusPage() {
                     )}
                     </CardContent>
                 </Card>
+            );
+
+
+            return (
+              <div key={item.id}>
+                {isAccessible ? (
+                  <Link href={`/bonus/${item.id}`} aria-disabled={!isAccessible} className={cn(!isAccessible && 'pointer-events-none')}>
+                    {cardContent}
+                  </Link>
+                ) : (
+                  cardContent
+                )}
                 <div className="mt-2 text-center">
                     <h3 className="font-semibold text-foreground truncate">{item.title}</h3>
                     <p className="text-xs text-muted-foreground">{item.description}</p>
                 </div>
-              </Link>
+              </div>
             )
           })}
         </div>

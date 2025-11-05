@@ -9,7 +9,7 @@
  *    - Atualize a `coverUrl` com a imagem de capa de cada bônus.
  *    - Atualize a `youtubeId` com o ID do vídeo do YouTube para cada bônus.
  *    - Adicione uma `releaseDate` no formato 'YYYY-MM-DD' para bônus futuros.
- * 3. Use o `requiredCode` em um item de `bonusContent` para vinculá-lo a um código.
+ *    - Adicione um `checkoutUrl` para o link de pagamento se quiser vender o bônus.
  */
 
 // 1. Defina aqui os nomes e os CÓDIGOS SECRETOS de cada bônus.
@@ -28,6 +28,7 @@ export interface BonusItem {
     youtubeId: string; // ID do vídeo do YouTube
     requiredCode?: string;
     releaseDate?: string; // Data de lançamento no formato 'YYYY-MM-DD'
+    checkoutUrl?: string; // Link da página de pagamento
 }
 
 
@@ -39,7 +40,8 @@ export const bonusContent: BonusItem[] = [
         description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
         coverUrl: "https://i.imgur.com/P6JFT67.png",
         youtubeId: "BpYYVSFZYfs", // <- TROCAR ID DO VÍDEO REAL
-        requiredCode: "MEMORIA-OURO" 
+        requiredCode: "MEMORIA-OURO",
+        checkoutUrl: "#" // <-- COLOQUE SEU LINK DE CHECKOUT AQUI
     },
     {
         id: "rotina-de-estudos", 
@@ -56,7 +58,7 @@ export const bonusContent: BonusItem[] = [
         coverUrl: "https://i.imgur.com/vPHn8Xu.png",
         youtubeId: "3EwH4EghGqw", // <- TROCAR ID DO VÍDEO REAL
         requiredCode: "APROVACAO-2024",
-        releaseDate: "2024-07-20" // Exemplo: Lançamento em 20 de Julho de 2024
+        releaseDate: "2024-07-20"
     },
     // Itens gratuitos (sem requiredCode) aparecerão na página "Mais"
     {
