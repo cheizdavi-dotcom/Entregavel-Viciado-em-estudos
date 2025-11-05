@@ -91,13 +91,17 @@ export default function AppPage() {
       .map((module) => {
         let isUnlocked = false;
         
+        // O primeiro módulo é sempre desbloqueado
         if (module.order === 1) {
           isUnlocked = true;
         } else {
+          // Os módulos seguintes são desbloqueados se o módulo anterior estiver completo
           const previousModule = regularModules.find(m => m.order === module.order - 1);
-          isUnlocked = previousModule ? moduleCompletionStatus[previousModule.id] : false;
+          if (previousModule) {
+            isUnlocked = moduleCompletionStatus[previousModule.id];
+          }
         }
-
+        
         return {
           ...module,
           isUnlocked,
