@@ -53,26 +53,6 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     try {
       const savedProgress = localStorage.getItem(PROGRESS_STORAGE_KEY);
       let currentProgress = deserializeProgress(savedProgress);
-
-      // TEMP: Unlock Module 3 for development
-      const module2Lessons = lessons.filter(l => l.moduleId === '2');
-      let needsUpdate = false;
-      module2Lessons.forEach(lesson => {
-        if (!currentProgress[lesson.id] || !currentProgress[lesson.id].completed) {
-            currentProgress[lesson.id] = {
-                watchedSeconds: lesson.durationSec,
-                completed: true,
-                updatedAt: new Date()
-            };
-            needsUpdate = true;
-        }
-      });
-      
-      if (needsUpdate) {
-          localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(currentProgress));
-      }
-      // END TEMP
-
       setProgress(currentProgress);
     } catch (error) {
       console.error("Failed to load progress from localStorage:", error);
