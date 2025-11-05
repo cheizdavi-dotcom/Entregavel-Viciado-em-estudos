@@ -21,7 +21,7 @@ export const modules = [
   {
     id: '3',
     title: 'Módulo 3: A Ação',
-    subtitle: 'Em breve: lançamento em 06/07',
+    subtitle: 'Ferramentas Práticas',
     coverUrl: 'https://i.imgur.com/8RrvCgR.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
@@ -34,7 +34,6 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
-    summaryPdfUrl: 'https://drive.google.com/drive/folders/1ig1O6wDOQ75vk32jnlL8joRxboFwC0Ib?usp=drive_link',
   },
   {
     id: '5',
@@ -43,7 +42,6 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
-    summaryPdfUrl: 'https://drive.google.com/drive/folders/1ig1O6wDOQ75vk32jnlL8joRxboFwC0Ib?usp=drive_link',
   },
   // Módulo Bônus
   {
@@ -64,7 +62,7 @@ export const lessons = [
   { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320, summaryPdfUrl: '' },
   { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280, summaryPdfUrl: '' },
   { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'JKSfDyAYKuc', order: 4, durationSec: 350, summaryPdfUrl: '' },
-  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'o-YBDTqX_ZU', order: 5, durationSec: 290, summaryPdfUrl: '' },
+  { id: '105', moduleId: '1', title: 'Seu tipo de procrastinador', youtubeId: 'o-YBDTqX_ZU', order: 5, durationSec: 290, summaryPdfUrl: '' },
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310, summaryPdfUrl: '' },
