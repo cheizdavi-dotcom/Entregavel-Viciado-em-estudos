@@ -90,7 +90,11 @@ export default function AppPage() {
       .sort((a, b) => a.order - b.order)
       .map((module) => {
         let isUnlocked = false;
-        if (module.order === 1) {
+        
+        // Forçar desbloqueio do Módulo 2
+        if (module.id === '2') {
+          isUnlocked = true;
+        } else if (module.order === 1) {
           isUnlocked = true;
         } else {
           const previousModule = regularModules.find(m => m.order === module.order - 1);
