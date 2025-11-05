@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import { Lock, Unlock, CalendarClock, ShoppingCart } from "lucide-react";
+import { Lock, Unlock, CalendarClock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -159,6 +159,9 @@ export default function BonusPage() {
             const { isUnlocked, isReleased, releaseDateFormatted } = getBonusStatus(item.id);
             const isAccessible = isUnlocked && isReleased;
 
+            // Define o link correto: para o módulo se for um bônus com aulas, ou para o vídeo único
+            const href = item.moduleId ? `/module/${item.moduleId}` : `/bonus/${item.id}`;
+
             const cardContent = (
                 <Card className="relative overflow-hidden transition-transform hover:scale-105 group">
                     <CardContent className="relative flex aspect-[1080/1350] items-center justify-center p-0">
@@ -191,11 +194,10 @@ export default function BonusPage() {
                 </Card>
             );
 
-
             return (
               <div key={item.id}>
                 {isAccessible ? (
-                  <Link href={`/bonus/${item.id}`} aria-disabled={!isAccessible} className={cn(!isAccessible && 'pointer-events-none')}>
+                  <Link href={href} aria-disabled={!isAccessible} className={cn(!isAccessible && 'pointer-events-none')}>
                     {cardContent}
                   </Link>
                 ) : (

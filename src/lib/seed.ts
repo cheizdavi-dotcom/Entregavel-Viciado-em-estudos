@@ -1,9 +1,3 @@
-
-
-
-
-
-
 export const modules = [
   {
     id: '1',
@@ -50,6 +44,17 @@ export const modules = [
     order: 5,
     summaryPdfUrl: 'https://drive.google.com/drive/folders/1ig1O6wDOQ75vk32jnlL8joRxboFwC0Ib?usp=drive_link',
   },
+  // Módulo Bônus
+  {
+    id: 'bonus-memoria-de-ouro',
+    isBonus: true,
+    title: 'Bônus: Memória de Ouro',
+    subtitle: 'Técnicas avançadas para memorização',
+    coverUrl: 'https://i.imgur.com/P6JFT67.png',
+    description: 'Técnicas avançadas para memorização e retenção de conteúdo.',
+    order: 99, // Ordem alta para não interferir na lógica de desbloqueio
+    summaryPdfUrl: '', // Adicionar link do PDF aqui quando estiver pronto
+  }
 ];
 
 export const lessons = [
@@ -87,4 +92,11 @@ export const lessons = [
   { id: '503', moduleId: '5', title: 'Aula 3: Visualização e futuro', youtubeId: '6vuetK362wE', order: 3, durationSec: 310, summaryPdfUrl: '' },
   { id: '504', moduleId: '5', title: 'Aula 4: O poder do tédio', youtubeId: 'TWTB4a6A-wY', order: 4, durationSec: 290, summaryPdfUrl: '' },
   { id: '505', moduleId: '5', title: 'Aula 5: Próximos passos', youtubeId: 'Lp9M4soP-Y', order: 5, durationSec: 330, summaryPdfUrl: '' },
+
+  // Aulas Bônus: Memória de Ouro
+  { id: 'bonus-101', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 1: A Fundação da Memória de Ouro', youtubeId: 'BpYYVSFZYfs', order: 1, durationSec: 300, summaryPdfUrl: '' },
+  { id: 'bonus-102', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 2: O Palácio Mental (Técnica de Loci)', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320, summaryPdfUrl: '' },
+  { id: 'bonus-103', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 3: Repetição Espaçada Inteligente', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280, summaryPdfUrl: '' },
+  { id: 'bonus-104', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 4: Associações Criativas e Mnemônicos', youtubeId: 'zJJbbsidj8XQ', order: 4, durationSec: 350, summaryPdfUrl: '' },
+  { id: 'bonus-105', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 5: Integrando Tudo na Sua Rotina', youtubeId: 'uybbsidj8XQ', order: 5, durationSec: 290, summaryPdfUrl: '' },
 ];

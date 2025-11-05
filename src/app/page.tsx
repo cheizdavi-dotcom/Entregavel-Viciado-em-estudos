@@ -27,10 +27,13 @@ import { Button } from '@/components/ui/button';
 export default function AppPage() {
   const { progress, loading } = useProgress();
 
-  const totalLessons = lessons.length;
+  const totalLessons = useMemo(() => lessons.filter(l => !l.moduleId.startsWith('bonus-')).length, []);
+  
   const completedLessons = useMemo(() => {
     if (loading) return 0;
-    return Object.values(progress).filter((p) => p.completed).length;
+    return Object.entries(progress)
+      .filter(([lessonId, p]) => !lessons.find(l => l.id === lessonId)?.moduleId.startsWith('bonus-') && p.completed)
+      .length;
   }, [progress, loading]);
 
   const overallProgress = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
@@ -40,6 +43,11 @@ export default function AppPage() {
     
     const allProgress = Object.entries(progress)
       .map(([lessonId, prog]) => ({ lessonId, ...prog }))
+      // Filtra progresso de bônus para não aparecer no "Continuar de onde parou"
+      .filter(({lessonId}) => {
+        const lesson = lessons.find(l => l.id === lessonId);
+        return lesson && !lesson.moduleId.startsWith('bonus-');
+      })
       .sort((a,b) => b.updatedAt.getTime() - a.updatedAt.getTime());
 
     if (allProgress.length > 0) {
@@ -52,8 +60,10 @@ export default function AppPage() {
 
 
   const modulesWithProgress = useMemo(() => {
+    const regularModules = modules.filter(m => !m.isBonus);
+    
     if (loading) {
-      return modules
+      return regularModules
         .map((m) => ({
           ...m,
           isUnlocked: m.order === 1,
@@ -63,7 +73,7 @@ export default function AppPage() {
     }
 
     const moduleCompletionStatus: Record<string, boolean> = {};
-    modules.forEach((module) => {
+    regularModules.forEach((module) => {
       const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
       if (moduleLessons.length === 0) {
         moduleCompletionStatus[module.id] = true;
@@ -76,14 +86,14 @@ export default function AppPage() {
         completedLessonsInModule.length === moduleLessons.length;
     });
 
-    return modules
+    return regularModules
       .sort((a, b) => a.order - b.order)
       .map((module) => {
         let isUnlocked = false;
         if (module.order === 1) {
           isUnlocked = true;
         } else {
-          const previousModule = modules.find(m => m.order === module.order - 1);
+          const previousModule = regularModules.find(m => m.order === module.order - 1);
           isUnlocked = previousModule ? moduleCompletionStatus[previousModule.id] : false;
         }
 

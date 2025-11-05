@@ -7,7 +7,8 @@
  *    - Você enviará o código específico para o cliente que comprou o bônus correspondente.
  * 2. Edite a lista `bonusContent` para definir seus materiais.
  *    - Atualize a `coverUrl` com a imagem de capa de cada bônus.
- *    - Atualize a `youtubeId` com o ID do vídeo do YouTube para cada bônus.
+ *    - Se for um bônus com múltiplas aulas (formato de módulo), defina o `moduleId`.
+ *    - Se for um bônus de vídeo único, defina o `youtubeId`.
  *    - Adicione uma `releaseDate` no formato 'YYYY-MM-DD' para bônus futuros.
  */
 
@@ -24,7 +25,8 @@ export interface BonusItem {
     title: string;
     description: string;
     coverUrl: string; // Capa do bônus
-    youtubeId: string; // ID do vídeo do YouTube
+    youtubeId?: string; // ID do vídeo do YouTube (para bônus de vídeo único)
+    moduleId?: string; // ID do módulo (para bônus com múltiplas aulas)
     requiredCode?: string;
     releaseDate?: string; // Data de lançamento no formato 'YYYY-MM-DD'
 }
@@ -37,7 +39,7 @@ export const bonusContent: BonusItem[] = [
         title: "Memória de Ouro", 
         description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
         coverUrl: "https://i.imgur.com/P6JFT67.png",
-        youtubeId: "BpYYVSFZYfs", // <- TROCAR ID DO VÍDEO REAL
+        moduleId: "bonus-memoria-de-ouro", // <- Link para o módulo bônus em seed.ts
         requiredCode: "MEMORIA-OURO",
     },
     {
@@ -63,24 +65,18 @@ export const bonusContent: BonusItem[] = [
         title: "Planner Semanal",
         description: "Organize suas tarefas e horários de estudo com este planner exclusivo.",
         coverUrl: "https://i.imgur.com/InRd8Er.png", // Este campo não será usado na pág "Mais"
-        youtubeId: "p1a2n3", // Este campo não será usado na pág "Mais"
-        // Sem `requiredCode`, conteúdo gratuito.
     },
     {
         id: "mapa-mental",
         title: "Mapa Mental de Estudos",
         description: "Um modelo de mapa mental para organizar ideias e acelerar o aprendizado.",
         coverUrl: "https://i.imgur.com/ILDypkd.png", // Este campo não será usado na pág "Mais"
-        youtubeId: "m4p1m3", // Este campo não será usado na pág "Mais"
-        // Sem `requiredCode`, conteúdo gratuito.
     },
     {
         id: "checklist-foco",
         title: "Checklist de Foco",
         description: "Prepare seu ambiente antes de estudar e elimine as distrações.",
         coverUrl: "https://i.imgur.com/reNazVp.png", // Este campo não será usado na pág "Mais"
-        youtubeId: "f0c4s5", // Este campo não será usado na pág "Mais"
-        // Sem `requiredCode`, conteúdo gratuito.
     }
 ];
 
