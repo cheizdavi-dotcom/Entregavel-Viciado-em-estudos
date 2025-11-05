@@ -75,8 +75,9 @@ export default function AppPage() {
     const moduleCompletionStatus: Record<string, boolean> = {};
     regularModules.forEach((module) => {
       const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
+      // Módulo só pode ser completo se tiver aulas
       if (moduleLessons.length === 0) {
-        moduleCompletionStatus[module.id] = true;
+        moduleCompletionStatus[module.id] = false;
         return;
       }
       const completedLessonsInModule = moduleLessons.filter(
