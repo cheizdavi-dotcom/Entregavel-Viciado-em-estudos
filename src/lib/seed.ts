@@ -54,7 +54,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/P6JFT67.png',
     description: 'Técnicas avançadas para memorização e retenção de conteúdo.',
     order: 99, // Ordem alta para não interferir na lógica de desbloqueio
-    summaryPdfUrl: '#', // Adicionado link temporário para habilitar o botão
+    summaryPdfUrl: 'https://drive.google.com/drive/folders/1yPeEhalBmzdc7NYp5kgnmAkWJ_Tlc_oE?usp=sharing',
   }
 ];
 
