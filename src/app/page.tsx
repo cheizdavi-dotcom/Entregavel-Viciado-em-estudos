@@ -69,28 +69,29 @@ export default function AppPage() {
       }));
     }
 
-    const moduleCompletionStatus: Record<string, boolean> = {};
-    regularModules.forEach((module) => {
-      const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
-      // Módulos sem aulas não podem ser concluídos.
-      if (moduleLessons.length === 0) {
-        moduleCompletionStatus[module.id] = false;
-        return;
-      }
-      const completedCount = moduleLessons.filter((l) => progress[l.id]?.completed).length;
-      moduleCompletionStatus[module.id] = completedCount === moduleLessons.length;
-    });
+    const moduleCompletionStatus: { [key: string]: boolean } = {};
+    for (const module of regularModules) {
+        const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
+        if (moduleLessons.length === 0) {
+            moduleCompletionStatus[module.id] = false; // Módulos sem aulas não podem ser "completos" para desbloquear outros.
+            continue;
+        }
+        const completedLessonsCount = moduleLessons.filter((l) => progress[l.id]?.completed).length;
+        moduleCompletionStatus[module.id] = completedLessonsCount === moduleLessons.length;
+    }
 
-    let previousModuleCompleted = true; // Permite que o primeiro módulo seja sempre desbloqueado
-    return regularModules.map((module) => {
-        const isUnlocked = previousModuleCompleted;
-        // Prepara a verificação para o próximo módulo da iteração
-        previousModuleCompleted = isUnlocked && moduleCompletionStatus[module.id];
+    let previousModuleCompleted = true; // O primeiro módulo (order: 1) sempre começa desbloqueado
+    return regularModules.map((module, index) => {
+        if (index > 0) {
+            const prevModule = regularModules[index - 1];
+            previousModuleCompleted = moduleCompletionStatus[prevModule.id];
+        }
+        const isUnlocked = index === 0 || previousModuleCompleted;
         return {
-          ...module,
-          isUnlocked,
+            ...module,
+            isUnlocked,
         };
-      });
+    });
       
   }, [progress, loading]);
 
@@ -173,7 +174,7 @@ export default function AppPage() {
                                 width={1080}
                                 height={1600}
                                 className={cn(
-                                  'object-cover w-full h-full',
+                                  'object-cover object-top w-full h-full',
                                   !module.isUnlocked && 'grayscale'
                                 )}
                                 data-ai-hint="course module"
