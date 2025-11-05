@@ -76,7 +76,7 @@ export const lessons = [
   // Módulo 3
   { id: '301', moduleId: '3', title: 'Aula 1: A regra dos 2 minutos', youtubeId: 'JnJv42N4DWo', order: 1, durationSec: 280, summaryPdfUrl: '' },
   { id: '302', moduleId: '3', title: 'Aula 2: Técnica Pomodoro na prática', youtubeId: 'WKnaT07qaJ0', order: 2, durationSec: 340, summaryPdfUrl: '' },
-  { id: '303', moduleId: '3', title: 'Aula 3: "Coma o sapo"', youtubeId: 'Tnwk-22Ab3E', order: 3, durationSec: 300, summaryPdfUrl: '' },
+  { id: '303', moduleId: '3', title: 'Aula 3: "Coma o sapo"', youtubeId: 'dtP8OQ1993k', order: 3, durationSec: 300, summaryPdfUrl: '' },
   { id: '304', moduleId: '3', title: 'Aula 4: Dividir para conquistar', youtubeId: 'w2n2bfpYnI4', order: 4, durationSec: 320, summaryPdfUrl: '' },
   { id: '305', moduleId: '3', title: 'Aula 5: Recompensas inteligentes', youtubeId: '9v5tJo2eL0A', order: 5, durationSec: 310, summaryPdfUrl: '' },
 
