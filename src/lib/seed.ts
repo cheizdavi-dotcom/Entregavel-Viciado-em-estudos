@@ -25,7 +25,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/8RrvCgR.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
-    summaryPdfUrl: 'https://drive.google.com/drive/folders/1ig1O6wDOQ75vk32jnlL8joRxboFwC0Ib?usp=drive_link',
+    summaryPdfUrl: 'https://drive.google.com/drive/folders/13_j9_y33umMWvrzfSvpfGWI0m1Yu2zWh?usp=sharing',
   },
   {
     id: '4',
