@@ -109,14 +109,14 @@ export default function BonusPage() {
           Conteúdos Bônus
         </h1>
         <p className="text-muted-foreground mt-2">
-          Desbloqueie aqui os materiais exclusivos que você adquiriu ou compre novos.
+          Desbloqueie aqui os materiais exclusivos que você adquiriu.
         </p>
       </header>
 
       <Card className="mb-6 md:mb-8">
         <CardHeader>
           <CardTitle className="text-xl sm:text-2xl">Desbloquear Bônus</CardTitle>
-          <CardDescription>Já comprou um produto extra? Insira o código que você recebeu por e-mail para liberá-lo.</CardDescription>
+          <CardDescription>Insira o código que você recebeu por e-mail para liberar o seu acesso.</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-2">
@@ -177,16 +177,7 @@ export default function BonusPage() {
                         <div className="absolute inset-0 bg-background/80 flex flex-col items-center justify-center text-center p-4">
                             <Lock className="h-8 w-8 text-foreground" />
                             <p className="mt-2 font-semibold text-foreground">Bloqueado</p>
-                            {item.checkoutUrl ? (
-                              <Button asChild size="sm" className="mt-4">
-                                <a href={item.checkoutUrl} target="_blank" rel="noopener noreferrer">
-                                  <ShoppingCart className="mr-2"/>
-                                  Comprar Agora
-                                </a>
-                              </Button>
-                            ) : (
-                              <p className="text-xs text-muted-foreground mt-2">Insira o código para liberar</p>
-                            )}
+                            <p className="text-xs text-muted-foreground mt-2">Insira o código para liberar</p>
                         </div>
                     )}
                     {isClient && isUnlocked && !isReleased && (
