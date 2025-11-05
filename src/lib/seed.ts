@@ -25,7 +25,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/8RrvCgR.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
-    summaryPdfUrl: 'https://drive.google.com/drive/folders/13_j9_y33umMWvrzfSvpfGWI0m1Yu2zWh?usp=sharing',
+    summaryPdfUrl: 'https://drive.google.com/drive/folders/13_j9_y33umMWvrzfSvpfGWI0m1Yu2zWh?usp=drive_link',
   },
   {
     id: '4',
@@ -83,7 +83,7 @@ export const lessons = [
   // Módulo 4
   { id: '401', moduleId: '4', title: 'Aula 1: Como hábitos funcionam', youtubeId: 'dtrYk5IuVvI', order: 1, durationSec: 330, summaryPdfUrl: '' },
   { id: '402', moduleId: '4', title: 'Aula 2: Empilhamento de hábitos', youtubeId: 'fzeHAfhp39Y', order: 2, durationSec: 290, summaryPdfUrl: '' },
-  { id: '403', moduleId: '4', title: 'Aula 3: O diário de progresso', youtubeId: 'KzZy35_k_wI', order: 3, durationSec: 310, summaryPdfUrl: '' },
+  { id: '403', moduleId: '4', title: 'O diário de progresso', youtubeId: 'KzZy35_k_wI', order: 3, durationSec: 310, summaryPdfUrl: '' },
   { id: '404', moduleId: '4', title: 'Aula 4: Lidando com falhas', youtubeId: 'X7gh_A3locY', order: 4, durationSec: 340, summaryPdfUrl: '' },
   { id: '405', moduleId: '4', title: 'Aula 5: A identidade de quem faz', youtubeId: 'PZ7lDrwYdZc', order: 5, durationSec: 300, summaryPdfUrl: '' },
 
