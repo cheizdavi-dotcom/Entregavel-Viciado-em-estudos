@@ -98,6 +98,6 @@ export const lessons = [
   { id: 'bonus-101', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 1: A Fundação da Memória de Ouro', youtubeId: '8wVNtEvoDWg', order: 1, durationSec: 300, summaryPdfUrl: '' },
   { id: 'bonus-102', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 2: O Palácio Mental (Técnica de Loci)', youtubeId: '6vxiOOmgyAw', order: 2, durationSec: 320, summaryPdfUrl: '' },
   { id: 'bonus-103', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 3: Repetição Espaçada Inteligente', youtubeId: 'fi5QvSlZvrI', order: 3, durationSec: 280, summaryPdfUrl: '' },
-  { id: 'bonus-104', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 4: Associações Criativas e Mnemônicos', youtubeId: 'X6s-xYg_p_A', order: 4, durationSec: 350, summaryPdfUrl: '' },
+  { id: 'bonus-104', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 4: Associações Criativas e Mnemônicos', youtubeId: 'mkCxuIJS44o', order: 4, durationSec: 350, summaryPdfUrl: '' },
   { id: 'bonus-105', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 5: Integrando Tudo na Sua Rotina', youtubeId: 'u5EXshQSo_s', order: 5, durationSec: 290, summaryPdfUrl: '' },
 ];
