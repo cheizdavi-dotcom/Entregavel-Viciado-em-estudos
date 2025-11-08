@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -32,7 +33,10 @@ export default function AppPage() {
   const completedLessons = useMemo(() => {
     if (loading) return 0;
     return Object.entries(progress)
-      .filter(([lessonId, p]) => !lessons.find(l => l.id === lessonId)?.moduleId.startsWith('bonus-') && p.completed)
+      .filter(([lessonId, p]) => {
+        const lesson = lessons.find(l => l.id === lessonId);
+        return lesson && !lesson.moduleId.startsWith('bonus-') && p.completed;
+      })
       .length;
   }, [progress, loading]);
 
@@ -58,7 +62,6 @@ export default function AppPage() {
     return null;
   }, [progress, loading]);
 
-
   const modulesWithProgress = useMemo(() => {
     const regularModules = modules.filter(m => !m.isBonus).sort((a, b) => a.order - b.order);
 
@@ -70,21 +73,23 @@ export default function AppPage() {
     for (const module of regularModules) {
         const moduleLessons = lessons.filter(l => l.moduleId === module.id);
         if (moduleLessons.length === 0) {
-            moduleCompletionStatus[module.id] = false; // Módulos sem aulas não podem ser "completos" para desbloquear outros.
+            // Módulo sem aulas não pode ser "completo" para desbloquear outros.
+            moduleCompletionStatus[module.id] = false; 
             continue;
         }
         const completedLessonsCount = moduleLessons.filter(l => progress[l.id]?.completed).length;
         moduleCompletionStatus[module.id] = completedLessonsCount === moduleLessons.length;
     }
     
-    return regularModules.map((module, index) => {
+    return regularModules.map((module) => {
         let isUnlocked = false;
         if (module.order === 1) {
             isUnlocked = true;
         } else {
             const prevModule = regularModules.find(m => m.order === module.order - 1);
-            if (prevModule) {
-                isUnlocked = moduleCompletionStatus[prevModule.id];
+            // Só desbloqueia se o módulo anterior existir E estiver completo
+            if (prevModule && moduleCompletionStatus[prevModule.id]) {
+                isUnlocked = true;
             }
         }
         return {
@@ -94,6 +99,7 @@ export default function AppPage() {
     });
       
   }, [progress, loading]);
+
 
   if (loading) {
     return (
@@ -174,7 +180,7 @@ export default function AppPage() {
                                 width={1080}
                                 height={1600}
                                 className={cn(
-                                  'object-cover w-full h-full',
+                                  'object-cover w-full h-full object-top',
                                   !module.isUnlocked && 'grayscale'
                                 )}
                                 data-ai-hint="course module"
