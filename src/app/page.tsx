@@ -66,19 +66,19 @@ export default function AppPage() {
     const regularModules = modules.filter(m => !m.isBonus).sort((a, b) => a.order - b.order);
 
     if (loading) {
-        return regularModules.map(m => ({ ...m, isUnlocked: m.order === 1 }));
+        return regularModules.map((m, index) => ({ ...m, isUnlocked: index === 0 }));
     }
 
     const moduleCompletionStatus: { [key: string]: boolean } = {};
+
     for (const module of regularModules) {
         const moduleLessons = lessons.filter(l => l.moduleId === module.id);
-        if (moduleLessons.length === 0) {
-            // Módulo sem aulas não pode ser "completo" para desbloquear outros.
-            moduleCompletionStatus[module.id] = false; 
-            continue;
+        if (moduleLessons.length > 0) {
+            const completedLessonsCount = moduleLessons.filter(l => progress[l.id]?.completed).length;
+            moduleCompletionStatus[module.id] = completedLessonsCount === moduleLessons.length;
+        } else {
+            moduleCompletionStatus[module.id] = false; // Módulos sem aulas não podem ser "completos" para desbloquear outros.
         }
-        const completedLessonsCount = moduleLessons.filter(l => progress[l.id]?.completed).length;
-        moduleCompletionStatus[module.id] = completedLessonsCount === moduleLessons.length;
     }
     
     return regularModules.map((module) => {
@@ -87,7 +87,6 @@ export default function AppPage() {
             isUnlocked = true;
         } else {
             const prevModule = regularModules.find(m => m.order === module.order - 1);
-            // Só desbloqueia se o módulo anterior existir E estiver completo
             if (prevModule && moduleCompletionStatus[prevModule.id]) {
                 isUnlocked = true;
             }
