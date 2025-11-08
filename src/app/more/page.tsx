@@ -1,37 +1,13 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import { Download, LifeBuoy, RotateCcw } from "lucide-react";
+import { Download, LifeBuoy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { moreContent } from "@/lib/bonus-codes";
 import Link from "next/link";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { useProgress } from "@/hooks/useProgress.tsx";
-import { useToast } from "@/hooks/use-toast";
-
 
 export default function MorePage() {
   const supportEmail = "metodoviciadonosestudos@gmail.com";
-  const { resetAllProgress } = useProgress();
-  const { toast } = useToast();
-
-  const handleReset = () => {
-    resetAllProgress();
-    toast({
-      title: "Progresso Resetado",
-      description: "Todo o seu progresso de aulas foi apagado.",
-    });
-  };
 
   return (
     <div className="container mx-auto p-4">
@@ -64,39 +40,6 @@ export default function MorePage() {
                   </Button>
                 </CardContent>
               </Card>
-
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Card className="hover:bg-accent/50 cursor-pointer">
-                      <CardHeader>
-                        <CardTitle className="text-lg flex items-center justify-between">
-                            <span>Resetar Progresso</span>
-                        </CardTitle>
-                        <CardDescription>Apagar todo o seu histórico de aulas assistidas e recomeçar do zero.</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                          <Button variant="destructive">
-                            <RotateCcw className="mr-2 h-4 w-4" />
-                            Resetar
-                          </Button>
-                      </CardContent>
-                    </Card>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Esta ação não pode ser desfeita. Isso irá apagar permanentemente
-                        todo o seu progresso de aulas assistidas e você terá que recomeçar do Módulo 1.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleReset}>Sim, quero resetar</AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-              </AlertDialog>
-
            </div>
         </section>
 
