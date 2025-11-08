@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback, useEffect, createContext, useContext, ReactNode, useRef } from 'react';
-import { lessons } from '@/lib/seed';
 
 const PROGRESS_STORAGE_KEY = 'lessonProgress';
 const PROGRESS_BROADCAST_CHANNEL = 'progress-channel';
@@ -9,7 +8,7 @@ const PROGRESS_BROADCAST_CHANNEL = 'progress-channel';
 export interface LessonProgress {
   watchedSeconds: number;
   completed: boolean;
-  updatedAt: Date; 
+  updatedAt: string; // Stored as ISO string
 }
 
 interface ProgressContextType {
@@ -39,13 +38,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const writeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const deserializeProgress = (savedProgress: string | null) => {
+  const deserializeProgress = (savedProgress: string | null): Record<string, LessonProgress> => {
     if (!savedProgress) return {};
-    const parsedProgress = JSON.parse(savedProgress);
-    Object.keys(parsedProgress).forEach(key => {
-      parsedProgress[key].updatedAt = new Date(parsedProgress[key].updatedAt);
-    });
-    return parsedProgress;
+    try {
+        return JSON.parse(savedProgress);
+    } catch {
+        return {};
+    }
   }
   
   // Load progress from localStorage on initial client-side mount
@@ -91,7 +90,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         [lessonId]: {
             watchedSeconds: seconds,
             completed,
-            updatedAt: new Date(),
+            updatedAt: new Date().toISOString(),
         }
     };
     setProgress(newProgressData);
