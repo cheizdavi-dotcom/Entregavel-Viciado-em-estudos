@@ -41,12 +41,12 @@ export default function AppPage() {
     if (loading || Object.keys(progress).length === 0) return null;
     
     const allProgress = Object.entries(progress)
-      .map(([lessonId, prog]) => ({ lessonId, ...prog }))
+      .map(([lessonId, prog]) => ({ lessonId, ...prog, updatedAt: new Date(prog.updatedAt) }))
       .filter(({lessonId}) => {
         const lesson = lessons.find(l => l.id === lessonId);
         return lesson && !lesson.moduleId.startsWith('bonus-');
       })
-      .sort((a,b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+      .sort((a,b) => b.updatedAt.getTime() - a.updatedAt.getTime());
 
     if (allProgress.length > 0) {
       const lastLessonId = allProgress[0].lessonId;
@@ -60,33 +60,26 @@ export default function AppPage() {
     const regularModules = modules.filter(m => !m.isBonus).sort((a, b) => a.order - b.order);
 
     if (loading) {
-      return regularModules.map((module, index) => ({
+      return regularModules.map((module) => ({
         ...module,
-        isUnlocked: index === 0,
+        isUnlocked: module.order === 1,
       }));
     }
 
     const completedModules = new Set<string>();
-    for (const module of regularModules) {
+    regularModules.forEach(module => {
       const moduleLessons = lessons.filter(l => l.moduleId === module.id);
-      if (moduleLessons.length > 0) {
-        const allComplete = moduleLessons.every(l => progress[l.id]?.completed);
-        if (allComplete) {
-          completedModules.add(module.id);
-        }
+      if (moduleLessons.length > 0 && moduleLessons.every(l => progress[l.id]?.completed)) {
+        completedModules.add(module.id);
       }
-    }
+    });
 
     return regularModules.map(module => {
-      let isUnlocked = false;
-      if (module.order === 1) {
-        isUnlocked = true;
-      } else {
-        const prevModule = regularModules.find(m => m.order === module.order - 1);
-        if (prevModule && completedModules.has(prevModule.id)) {
-          isUnlocked = true;
-        }
-      }
+      const isUnlocked = module.order === 1 || (
+        regularModules.find(m => m.order === module.order - 1) &&
+        completedModules.has(regularModules.find(m => m.order === module.order - 1)!.id)
+      );
+
       return {
         ...module,
         isUnlocked,
