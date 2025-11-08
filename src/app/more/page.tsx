@@ -1,13 +1,37 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
-import { Download, LifeBuoy } from "lucide-react";
+import { Download, LifeBuoy, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { moreContent } from "@/lib/bonus-codes";
 import Link from "next/link";
+import { useProgress } from "@/hooks/useProgress.tsx";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { useToast } from "@/hooks/use-toast";
+
 
 export default function MorePage() {
+  const { resetAllProgress } = useProgress();
+  const { toast } = useToast();
   const supportEmail = "metodoviciadonosestudos@gmail.com";
+
+  const handleReset = () => {
+    resetAllProgress();
+    toast({
+      title: "Progresso Resetado",
+      description: "Todas as suas aulas foram marcadas como não assistidas.",
+    });
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -40,6 +64,39 @@ export default function MorePage() {
                   </Button>
                 </CardContent>
               </Card>
+
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                   <Card className="hover:bg-muted/50 cursor-pointer">
+                      <CardHeader>
+                        <CardTitle className="text-lg flex items-center justify-between">
+                            <span className="text-destructive">Resetar Progresso</span>
+                        </CardTitle>
+                        <CardDescription>Limpa todos os dados de aulas assistidas. Use com cuidado.</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                          <Button variant="destructive" className="w-full sm:w-auto">
+                              <RotateCcw className="mr-2 h-4 w-4" />
+                              Resetar
+                          </Button>
+                      </CardContent>
+                    </Card>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Esta ação não pode ser desfeita. Isso apagará permanentemente todo o seu progresso de aulas assistidas e concluídas.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleReset} className="bg-destructive hover:bg-destructive/90">
+                      Sim, quero resetar
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
            </div>
         </section>
 
