@@ -66,37 +66,39 @@ export default function AppPage() {
     const regularModules = modules.filter(m => !m.isBonus).sort((a, b) => a.order - b.order);
 
     if (loading) {
-        return regularModules.map((m, index) => ({ ...m, isUnlocked: index === 0 }));
+      return regularModules.map((module) => ({
+        ...module,
+        isUnlocked: module.order === 1,
+      }));
     }
 
     const moduleCompletionStatus: { [key: string]: boolean } = {};
-
     for (const module of regularModules) {
-        const moduleLessons = lessons.filter(l => l.moduleId === module.id);
-        if (moduleLessons.length > 0) {
-            const completedLessonsCount = moduleLessons.filter(l => progress[l.id]?.completed).length;
-            moduleCompletionStatus[module.id] = completedLessonsCount === moduleLessons.length;
-        } else {
-            moduleCompletionStatus[module.id] = false; // Módulos sem aulas não podem ser "completos" para desbloquear outros.
-        }
+      const moduleLessons = lessons.filter(l => l.moduleId === module.id);
+      if (moduleLessons.length > 0) {
+        const completedCount = moduleLessons.filter(l => progress[l.id]?.completed).length;
+        moduleCompletionStatus[module.id] = completedCount === moduleLessons.length;
+      } else {
+        // Módulos sem aulas não podem ser "completos" para desbloquear o próximo
+        moduleCompletionStatus[module.id] = false;
+      }
     }
-    
+
     return regularModules.map((module) => {
-        let isUnlocked = false;
-        if (module.order === 1) {
-            isUnlocked = true;
-        } else {
-            const prevModule = regularModules.find(m => m.order === module.order - 1);
-            if (prevModule && moduleCompletionStatus[prevModule.id]) {
-                isUnlocked = true;
-            }
+      let isUnlocked = false;
+      if (module.order === 1) {
+        isUnlocked = true;
+      } else {
+        const prevModule = regularModules.find(m => m.order === module.order - 1);
+        if (prevModule && moduleCompletionStatus[prevModule.id]) {
+          isUnlocked = true;
         }
-        return {
-            ...module,
-            isUnlocked,
-        };
+      }
+      return {
+        ...module,
+        isUnlocked,
+      };
     });
-      
   }, [progress, loading]);
 
 
