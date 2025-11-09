@@ -53,7 +53,7 @@ export const bonusContent: BonusItem[] = [
     {
         id: "o-sono-do-estudante", 
         title: "O Sono do Estudante", 
-        description: "Aprenda a dormir melhor para consolidar o aprendizado.", 
+        description: "Durma menos e memorize mais com técnicas de neurosono avançadas.", 
         coverUrl: "https://imgur.com/L9KNFom.png",
         youtubeId: "E1I0hAx2wSo",
         requiredCode: "SONO-ESTUDANTE",
