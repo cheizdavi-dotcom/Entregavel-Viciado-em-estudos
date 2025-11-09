@@ -30,7 +30,7 @@ export const modules = [
   {
     id: '4',
     title: 'Módulo 4: O Controle',
-    subtitle: 'Em breve: lançamento em 10/07',
+    subtitle: 'Criando Hábitos Duradouros',
     coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
