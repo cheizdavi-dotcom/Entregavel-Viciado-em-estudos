@@ -63,30 +63,15 @@ export default function AppPage() {
     if (loading) {
       return regularModules.map((module) => ({
         ...module,
-        isUnlocked: module.order === 1,
+        isUnlocked: true, // Desbloqueia todos durante o carregamento
       }));
     }
 
-    const completedModules = new Set<string>();
-    regularModules.forEach(module => {
-      const moduleLessons = lessons.filter(l => l.moduleId === module.id);
-      if (moduleLessons.length > 0 && moduleLessons.every(l => progress[l.id]?.completed)) {
-        completedModules.add(module.id);
-      }
-    });
-
-    return regularModules.map(module => {
-      const isUnlocked = module.order === 1 || (
-        regularModules.find(m => m.order === module.order - 1) &&
-        completedModules.has(regularModules.find(m => m.order === module.order - 1)!.id)
-      );
-
-      return {
-        ...module,
-        isUnlocked,
-      };
-    });
-  }, [progress, loading]);
+    return regularModules.map(module => ({
+      ...module,
+      isUnlocked: true, // Força o desbloqueio de todos os módulos temporariamente
+    }));
+  }, [loading]);
 
 
   if (loading) {
