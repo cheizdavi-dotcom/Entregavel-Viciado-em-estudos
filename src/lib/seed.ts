@@ -22,7 +22,7 @@ export const modules = [
     id: '3',
     title: 'Módulo 3: A Ação',
     subtitle: 'Técnicas de Produtividade',
-    coverUrl: 'https://i.imgur.com/8RrvCgR.png',
+    coverUrl: 'https://imgur.com/rLKBy1M.png',
     description: 'Descubra técnicas práticas e eficazes para iniciar e concluir tarefas, mesmo quando a motivação está baixa.',
     order: 3,
     summaryPdfUrl: 'https://drive.google.com/drive/folders/13_j9_y33umMWvrzfSvpfGWI0m1Yu2zWh?usp=drive_link',
