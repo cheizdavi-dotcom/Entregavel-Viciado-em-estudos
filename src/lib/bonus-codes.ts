@@ -38,14 +38,14 @@ export const bonusContent: BonusItem[] = [
         id: "memoria-de-ouro", 
         title: "Memória de Ouro", 
         description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
-        coverUrl: "https://i.imgur.com/t85LaHE.png",
+        coverUrl: "https://imgur.com/t85LaHE",
         moduleId: "bonus-memoria-de-ouro", // <- Link para o módulo bônus em seed.ts
         requiredCode: "MEMORIA-OURO",
     },
     {
         id: "metodo-pomodoro-avancado", 
         title: "Método Pomodoro Avançado", 
-        description: "Domine a técnica para máxima concentração e produtividade.", 
+        description: "Turbine sua produtividade com blocos de estudo perfeitos.", 
         coverUrl: "https://i.imgur.com/z6nLauv.png", // <- PENDENTE: Aguardando nova imagem
         youtubeId: "WKnaT07qaJ0",
         requiredCode: "POMODORO-PRO"
