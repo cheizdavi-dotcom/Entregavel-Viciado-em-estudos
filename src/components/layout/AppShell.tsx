@@ -21,7 +21,6 @@ const navItems = [
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -61,17 +60,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <main className="flex-1 pb-20">
-        {isHomePage && (
-          <div className="p-4">
-            <Alert>
-              <Info className="h-4 w-4" />
-              <AlertTitle>Boas-vindas!</AlertTitle>
-              <AlertDescription>
-                Os módulos são liberados progressivamente. Mergulhe no conteúdo já disponível e prepare-se para as próximas aulas!
-              </AlertDescription>
-            </Alert>
-          </div>
-        )}
         {children}
       </main>
       <footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/80 backdrop-blur-sm">

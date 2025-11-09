@@ -14,7 +14,7 @@ import { lessons, modules } from '@/lib/seed';
 import Link from 'next/link';
 import { useProgress } from '@/hooks/useProgress.tsx';
 import { useMemo } from 'react';
-import { Lock, PlayCircle } from 'lucide-react';
+import { Lock, PlayCircle, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
   Tooltip,
@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/tooltip';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default function AppPage() {
   const { progress, loading } = useProgress();
@@ -106,6 +107,16 @@ export default function AppPage() {
           Seu caminho para o fim da procrastinação começa agora.
         </p>
       </header>
+
+      <div className="mb-6 md:mb-8">
+        <Alert>
+          <Info className="h-4 w-4" />
+          <AlertTitle>Boas-vindas!</AlertTitle>
+          <AlertDescription>
+            Os módulos são liberados progressivamente. Mergulhe no conteúdo já disponível e prepare-se para as próximas aulas!
+          </AlertDescription>
+        </Alert>
+      </div>
 
       <Card className="mb-6 md:mb-8">
         <CardContent className="p-4 sm:p-6">
