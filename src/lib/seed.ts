@@ -62,7 +62,7 @@ export const lessons = [
   { id: '102', moduleId: '1', title: 'Aula 2: O ciclo vicioso', youtubeId: 'ImZ2abenGkw', order: 2, durationSec: 320, summaryPdfUrl: '' },
   { id: '103', moduleId: '1', title: 'Aula 3: Mitos e verdades', youtubeId: '3EwH4EghGqw', order: 3, durationSec: 280, summaryPdfUrl: '' },
   { id: '104', moduleId: '1', title: 'Aula 4: O custo da inação', youtubeId: 'JKSfDyAYKuc', order: 4, durationSec: 350, summaryPdfUrl: '' },
-  { id: '105', moduleId: '1', title: 'Seu tipo de procrastinador', youtubeId: 'o-YBDTqX_ZU', order: 5, durationSec: 290, summaryPdfUrl: '' },
+  { id: '105', moduleId: '1', title: 'Aula 5: Seu tipo de procrastinador', youtubeId: 'o-YBDTqX_ZU', order: 5, durationSec: 290, summaryPdfUrl: '' },
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310, summaryPdfUrl: '' },
@@ -74,14 +74,14 @@ export const lessons = [
   // Módulo 3
   { id: '301', moduleId: '3', title: 'Aula 1: A regra dos 2 minutos', youtubeId: 'JnJv42N4DWo', order: 1, durationSec: 280, summaryPdfUrl: '' },
   { id: '302', moduleId: '3', title: 'Aula 2: Técnica Pomodoro na prática', youtubeId: 'WKnaT07qaJ0', order: 2, durationSec: 340, summaryPdfUrl: '' },
-  { id: '303', moduleId: '3', title: '"Coma o sapo"', youtubeId: 'dtP8OQ1993k', order: 3, durationSec: 300, summaryPdfUrl: '' },
+  { id: '303', moduleId: '3', title: 'Aula 3: "Coma o sapo"', youtubeId: 'dtP8OQ1993k', order: 3, durationSec: 300, summaryPdfUrl: '' },
   { id: '304', moduleId: '3', title: 'Aula 4: Dividir para conquistar', youtubeId: '_FQOvA1t1Mw', order: 4, durationSec: 320, summaryPdfUrl: '' },
   { id: '305', moduleId: '3', title: 'Aula 5: Recompensas inteligentes', youtubeId: 'K-1I4sVUInY', order: 5, durationSec: 310, summaryPdfUrl: '' },
 
   // Módulo 4
   { id: '401', moduleId: '4', title: 'Aula 1: Como hábitos funcionam', youtubeId: 'dtrYk5IuVvI', order: 1, durationSec: 330, summaryPdfUrl: '' },
   { id: '402', moduleId: '4', title: 'Aula 2: Empilhamento de hábitos', youtubeId: 'fzeHAfhp39Y', order: 2, durationSec: 290, summaryPdfUrl: '' },
-  { id: '403', moduleId: '4', title: 'O diário de progresso', youtubeId: 'KzZy35_k_wI', order: 3, durationSec: 310, summaryPdfUrl: '' },
+  { id: '403', moduleId: '4', title: 'Aula 3: O diário de progresso', youtubeId: 'KzZy35_k_wI', order: 3, durationSec: 310, summaryPdfUrl: '' },
   { id: '404', moduleId: '4', title: 'Aula 4: Lidando com falhas', youtubeId: 'X7gh_A3locY', order: 4, durationSec: 340, summaryPdfUrl: '' },
   { id: '405', moduleId: '4', title: 'Aula 5: A identidade de quem faz', youtubeId: 'PZ7lDrwYdZc', order: 5, durationSec: 300, summaryPdfUrl: '' },
 
