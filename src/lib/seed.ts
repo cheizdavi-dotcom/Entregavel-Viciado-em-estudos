@@ -82,7 +82,7 @@ export const lessons = [
   { id: '401', moduleId: '4', title: 'Aula 1: Como hábitos funcionam', youtubeId: 'kSJVekvjViQ', order: 1, durationSec: 330, summaryPdfUrl: '' },
   { id: '402', moduleId: '4', title: 'Aula 2: Empilhamento de hábitos', youtubeId: '2odfnEAKNEU', order: 2, durationSec: 290, summaryPdfUrl: '' },
   { id: '403', moduleId: '4', title: 'Aula 3: O diário de progresso', youtubeId: 'QnVUIWi9r1E', order: 3, durationSec: 310, summaryPdfUrl: '' },
-  { id: '404', moduleId: '4', title: 'Aula 4: Lidando com falhas', youtubeId: 'X7gh_A3locY', order: 4, durationSec: 340, summaryPdfUrl: '' },
+  { id: '404', moduleId: '4', title: 'Aula 4: Lidando com falhas', youtubeId: 'h-GMJtxcAGo', order: 4, durationSec: 340, summaryPdfUrl: '' },
   { id: '405', moduleId: '4', title: 'Aula 5: A identidade de quem faz', youtubeId: 'PZ7lDrwYdZc', order: 5, durationSec: 300, summaryPdfUrl: '' },
 
   // Módulo 5
@@ -99,3 +99,4 @@ export const lessons = [
   { id: 'bonus-104', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 4: Associações Criativas e Mnemônicos', youtubeId: 'mkCxuIJS44o', order: 4, durationSec: 350, summaryPdfUrl: '' },
   { id: 'bonus-105', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 5: Integrando Tudo na Sua Rotina', youtubeId: 'SQKWZy-eBAg', order: 5, durationSec: 290, summaryPdfUrl: '' },
 ];
+
