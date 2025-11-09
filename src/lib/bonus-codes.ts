@@ -38,7 +38,7 @@ export const bonusContent: BonusItem[] = [
         id: "memoria-de-ouro", 
         title: "Memória de Ouro", 
         description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
-        coverUrl: "https://imgur.com/t85LaHE",
+        coverUrl: "https://imgur.com/t85LaHE.png",
         moduleId: "bonus-memoria-de-ouro", // <- Link para o módulo bônus em seed.ts
         requiredCode: "MEMORIA-OURO",
     },
@@ -46,7 +46,7 @@ export const bonusContent: BonusItem[] = [
         id: "metodo-pomodoro-avancado", 
         title: "Método Pomodoro Avançado", 
         description: "Turbine sua produtividade com blocos de estudo perfeitos.", 
-        coverUrl: "https://i.imgur.com/z6nLauv.png", // <- PENDENTE: Aguardando nova imagem
+        coverUrl: "https://imgur.com/jQdXVqz.png",
         youtubeId: "WKnaT07qaJ0",
         requiredCode: "POMODORO-PRO"
     },
@@ -54,7 +54,7 @@ export const bonusContent: BonusItem[] = [
         id: "o-sono-do-estudante", 
         title: "O Sono do Estudante", 
         description: "Aprenda a dormir melhor para consolidar o aprendizado.", 
-        coverUrl: "https://i.imgur.com/vPHn8Xu.png", // <- PENDENTE: Aguardando nova imagem
+        coverUrl: "https://imgur.com/L9KNFom.png",
         youtubeId: "E1I0hAx2wSo",
         requiredCode: "SONO-ESTUDANTE",
     },
