@@ -16,7 +16,7 @@
 // Estes são os códigos que você vai enviar para os seus clientes.
 export const bonusCodes = [
     { name: "Memória de Ouro", code: "MEMORIA-OURO" },
-    { name: "Guia do Pomodoro", code: "POMODORO-PRO" },
+    { name: "Método Pomodoro Avançado", code: "POMODORO-PRO" },
     { name: "O Sono do Estudante", code: "SONO-ESTUDANTE" },
 ];
 
@@ -43,8 +43,8 @@ export const bonusContent: BonusItem[] = [
         requiredCode: "MEMORIA-OURO",
     },
     {
-        id: "guia-do-pomodoro", 
-        title: "Guia do Pomodoro", 
+        id: "metodo-pomodoro-avancado", 
+        title: "Método Pomodoro Avançado", 
         description: "Domine a técnica para máxima concentração e produtividade.", 
         coverUrl: "https://i.imgur.com/z6nLauv.png", // <- PENDENTE: Aguardando nova imagem
         youtubeId: "WKnaT07qaJ0",
