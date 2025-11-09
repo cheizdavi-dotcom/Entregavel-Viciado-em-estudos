@@ -46,7 +46,7 @@ export const bonusContent: BonusItem[] = [
         id: "metodo-pomodoro-avancado", 
         title: "Método Pomodoro Avançado", 
         description: "Turbine sua produtividade com blocos de estudo perfeitos.", 
-        coverUrl: "https://imgur.com/jQdXVqz.png",
+        coverUrl: "https://imgur.com/ZIWWzgX.png",
         youtubeId: "WKnaT07qaJ0",
         requiredCode: "POMODORO-PRO",
         releaseDate: "2024-07-11",
