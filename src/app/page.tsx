@@ -167,7 +167,7 @@ export default function AppPage() {
                                 width={1080}
                                 height={1600}
                                 className={cn(
-                                  'object-cover w-full h-full object-top',
+                                  'object-cover w-full h-full object-center',
                                   !module.isUnlocked && 'grayscale'
                                 )}
                                 data-ai-hint="course module"
