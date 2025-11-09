@@ -16,8 +16,8 @@
 // Estes são os códigos que você vai enviar para os seus clientes.
 export const bonusCodes = [
     { name: "Memória de Ouro", code: "MEMORIA-OURO" },
-    { name: "Rotina de Estudos", code: "ROTINA-ESTUDOS" },
-    { name: "Caminho para Aprovação", code: "APROVACAO-2024" },
+    { name: "Guia do Pomodoro", code: "POMODORO-PRO" },
+    { name: "O Sono do Estudante", code: "SONO-ESTUDANTE" },
 ];
 
 export interface BonusItem {
@@ -43,21 +43,20 @@ export const bonusContent: BonusItem[] = [
         requiredCode: "MEMORIA-OURO",
     },
     {
-        id: "rotina-de-estudos", 
-        title: "Rotina de Estudos", 
-        description: "Um guia prático para construir e manter a disciplina nos estudos.", 
-        coverUrl: "https://i.imgur.com/z6nLauv.png",
-        youtubeId: "ImZ2abenGkw", // <- TROCAR ID DO VÍDEO REAL
-        requiredCode: "ROTINA-ESTUDOS"
+        id: "guia-do-pomodoro", 
+        title: "Guia do Pomodoro", 
+        description: "Domine a técnica para máxima concentração e produtividade.", 
+        coverUrl: "https://i.imgur.com/z6nLauv.png", // <- PENDENTE: Aguardando nova imagem
+        youtubeId: "WKnaT07qaJ0",
+        requiredCode: "POMODORO-PRO"
     },
     {
-        id: "caminho-para-aprovacao", 
-        title: "Caminho para Aprovação", 
-        description: "O passo a passo estratégico para garantir sua vaga.", 
-        coverUrl: "https://i.imgur.com/vPHn8Xu.png",
-        youtubeId: "3EwH4EghGqw", // <- TROCAR ID DO VÍDEO REAL
-        requiredCode: "APROVACAO-2024",
-        releaseDate: "2024-07-20"
+        id: "o-sono-do-estudante", 
+        title: "O Sono do Estudante", 
+        description: "Aprenda a dormir melhor para consolidar o aprendizado.", 
+        coverUrl: "https://i.imgur.com/vPHn8Xu.png", // <- PENDENTE: Aguardando nova imagem
+        youtubeId: "E1I0hAx2wSo",
+        requiredCode: "SONO-ESTUDANTE",
     },
     // Itens gratuitos (sem requiredCode) aparecerão na página "Mais"
     {
