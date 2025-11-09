@@ -38,7 +38,7 @@ export const bonusContent: BonusItem[] = [
         id: "memoria-de-ouro", 
         title: "Memória de Ouro", 
         description: "Técnicas avançadas para memorização e retenção de conteúdo.", 
-        coverUrl: "https://i.imgur.com/P6JFT67.png",
+        coverUrl: "https://i.imgur.com/t85LaHE.png",
         moduleId: "bonus-memoria-de-ouro", // <- Link para o módulo bônus em seed.ts
         requiredCode: "MEMORIA-OURO",
     },
