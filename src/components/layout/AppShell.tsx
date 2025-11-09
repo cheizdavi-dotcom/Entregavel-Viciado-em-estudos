@@ -26,7 +26,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-background/80 backdrop-blur-sm">
         <div className="flex items-center gap-2">
-          <Image src="https://i.imgur.com/cYDq6fg.png" alt="Logo" width={28} height={28} />
+          <Image src="https://i.imgur.com/9Nv3sGO.png" alt="Logo" width={28} height={28} />
           <span className="font-bold text-lg">O Fim da Procrastinação</span>
         </div>
       </header>
