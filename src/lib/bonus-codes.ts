@@ -48,7 +48,8 @@ export const bonusContent: BonusItem[] = [
         description: "Turbine sua produtividade com blocos de estudo perfeitos.", 
         coverUrl: "https://imgur.com/jQdXVqz.png",
         youtubeId: "WKnaT07qaJ0",
-        requiredCode: "POMODORO-PRO"
+        requiredCode: "POMODORO-PRO",
+        releaseDate: "2024-07-11",
     },
     {
         id: "o-sono-do-estudante", 
@@ -57,6 +58,7 @@ export const bonusContent: BonusItem[] = [
         coverUrl: "https://imgur.com/L9KNFom.png",
         youtubeId: "E1I0hAx2wSo",
         requiredCode: "SONO-ESTUDANTE",
+        releaseDate: "2024-07-12",
     },
     // Itens gratuitos (sem requiredCode) aparecerão na página "Mais"
     {
