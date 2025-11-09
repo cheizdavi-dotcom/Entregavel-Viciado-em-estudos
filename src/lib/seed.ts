@@ -34,6 +34,7 @@ export const modules = [
     coverUrl: 'https://i.imgur.com/InRd8Er.png',
     description: 'Transforme a ação em um hábito duradouro. Crie sistemas que trabalham a seu favor para manter o foco no longo prazo.',
     order: 4,
+    summaryPdfUrl: 'https://drive.google.com/drive/folders/1uPyi6-n3qwxatiMHqmcgCXz3Yvrqby6C?usp=drive_link',
   },
   {
     id: '5',
