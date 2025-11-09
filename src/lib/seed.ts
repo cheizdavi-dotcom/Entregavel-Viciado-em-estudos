@@ -66,7 +66,7 @@ export const lessons = [
 
   // Módulo 2
   { id: '201', moduleId: '2', title: 'Aula 1: Encontrando seus gatilhos', youtubeId: 'JKSfDyAYKuc', order: 1, durationSec: 310, summaryPdfUrl: '' },
-  { id: '202', moduleId: '2', title: ' Aula 2: Ambiente produtivo', youtubeId: 'TGyS50xIbw4', order: 2, durationSec: 330, summaryPdfUrl: '' },
+  { id: '202', moduleId: '2', title: 'Aula 2: Ambiente produtivo', youtubeId: 'TGyS50xIbw4', order: 2, durationSec: 330, summaryPdfUrl: '' },
   { id: '203', moduleId: '2', title: 'Aula 3: Ferramentas e distrações', youtubeId: 'CxBoGEZzir4', order: 3, durationSec: 290, summaryPdfUrl: '' },
   { id: '204', moduleId: '2', title: 'Aula 4: O poder do "não"', youtubeId: 'pPJ5WX2VPRc', order: 4, durationSec: 360, summaryPdfUrl: '' },
   { id: '205', moduleId: '2', title: 'Aula 5: Planejando seu dia', youtubeId: 'QAU_8iRzcI4', order: 5, durationSec: 300, summaryPdfUrl: '' },
@@ -83,7 +83,7 @@ export const lessons = [
   { id: '402', moduleId: '4', title: 'Aula 2: Empilhamento de hábitos', youtubeId: '2odfnEAKNEU', order: 2, durationSec: 290, summaryPdfUrl: '' },
   { id: '403', moduleId: '4', title: 'Aula 3: O diário de progresso', youtubeId: 'QnVUIWi9r1E', order: 3, durationSec: 310, summaryPdfUrl: '' },
   { id: '404', moduleId: '4', title: 'Aula 4: Lidando com falhas', youtubeId: 'h-GMJtxcAGo', order: 4, durationSec: 340, summaryPdfUrl: '' },
-  { id: '405', moduleId: '4', title: 'Aula 5: A identidade de quem faz', youtubeId: 'PZ7lDrwYdZc', order: 5, durationSec: 300, summaryPdfUrl: '' },
+  { id: '405', moduleId: '4', title: 'Aula 5: A identidade de quem faz', youtubeId: '_V8F3nYj2OA', order: 5, durationSec: 300, summaryPdfUrl: '' },
 
   // Módulo 5
   { id: '501', moduleId: '5', title: 'Aula 1: Mentalidade de crescimento', youtubeId: 'ICj_ohyI_g4', order: 1, durationSec: 320, summaryPdfUrl: '' },
@@ -99,4 +99,3 @@ export const lessons = [
   { id: 'bonus-104', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 4: Associações Criativas e Mnemônicos', youtubeId: 'mkCxuIJS44o', order: 4, durationSec: 350, summaryPdfUrl: '' },
   { id: 'bonus-105', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 5: Integrando Tudo na Sua Rotina', youtubeId: 'SQKWZy-eBAg', order: 5, durationSec: 290, summaryPdfUrl: '' },
 ];
-
