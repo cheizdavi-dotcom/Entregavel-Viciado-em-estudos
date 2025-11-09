@@ -6,6 +6,7 @@ import {
   LayoutGrid,
   Info,
   Star,
+  Mic,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,6 +16,7 @@ import Image from 'next/image';
 const navItems = [
   { href: '/', label: 'Principal', icon: Home },
   { href: '/continue', label: 'Continuar', icon: PlaySquare },
+  { href: '/podcasts', label: 'Podcasts', icon: Mic },
   { href: '/bonus', label: 'Bônus', icon: Star },
   { href: '/more', label: 'Mais', icon: LayoutGrid },
 ];
@@ -34,7 +36,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <footer className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/80 backdrop-blur-sm">
-        <nav className="grid h-16 items-center grid-cols-4 max-w-md mx-auto">
+        <nav className="grid h-16 items-center grid-cols-5 max-w-md mx-auto">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
             return (
