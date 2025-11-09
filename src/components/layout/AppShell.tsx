@@ -10,7 +10,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import Image from 'next/image';
 
 const navItems = [
   { href: '/', label: 'Principal', icon: Home },
@@ -26,36 +26,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-background/80 backdrop-blur-sm">
         <div className="flex items-center gap-2">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-primary"
-          >
-            <path
-              d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M2 7L12 12L22 7"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M12 12V22"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Image src="https://i.imgur.com/cYDq6fg.png" alt="Logo" width={28} height={28} />
           <span className="font-bold text-lg">O Fim da Procrastinação</span>
         </div>
       </header>
