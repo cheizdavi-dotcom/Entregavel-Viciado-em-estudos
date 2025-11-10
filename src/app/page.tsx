@@ -13,7 +13,7 @@ import Image from 'next/image';
 import { lessons, modules } from '@/lib/seed';
 import Link from 'next/link';
 import { useProgress } from '@/hooks/useProgress.tsx';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Lock, PlayCircle, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
@@ -28,6 +28,11 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default function AppPage() {
   const { progress, loading } = useProgress();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const totalLessons = useMemo(() => lessons.filter(l => !l.moduleId.startsWith('bonus-')).length, []);
   
@@ -60,18 +65,25 @@ export default function AppPage() {
   const modulesWithProgress = useMemo(() => {
     const regularModules = modules.filter(m => !m.isBonus).sort((a, b) => a.order - b.order);
 
-    if (loading) {
+    if (loading || !isClient) {
       return regularModules.map((module) => ({
         ...module,
-        isUnlocked: true, // Desbloqueia todos durante o carregamento
+        isUnlocked: false,
       }));
     }
 
-    return regularModules.map(module => ({
-      ...module,
-      isUnlocked: true, // Força o desbloqueio de todos os módulos temporariamente
-    }));
-  }, [loading]);
+    return regularModules.map(module => {
+      let isUnlocked = true;
+      if (module.releaseDate) {
+        // A data da releaseDate é 'YYYY-MM-DD'. Para evitar problemas com fuso horário,
+        // criamos a data em UTC.
+        const releaseDateTime = new Date(`${module.releaseDate}T00:00:00Z`);
+        const now = new Date();
+        isUnlocked = now >= releaseDateTime;
+      }
+      return { ...module, isUnlocked };
+    });
+  }, [loading, isClient]);
 
 
   if (loading) {
@@ -169,8 +181,9 @@ export default function AppPage() {
                                 data-ai-hint="course module"
                               />
                               {!module.isUnlocked && (
-                                <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                                  <Lock className="w-16 h-16 text-white/80" />
+                                <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-2">
+                                  <Lock className="w-12 h-12 text-white/80" />
+                                  <p className="text-white font-semibold mt-2 text-sm">Em breve</p>
                                 </div>
                               )}
                             </CardContent>
@@ -189,7 +202,10 @@ export default function AppPage() {
                   </TooltipTrigger>
                   {!module.isUnlocked && (
                     <TooltipContent>
-                      <p>Complete os módulos anteriores para desbloquear</p>
+                       {module.releaseDate 
+                        ? <p>Lançamento em {new Date(`${module.releaseDate}T00:00:00Z`).toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'})}</p>
+                        : <p>Complete os módulos anteriores para desbloquear</p>
+                       }
                     </TooltipContent>
                   )}
                 </Tooltip>
