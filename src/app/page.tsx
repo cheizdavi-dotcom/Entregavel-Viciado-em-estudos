@@ -66,24 +66,38 @@ export default function AppPage() {
     const regularModules = modules.filter(m => !m.isBonus).sort((a, b) => a.order - b.order);
 
     if (loading || !isClient) {
-      return regularModules.map((module) => ({
+      return regularModules.map(module => ({
         ...module,
         isUnlocked: false,
       }));
     }
 
+    let previousModuleCompleted = true; // Module 1 is always unlocked
+
     return regularModules.map(module => {
-      let isUnlocked = true;
+      let isUnlocked = false;
+      
+      // Module is unlocked if it has a releaseDate in the past
       if (module.releaseDate) {
-        // A data da releaseDate é 'YYYY-MM-DD'. Para evitar problemas com fuso horário,
-        // criamos a data em UTC.
         const releaseDateTime = new Date(`${module.releaseDate}T00:00:00Z`);
         const now = new Date();
         isUnlocked = now >= releaseDateTime;
       }
+      
+      // OR if it's the first module, OR if the previous one was completed.
+      if (module.order === 1 || previousModuleCompleted) {
+        isUnlocked = true;
+      }
+
+      // Check completion status for the next iteration
+      const moduleLessons = lessons.filter(l => l.moduleId === module.id);
+      const completedLessonsInModule = moduleLessons.every(l => progress[l.id]?.completed);
+      
+      previousModuleCompleted = isUnlocked && completedLessonsInModule;
+
       return { ...module, isUnlocked };
     });
-  }, [loading, isClient]);
+  }, [progress, loading, isClient]);
 
 
   if (loading) {
