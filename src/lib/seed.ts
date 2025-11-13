@@ -39,11 +39,11 @@ export const modules = [
   {
     id: '5',
     title: 'Módulo 5: A Constância',
-    subtitle: 'Lançamento em 11/07',
+    subtitle: 'Lançamento em 15/11',
     coverUrl: 'https://i.imgur.com/ILDypkd.png',
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
-    releaseDate: '2024-07-11',
+    releaseDate: '2024-11-15',
   },
   // Módulo Bônus
   {
