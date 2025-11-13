@@ -76,23 +76,23 @@ export default function AppPage() {
 
     return regularModules.map(module => {
       let isUnlocked = false;
-      
-      // Module is unlocked if it has a releaseDate in the past
+
+      // Logic for date-based release (for modules that have it)
       if (module.releaseDate) {
         const releaseDateTime = new Date(`${module.releaseDate}T00:00:00Z`);
         const now = new Date();
-        isUnlocked = now >= releaseDateTime;
-      }
-      
-      // OR if it's the first module, OR if the previous one was completed.
-      if (module.order === 1 || previousModuleCompleted) {
-        isUnlocked = true;
+        // A module is unlocked if the date has passed AND the previous module is complete
+        isUnlocked = now >= releaseDateTime && previousModuleCompleted;
+      } else {
+        // A module is unlocked if it's the first or the previous one is complete
+         isUnlocked = module.order === 1 || previousModuleCompleted;
       }
 
-      // Check completion status for the next iteration
+      // Check completion status of the CURRENT module for the NEXT iteration
       const moduleLessons = lessons.filter(l => l.moduleId === module.id);
       const completedLessonsInModule = moduleLessons.every(l => progress[l.id]?.completed);
       
+      // The NEXT module will be unlockable if the CURRENT one is unlocked and completed.
       previousModuleCompleted = isUnlocked && completedLessonsInModule;
 
       return { ...module, isUnlocked };
