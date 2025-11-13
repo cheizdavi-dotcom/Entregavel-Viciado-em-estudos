@@ -197,7 +197,7 @@ export default function AppPage() {
                               {!module.isUnlocked && (
                                 <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-2">
                                   <Lock className="w-12 h-12 text-white/80" />
-                                  <p className="text-white font-semibold mt-2 text-sm">Em breve</p>
+                                  {module.releaseDate && <p className="text-white font-semibold mt-2 text-sm">Em breve</p>}
                                 </div>
                               )}
                             </CardContent>
