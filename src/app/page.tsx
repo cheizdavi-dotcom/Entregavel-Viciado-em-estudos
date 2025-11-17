@@ -75,24 +75,19 @@ export default function AppPage() {
     let previousModuleCompleted = true; // Module 1 is always unlocked
 
     return regularModules.map(module => {
-      let isUnlocked = false;
-
-      // Logic for date-based release (for modules that have it)
-      if (module.releaseDate) {
-        const releaseDateTime = new Date(`${module.releaseDate}T00:00:00Z`);
-        const now = new Date();
-        // A module is unlocked if the date has passed AND the previous module is complete
-        isUnlocked = now >= releaseDateTime && previousModuleCompleted;
-      } else {
-        // A module is unlocked if it's the first or the previous one is complete
-         isUnlocked = module.order === 1 || previousModuleCompleted;
+      // Módulo 5 está sempre desbloqueado
+      if (module.id === '5') {
+        return { ...module, isUnlocked: true };
       }
 
-      // Check completion status of the CURRENT module for the NEXT iteration
+      // Módulo 1 está sempre desbloqueado
+      const isUnlocked = module.order === 1 || previousModuleCompleted;
+
+      // Verifica o status de conclusão do módulo ATUAL para a PRÓXIMA iteração
       const moduleLessons = lessons.filter(l => l.moduleId === module.id);
       const completedLessonsInModule = moduleLessons.every(l => progress[l.id]?.completed);
       
-      // The NEXT module will be unlockable if the CURRENT one is unlocked and completed.
+      // O PRÓXIMO módulo será desbloqueável se o ATUAL estiver desbloqueado e concluído.
       previousModuleCompleted = isUnlocked && completedLessonsInModule;
 
       return { ...module, isUnlocked };
@@ -197,7 +192,6 @@ export default function AppPage() {
                               {!module.isUnlocked && (
                                 <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-2">
                                   <Lock className="w-12 h-12 text-white/80" />
-                                  {module.releaseDate && <p className="text-white font-semibold mt-2 text-sm">Em breve</p>}
                                 </div>
                               )}
                             </CardContent>
@@ -216,7 +210,7 @@ export default function AppPage() {
                   </TooltipTrigger>
                   {!module.isUnlocked && (
                     <TooltipContent>
-                       {module.releaseDate 
+                       {module.releaseDate && module.id === '5'
                         ? <p>Lançamento em {new Date(`${module.releaseDate}T00:00:00Z`).toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'})}</p>
                         : <p>Complete os módulos anteriores para desbloquear</p>
                        }
