@@ -88,7 +88,7 @@ export const lessons = [
   { id: '405', moduleId: '4', title: 'Aula 5: A identidade de quem faz', youtubeId: '_V8F3nYj2OA', order: 5, durationSec: 300, summaryPdfUrl: '' },
 
   // Módulo 5
-  { id: '501', moduleId: '5', title: 'Aula 1: Mentalidade de crescimento', youtubeId: 'ICj_ohyI_g4', order: 1, durationSec: 320, summaryPdfUrl: '' },
+  { id: '501', moduleId: '5', title: 'Aula 1: Mentalidade de crescimento', youtubeId: 'w0uZn_2dWnI', order: 1, durationSec: 320, summaryPdfUrl: '' },
   { id: '502', moduleId: '5', title: 'Aula 2: Autocompaixão produtiva', youtubeId: 'E1I0hAx2wSo', order: 2, durationSec: 350, summaryPdfUrl: '' },
   { id: '503', moduleId: '5', title: 'Aula 3: Visualização e futuro', youtubeId: '6vuetK362wE', order: 3, durationSec: 310, summaryPdfUrl: '' },
   { id: '504', moduleId: '5', title: 'Aula 4: O poder do tédio', youtubeId: 'TWTB4a6A-wY', order: 4, durationSec: 290, summaryPdfUrl: '' },
