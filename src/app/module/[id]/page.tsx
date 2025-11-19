@@ -4,19 +4,20 @@ import { lessons, modules } from '@/lib/seed';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { PlayCircle, CheckCircle2, Download, FileText } from 'lucide-react';
+import { PlayCircle, CheckCircle2, FileText } from 'lucide-react';
 import { YouTubePlayer } from '@/components/player/YouTubePlayer';
 import { useProgress } from '@/hooks/useProgress.tsx';
 import { useState, useMemo, useEffect, useCallback, use } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function ModulePage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
   const params = use(paramsPromise);
   const [selectedLessonId, setSelectedLessonId] = useState<string | null>(null);
 
-  const { progress, saveProgress, getLessonProgress } = useProgress();
+  const { progress, saveProgress, getLessonProgress, loading } = useProgress();
 
   const currentModule = useMemo(() => modules.find((m) => m.id === params.id), [params.id]);
   const moduleLessons = useMemo(() => lessons.filter((l) => l.moduleId === params.id).sort((a,b) => a.order - b.order), [params.id]);
@@ -34,15 +35,17 @@ export default function ModulePage({ params: paramsPromise }: { params: Promise<
   }, [moduleLessons, getLessonProgress]);
 
   useEffect(() => {
-    if (moduleLessons.length > 0 && !selectedLessonId) {
+    // Only set default lesson when progress is loaded and there's no selection yet.
+    if (!loading && moduleLessons.length > 0 && !selectedLessonId) {
         const firstUncompletedLesson = moduleLessons.find(l => !progress[l.id]?.completed);
         if (firstUncompletedLesson) {
             setSelectedLessonId(firstUncompletedLesson.id);
         } else {
+            // If all are completed, select the first one.
             setSelectedLessonId(moduleLessons[0].id);
         }
     }
-  }, [moduleLessons, progress, selectedLessonId]);
+  }, [moduleLessons, progress, selectedLessonId, loading]);
 
 
   if (!currentModule) {
@@ -50,6 +53,7 @@ export default function ModulePage({ params: paramsPromise }: { params: Promise<
   }
 
   const handleProgress = useCallback((lessonId: string, durationSec: number) => (seconds: number) => {
+      if (!lessonId) return;
       const currentProgress = getLessonProgress(lessonId);
       // Mark as completed if 95% is watched, but only if not already completed
       const isCompleted = currentProgress?.completed || (durationSec > 0 && (seconds / durationSec) >= 0.95);
@@ -57,6 +61,7 @@ export default function ModulePage({ params: paramsPromise }: { params: Promise<
   }, [getLessonProgress, saveProgress]);
 
   const handleCompleted = useCallback((lessonId: string) => {
+    if (!lessonId) return;
     const lesson = lessons.find(l => l.id === lessonId);
     if (lesson) {
         const currentProgress = getLessonProgress(lessonId);
@@ -72,38 +77,65 @@ export default function ModulePage({ params: paramsPromise }: { params: Promise<
     }
   }
 
+  const renderPlayer = () => {
+    if (loading || !selectedLesson) {
+        return (
+            <div className="flex flex-col gap-4">
+                <Skeleton className="aspect-video w-full rounded-lg" />
+                <div className="space-y-2">
+                    <Skeleton className="h-8 w-3/4" />
+                    <Skeleton className="h-5 w-1/2" />
+                </div>
+            </div>
+        );
+    }
+
+    // A aula 5 ainda não tem videoId
+    if (!selectedLesson.youtubeId) {
+        return (
+             <div className="flex flex-col gap-4">
+                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center p-4">
+                    <p className="text-center">O vídeo para esta aula ainda não está disponível. Volte em breve!</p>
+                </div>
+                <div className="space-y-2">
+                    <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
+                    <p className="text-sm text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="flex flex-col gap-4">
+            <div className="aspect-video bg-black rounded-lg overflow-hidden">
+                <YouTubePlayer 
+                    key={selectedLesson.id}
+                    youtubeId={selectedLesson.youtubeId}
+                    onProgress={handleProgress(selectedLesson.id, selectedLesson.durationSec)}
+                    onCompleted={() => {
+                        handleCompleted(selectedLesson.id)
+                        handleSelectNextLesson();
+                    }}
+                    startSeconds={progress[selectedLesson.id]?.watchedSeconds || 0}
+                />
+            </div>
+            <div className="space-y-2">
+                <div>
+                <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
+                <p className="text-sm text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
+                </div>
+            </div>
+        </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-8">
       <div className="flex flex-col lg:grid lg:grid-cols-3 lg:gap-8">
         
         {/* Main Content: Video Player and Info */}
         <div className="lg:col-span-2 w-full">
-          {selectedLesson ? (
-             <div className="flex flex-col gap-4">
-                <div className="aspect-video bg-black rounded-lg overflow-hidden">
-                    <YouTubePlayer 
-                        key={selectedLesson.id}
-                        youtubeId={selectedLesson.youtubeId}
-                        onProgress={handleProgress(selectedLesson.id, selectedLesson.durationSec)}
-                        onCompleted={() => {
-                          handleCompleted(selectedLesson.id)
-                          handleSelectNextLesson();
-                        }}
-                        startSeconds={progress[selectedLesson.id]?.watchedSeconds || 0}
-                    />
-                </div>
-                <div className="space-y-2">
-                  <div>
-                    <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
-                    <p className="text-sm text-muted-foreground">{currentModule.title}: {currentModule.subtitle}</p>
-                  </div>
-                </div>
-            </div>
-          ) : (
-             <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                <p>Selecione uma aula para começar.</p>
-            </div>
-          )}
+          {renderPlayer()}
         </div>
 
         {/* Sidebar: Lesson List */}

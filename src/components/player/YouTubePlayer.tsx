@@ -21,6 +21,9 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // Se não houver ID, não faça nada.
+    if (!youtubeId) return;
+
     const setupPlayer = () => {
       if (playerRef.current) {
         playerRef.current.destroy();
@@ -67,8 +70,13 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
         clearInterval(progressIntervalRef.current);
       }
       if (playerRef.current && typeof playerRef.current.destroy === 'function') {
-        playerRef.current.destroy();
-        playerRef.current = null;
+        // Adicionada verificação para evitar erro na destruição
+        try {
+            playerRef.current.destroy();
+            playerRef.current = null;
+        } catch (e) {
+            console.error("Error destroying YouTube player:", e);
+        }
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,6 +111,15 @@ export function YouTubePlayer({ youtubeId, onProgress, onCompleted, startSeconds
         onCompleted();
     }
   };
+
+  if (!youtubeId) {
+    return (
+       <div className="relative aspect-video w-full h-full overflow-hidden rounded-lg bg-black flex items-center justify-center">
+            <p className="text-muted-foreground">Vídeo indisponível.</p>
+       </div>
+    );
+  }
+
 
   return (
     <div className="relative aspect-video w-full h-full overflow-hidden rounded-lg">
