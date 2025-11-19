@@ -1,4 +1,5 @@
 
+
 export const modules = [
   {
     id: '1',
@@ -92,7 +93,7 @@ export const lessons = [
   { id: '502', moduleId: '5', title: 'Aula 2: Autocompaixão produtiva', youtubeId: 'JPx0EOjkG4M', order: 2, durationSec: 350, summaryPdfUrl: '' },
   { id: '503', moduleId: '5', title: 'Aula 3: Visualização e futuro', youtubeId: 'fLxXGcjIV2c', order: 3, durationSec: 310, summaryPdfUrl: '' },
   { id: '504', moduleId: '5', title: 'Aula 4: O poder do tédio', youtubeId: 'M-pWl_7z0gY', order: 4, durationSec: 290, summaryPdfUrl: '' },
-  { id: '505', moduleId: '5', title: 'Aula 5: Próximos passos', youtubeId: 'Lp9M4soP-Yg', order: 5, durationSec: 330, summaryPdfUrl: '' },
+  { id: '505', moduleId: '5', title: 'Aula 5: Próximos passos', youtubeId: 'KAsE02PQAz8', order: 5, durationSec: 330, summaryPdfUrl: '' },
 
   // Aulas Bônus: Memória de Ouro
   { id: 'bonus-101', moduleId: 'bonus-memoria-de-ouro', title: 'Aula 1: A Fundação da Memória de Ouro', youtubeId: '8wVNtEvoDWg', order: 1, durationSec: 300, summaryPdfUrl: '' },
