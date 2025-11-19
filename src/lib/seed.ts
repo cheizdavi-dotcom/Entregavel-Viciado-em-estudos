@@ -91,7 +91,7 @@ export const lessons = [
   { id: '501', moduleId: '5', title: 'Aula 1: Mentalidade de crescimento', youtubeId: 'w0uZn_2dWnI', order: 1, durationSec: 320, summaryPdfUrl: '' },
   { id: '502', moduleId: '5', title: 'Aula 2: Autocompaixão produtiva', youtubeId: 'JPx0EOjkG4M', order: 2, durationSec: 350, summaryPdfUrl: '' },
   { id: '503', moduleId: '5', title: 'Aula 3: Visualização e futuro', youtubeId: 'fLxXGcjIV2c', order: 3, durationSec: 310, summaryPdfUrl: '' },
-  { id: '504', moduleId: '5', title: 'Aula 4: O poder do tédio', youtubeId: 'TWTB4a6A-wY', order: 4, durationSec: 290, summaryPdfUrl: '' },
+  { id: '504', moduleId: '5', title: 'Aula 4: O poder do tédio', youtubeId: 'M-pWl_7z0gY', order: 4, durationSec: 290, summaryPdfUrl: '' },
   { id: '505', moduleId: '5', title: 'Aula 5: Próximos passos', youtubeId: 'Lp9M4soP-Y', order: 5, durationSec: 330, summaryPdfUrl: '' },
 
   // Aulas Bônus: Memória de Ouro
