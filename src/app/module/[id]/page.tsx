@@ -95,7 +95,7 @@ export default function ModulePage({ params: paramsPromise }: { params: Promise<
         return (
              <div className="flex flex-col gap-4">
                 <div className="aspect-video bg-muted rounded-lg flex items-center justify-center p-4">
-                    <p className="text-center">O vídeo para esta aula ainda não está disponível. Volte em breve!</p>
+                    <p className="text-center text-muted-foreground">O vídeo para esta aula ainda não está disponível. Volte em breve!</p>
                 </div>
                 <div className="space-y-2">
                     <h1 className="text-xl sm:text-2xl font-bold">{selectedLesson.title}</h1>
@@ -189,3 +189,5 @@ export default function ModulePage({ params: paramsPromise }: { params: Promise<
     </div>
   );
 }
+
+    
