@@ -14,7 +14,7 @@ import { lessons, modules } from '@/lib/seed';
 import Link from 'next/link';
 import { useProgress } from '@/hooks/useProgress.tsx';
 import { useMemo, useState, useEffect } from 'react';
-import { Lock, PlayCircle, Info } from 'lucide-react';
+import { Lock, PlayCircle, Info, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
   Tooltip,
@@ -108,12 +108,19 @@ export default function AppPage() {
         </p>
       </header>
 
-      <div className="mb-6 md:mb-8">
+      <div className="flex flex-col gap-4 mb-6 md:mb-8">
+         <Alert className="border-primary/50">
+          <Star className="h-4 w-4 text-primary" />
+          <AlertTitle>Novidades à vista!</AlertTitle>
+          <AlertDescription>
+            O Módulo 5 foi totalmente atualizado. Mergulhe nas novas aulas e fique de olho, mais conteúdos chegarão em breve!
+          </AlertDescription>
+        </Alert>
         <Alert>
           <Info className="h-4 w-4" />
           <AlertTitle>Boas-vindas!</AlertTitle>
           <AlertDescription>
-            Os módulos são liberados progressivamente. Mergulhe no conteúdo já disponível e prepare-se para as próximas aulas!
+            Os módulos são liberados progressivamente. Complete as aulas de um módulo para desbloquear o próximo.
           </AlertDescription>
         </Alert>
       </div>
