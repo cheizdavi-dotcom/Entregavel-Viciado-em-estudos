@@ -75,12 +75,6 @@ export default function AppPage() {
     let previousModuleCompleted = true; // Module 1 is always unlocked
 
     return regularModules.map(module => {
-      // Módulo 5 está sempre desbloqueado
-      if (module.id === '5') {
-        return { ...module, isUnlocked: true };
-      }
-
-      // Módulo 1 está sempre desbloqueado
       const isUnlocked = module.order === 1 || previousModuleCompleted;
 
       // Verifica o status de conclusão do módulo ATUAL para a PRÓXIMA iteração
@@ -210,7 +204,7 @@ export default function AppPage() {
                   </TooltipTrigger>
                   {!module.isUnlocked && (
                     <TooltipContent>
-                       {module.releaseDate && module.id === '5'
+                       {module.releaseDate && new Date() < new Date(`${module.releaseDate}T00:00:00Z`)
                         ? <p>Lançamento em {new Date(`${module.releaseDate}T00:00:00Z`).toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'})}</p>
                         : <p>Complete os módulos anteriores para desbloquear</p>
                        }
