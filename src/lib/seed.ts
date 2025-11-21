@@ -45,6 +45,7 @@ export const modules = [
     description: 'Fortaleça sua mentalidade, aprenda a lidar com recaídas e domine a arte de ser uma pessoa de ação.',
     order: 5,
     releaseDate: '2024-11-18',
+    summaryPdfUrl: 'https://drive.google.com/drive/folders/1cjXazHjtBFB31eqYDKKok3c-ro4uUJVh?usp=sharing',
   },
   // Módulo Bônus
   {
